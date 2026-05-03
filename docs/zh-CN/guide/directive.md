@@ -20,10 +20,10 @@
 
 ```js
 import { createApp } from 'vue';
-import ULayer from 'ume-ui';
+import UmeUi from 'ume-ui';
 
 const app = createApp(App);
-app.use(ULayer);
+app.use(UmeUi);
 ```
 
 然后你可以在模板中直接使用指令：

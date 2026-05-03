@@ -46,13 +46,13 @@ cnpm install ume-ui
 // main.js 或 main.ts
 import { createApp } from 'vue';
 import App from './App.vue';
-import ULayers from 'ume-ui';
+import UmeUi from 'ume-ui';
 import 'ume-ui/dist/color.css'; // Import the CSS colors
 import 'ume-ui/dist/index.css'; // Import the CSS
 
 const app = createApp(App);
 
-app.use(ULayers);
+app.use(UmeUi);
 app.mount('#app');
 ```
 

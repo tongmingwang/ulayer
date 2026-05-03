@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>ULayer</h1>
+  <h1>UmeUI</h1>
   <p>A modern Vue 3 UI library built with TypeScript</p>
   <p>一个基于 Vue 3 + TypeScript 构建的现代化 UI 组件库</p>
   <p>
@@ -137,5 +137,5 @@ MIT © [wangtongming](https://github.com/tongmingwang)
 ---
 
 <div align="center">
-  <p>Made with ❤️ by ULayer Team</p>
+  <p>Made with ❤️ by UmeUi Team</p>
 </div>

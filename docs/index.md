@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: 'ULayer'
+  name: 'Ume Ui'
   text: 'A Vue3 UI library'
   tagline: A lightweight and elegant component library built for Vue 3
   image:

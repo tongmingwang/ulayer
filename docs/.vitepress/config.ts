@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'ULayer',
+  title: 'UmeUi',
   description: 'A ui for vue3',
   appearance: true,
   base: '/ume-ui/',

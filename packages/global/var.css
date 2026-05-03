@@ -67,7 +67,9 @@
 
 /* 暗黑主题 */
 html[data-ume-ui-theme='dark'],
-body[data-ume-ui-theme='dark'] {
+body[data-ume-ui-theme='dark'],
+html.dark,
+body.dark {
   --u-bg: #0f0f0f;
   --u-container-bg: #1f1f1f;
 

@@ -8,12 +8,12 @@ ume-ui 默认提供了一些预设主题，您可以直接使用：
 
 ```js
 import { createApp } from 'vue';
-import ULayers from 'ume-ui';
+import UmeUi from 'ume-ui';
 import 'ume-ui/dist/style.css';
 
 // 使用默认主题
 const app = createApp(App);
-app.use(ULayers);
+app.use(UmeUi);
 app.mount('#app');
 ```
 

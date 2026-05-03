@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: 'ULayer'
+  name: 'UmeUi'
   text: '一个 Vue3 的 UI 库'
   tagline: 专为 Vue 3 打造的轻量级优雅组件库
   image:

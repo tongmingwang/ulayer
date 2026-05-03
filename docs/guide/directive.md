@@ -20,10 +20,10 @@ When you import and install the entire ume-ui library, all directives are automa
 
 ```js
 import { createApp } from 'vue';
-import ULayer from 'ume-ui';
+import UmeUi from 'ume-ui';
 
 const app = createApp(App);
-app.use(ULayer);
+app.use(UmeUi);
 ```
 
 Then you can use directives directly in your templates:

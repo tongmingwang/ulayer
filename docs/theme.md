@@ -8,12 +8,12 @@ ume-ui provides some predefined themes by default, which you can use directly:
 
 ```js
 import { createApp } from 'vue';
-import ULayers from 'ume-ui';
+import UmeUi from 'ume-ui';
 import 'ume-ui/dist/style.css';
 
 // Use default theme
 const app = createApp(App);
-app.use(ULayers);
+app.use(UmeUi);
 app.mount('#app');
 ```
 
