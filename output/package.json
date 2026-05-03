@@ -1,0 +1,52 @@
+{
+  "name": "ulayer",
+  "version": "1.0.0",
+  "description": "A Vue 3 component library",
+  "type": "module",
+  "main": "./dist/ulayer.cjs.js",
+  "module": "./dist/ulayer.es.js",
+  "types": "./dist/ulayer.es.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/ulayer.es.js",
+      "require": "./dist/ulayer.cjs.js",
+      "types": "./dist/ulayer.es.d.ts"
+    },
+    "./button": {
+      "import": "./dist/button/index.es.js",
+      "require": "./dist/button/index.cjs.js",
+      "types": "./dist/button/index.d.ts"
+    },
+    "./dist/button/index.css": "./dist/button/index.css",
+    "./input": {
+      "import": "./dist/input/index.es.js",
+      "require": "./dist/input/index.cjs.js",
+      "types": "./dist/input/index.d.ts"
+    },
+    "./dist/input/index.css": "./dist/input/index.css",
+    "./dist/*.css": "./dist/*.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "vue",
+    "vue3",
+    "components",
+    "ui",
+    "component-library"
+  ],
+  "author": "wangtongming",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tongmingwang/ulayer"
+  },
+  "homepage": "https://github.com/tongmingwang/ulayer#readme",
+  "bugs": {
+    "url": "https://github.com/tongmingwang/ulayer/issues"
+  }
+}

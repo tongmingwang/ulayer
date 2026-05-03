@@ -1,0 +1,174 @@
+.u-button,
+button {
+  --u-btn-height: 36px;
+  --u-btn-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--u-btn-height);
+  border-radius: var(--u-btn-radius);
+  padding: 0 16px;
+  font-size: 14px;
+  font-style: normal;
+  font-family: inherit;
+  border: none;
+  outline: none;
+  user-select: none;
+  cursor: pointer;
+  background: var(--u-bg);
+  transition: background 0.2s;
+  font-weight: 500;
+  color: var(--u-primary-500);
+  overflow: hidden;
+  vertical-align: middle;
+  position: relative;
+  // 移动端点击底色变化
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+  &:hover {
+    background: var(--u-primary-50);
+  }
+  &:active {
+    background: var(--u-primary-100);
+  }
+  &.is-disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  &.is-loading {
+    pointer-events: none;
+    opacity: 0.65;
+  }
+  .u-button__loading {
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    border-radius: inherit;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .u-icon__svg {
+    width: 1.2em;
+    height: 1.2em;
+    animation: rotate 1s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.u-button {
+  &--round {
+    border-radius: var(--u-btn-height);
+  }
+  &--circle {
+    border-radius: var(--u-btn-height);
+    max-width: var(--u-btn-height);
+    max-height: var(--u-btn-height);
+    min-width: var(--u-btn-height);
+    min-height: var(--u-btn-height);
+  }
+  // size
+  &--small {
+    --u-btn-height: 28px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+  &--large {
+    --u-btn-height: 48px;
+    padding: 0 16px;
+    font-size: 18px;
+  }
+  &--medium {
+    --u-btn-height: 36px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  // variant
+  &--outlined {
+    color: var(--u-primary-500);
+    background-color: transparent;
+    border: 1px solid var(--u-primary-500);
+    &:hover {
+      background-color: var(--u-primary-50);
+    }
+  }
+  &--text {
+    color: var(--u-primary-500);
+    background-color: transparent;
+    border: none;
+    padding: 0 8px;
+    &:hover {
+      background-color: var(--u-primary-50);
+    }
+  }
+  &--contained {
+    color: var(--u-info-50);
+    background-color: var(--u-primary-500);
+    box-shadow: 0 1px 4px var(--u-primary-500);
+    &:hover {
+      background-color: var(--u-primary-600);
+    }
+  }
+
+  &--tonal {
+    color: var(--u-primary-500);
+    background-color: var(--u-primary-50);
+    &:hover {
+      background-color: var(--u-primary-100);
+    }
+  }
+
+  // color
+  @each $color in primary, success, warning, error, info {
+    &--#{$color} {
+      color: var(--u-info-50);
+      background-color: var(--u-#{$color}-500);
+      &:hover {
+        background-color: var(--u-#{$color}-600);
+      }
+
+      &.u-button--outlined {
+        color: var(--u-#{$color}-600);
+        background-color: transparent;
+        border: 1px solid var(--u-#{$color}-600);
+        &:hover {
+          background-color: var(--u-#{$color}-100);
+        }
+      }
+
+      &.u-button--text {
+        color: var(--u-#{$color}-600);
+        background-color: transparent;
+        border: none;
+        &:hover {
+          background-color: var(--u-#{$color}-100);
+        }
+      }
+      &.u-button--contained {
+        color: var(--u-info-50);
+        background-color: var(--u-#{$color}-500);
+        box-shadow: 0 1px 5px var(--u-#{$color}-500);
+        &:hover {
+          background-color: var(--u-#{$color}-600);
+        }
+      }
+      &.u-button--tonal {
+        color: var(--u-#{$color}-500);
+        background-color: var(--u-#{$color}-50);
+        &:hover {
+          background-color: var(--u-#{$color}-100);
+        }
+      }
+    }
+  }
+}
