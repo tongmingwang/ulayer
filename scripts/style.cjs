@@ -13,7 +13,7 @@ async function main() {
           global: resolve(__dirname, '../packages/global/var.css'),
         },
         output: {
-          assetFileNames: 'core.css',
+          assetFileNames: 'color.css',
         },
       },
     },

@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "docs:build": "pnpm build && vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "lib": "vite build",
     "build": "node scripts/style.cjs && npm run lib"
