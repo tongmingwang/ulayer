@@ -205,17 +205,11 @@ document.documentElement.setAttribute('data-ume-ui-theme', 'light');
   const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
   const toggleTheme = () => {
     if (theme.value === 'dark') {
-      document.documentElement.setAttribute('data-ume-ui-theme', 'light');
       theme.value = 'light';
     } else {
-      document.documentElement.setAttribute('data-ume-ui-theme', 'dark');
       theme.value = 'dark';
     }
   };
-  onMounted(() => {
-    const currentTheme = document.documentElement.getAttribute('data-ume-ui-theme') || 'light';
-    theme.value = currentTheme;
-  });
 </script>
 
 <style scoped>
