@@ -8,8 +8,9 @@
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
+    "declaration": true,
+    "declarationDir": "./types",
     "baseUrl": "./",
     "paths": {
       "@/*": [

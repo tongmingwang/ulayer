@@ -36,6 +36,7 @@ export default defineConfig({
             text: 'Components',
             items: [
               { text: 'Button', link: '/components/button' },
+              { text: 'Button Group', link: '/components/button-group' },
               { text: 'Input', link: '/components/input' },
             ],
           },
@@ -99,6 +100,7 @@ export default defineConfig({
             text: '组件',
             items: [
               { text: '按钮', link: '/zh-CN/components/button' },
+              { text: '按钮组', link: '/zh-CN/components/button-group' },
               { text: '输入框', link: '/zh-CN/components/input' },
             ],
           },

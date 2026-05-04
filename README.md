@@ -62,14 +62,14 @@ app.use(ume);
 ### On-demand Import | 按需引入
 
 ```ts
-import { Button, Input, ripple } from 'ume-ui';
+import { UButton, UInput, ripple } from 'ume-ui';
 import 'ume-ui/dist/color.css';
 import 'ume-ui/dist/button/index.css';
 import 'ume-ui/dist/input/index.css';
 
 // Register component
-app.component('UButton', Button);
-app.component('UInput', Input);
+app.component('UButton', UButton);
+app.component('UInput', UInput);
 
 // Register directive
 app.directive('ripple', ripple);
@@ -85,7 +85,7 @@ app.directive('ripple', ripple);
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { Button, Input, ripple } from 'ume-ui';
+  import { UButton, UInput, ripple } from 'ume-ui';
 
   const value = ref('');
 </script>
@@ -95,11 +95,12 @@ app.directive('ripple', ripple);
 
 ## 🧩 Available Components | 可用组件
 
-| Component | Status | Docs                                                              | Description            |
-| --------- | ------ | ----------------------------------------------------------------- | ---------------------- |
-| Button    | ✅     | [Button](https://tongmingwang.github.io/ume-ui/components/button) | Basic button component |
-| Input     | ✅     | [Input](https://tongmingwang.github.io/ume-ui/components/input)   | Input field component  |
-| Layout    | 🚧     | WIP                                                               | Layout components      |
+| Component    | Status | Docs                                                                         | Description            |
+| ------------ | ------ | ---------------------------------------------------------------------------- | ---------------------- |
+| UButton      | ✅     | [Button](https://tongmingwang.github.io/ume-ui/components/button)            | Basic button component |
+| UInput       | ✅     | [Input](https://tongmingwang.github.io/ume-ui/components/input)              | Input field component  |
+| UButtonGroup | ✅     | [ButtonGroup](https://tongmingwang.github.io/ume-ui/components/button-group) | Button group component |
+| Layout       | 🚧     | WIP                                                                          | Layout components      |
 
 ## 📐 Available Directives | 可用指令
 

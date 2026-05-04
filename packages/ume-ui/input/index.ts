@@ -1,11 +1,16 @@
-import type { App } from 'vue'
-import Input from './src/input.vue'
+import type { App, Plugin } from 'vue';
+import UInput from './src/input.vue';
 
-Input.install = (app: App) => {
-  app.component('UlInput', Input)
-}
+UInput.install = (app: App) => {
+  app.component(UInput.name!, UInput);
+};
+const UiInput: Plugin = {
+  install(app: App) {
+    app.component(UInput.name!, UInput);
+  },
+};
 
-export { Input }
-export * from './src/types'
+export { UInput };
+export * from './src/types';
 
-export default Input
+export default UiInput;

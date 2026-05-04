@@ -2,6 +2,8 @@
 button {
   --u-btn-height: 36px;
   --u-btn-radius: 4px;
+  --u-btn-color: var(--u-primary-500);
+  --u-btn-bg: var(--u-bg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -11,14 +13,15 @@ button {
   font-size: 14px;
   font-style: normal;
   font-family: inherit;
+  text-transform: uppercase;
   border: none;
   outline: none;
   user-select: none;
   cursor: pointer;
-  background: var(--u-bg);
+  background: var(--u-btn-bg);
   transition: background 0.2s;
   font-weight: 500;
-  color: var(--u-primary-500);
+  color: var(--u-btn-color);
   overflow: hidden;
   vertical-align: middle;
   position: relative;
@@ -26,14 +29,14 @@ button {
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
   &:hover {
-    background: var(--u-primary-50);
+    --u-btn-bg: var(--u-primary-50);
   }
   &:active {
-    background: var(--u-primary-100);
+    --u-btn-bg: var(--u-primary-100);
   }
   &.is-disabled {
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.65;
   }
   &.is-loading {
     pointer-events: none;
@@ -95,78 +98,77 @@ button {
 
   // variant
   &--outlined {
-    color: var(--u-primary-500);
-    background-color: transparent;
+    --u-btn-color: var(--u-primary-500);
+    --u-btn-bg: transparent;
     border: 1px solid var(--u-primary-500);
     &:hover {
-      background-color: var(--u-primary-50);
+      --u-btn-bg: var(--u-primary-50);
     }
   }
   &--text {
-    color: var(--u-primary-500);
-    background-color: transparent;
+    --u-btn-color: var(--u-primary-500);
+    --u-btn-bg: transparent;
     border: none;
     padding: 0 8px;
     &:hover {
-      background-color: var(--u-primary-50);
+      --u-btn-bg: var(--u-primary-50);
     }
   }
   &--contained {
-    color: var(--u-info-50);
-    background-color: var(--u-primary-500);
-    box-shadow: 0 1px 4px var(--u-primary-500);
+    --u-btn-color: var(--u-info-50);
+    --u-btn-bg: var(--u-primary-500);
+    box-shadow: 0 1px 2px var(--u-btn-bg);
     &:hover {
-      background-color: var(--u-primary-600);
+      --u-btn-bg: var(--u-primary-600);
     }
   }
 
   &--tonal {
-    color: var(--u-primary-500);
-    background-color: var(--u-primary-50);
+    --u-btn-color: var(--u-primary-500);
+    --u-btn-bg: var(--u-primary-50);
     &:hover {
-      background-color: var(--u-primary-100);
+      --u-btn-bg: var(--u-primary-100);
     }
   }
 
   // color
   @each $color in primary, success, warning, error, info {
     &--#{$color} {
-      color: var(--u-info-50);
-      background-color: var(--u-#{$color}-500);
+      --u-btn-color: var(--u-info-50);
+      --u-btn-bg: var(--u-#{$color}-500);
       &:hover {
-        background-color: var(--u-#{$color}-600);
+        --u-btn-bg: var(--u-#{$color}-600);
       }
 
       &.u-button--outlined {
-        color: var(--u-#{$color}-600);
-        background-color: transparent;
+        --u-btn-color: var(--u-#{$color}-600);
+        --u-btn-bg: transparent;
         border: 1px solid var(--u-#{$color}-600);
         &:hover {
-          background-color: var(--u-#{$color}-100);
+          --u-btn-bg: var(--u-#{$color}-100);
         }
       }
 
       &.u-button--text {
-        color: var(--u-#{$color}-600);
-        background-color: transparent;
+        --u-btn-color: var(--u-#{$color}-600);
+        --u-btn-bg: transparent;
         border: none;
         &:hover {
-          background-color: var(--u-#{$color}-100);
+          --u-btn-bg: var(--u-#{$color}-100);
         }
       }
       &.u-button--contained {
-        color: var(--u-info-50);
-        background-color: var(--u-#{$color}-500);
-        box-shadow: 0 1px 5px var(--u-#{$color}-500);
+        --u-btn-color: var(--u-info-50);
+        --u-btn-bg: var(--u-#{$color}-500);
         &:hover {
-          background-color: var(--u-#{$color}-600);
+          --u-btn-bg: var(--u-#{$color}-600);
         }
       }
       &.u-button--tonal {
-        color: var(--u-#{$color}-500);
-        background-color: var(--u-#{$color}-50);
+        --u-btn-color: var(--u-#{$color}-500);
+        --u-btn-bg: var(--u-#{$color}-50);
         &:hover {
-          background-color: var(--u-#{$color}-100);
+          --u-btn-bg: var(--u-#{$color}-100);
         }
       }
     }

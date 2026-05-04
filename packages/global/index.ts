@@ -1,2 +1,2 @@
 import './var.css';
-console.log(1);
+import './reset.css';

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 const rootPath = '../../packages/ume-ui';
-// 读取路由文件
+//  @ts-ignore
 const demoPages = import.meta.glob(`../../packages/ume-ui/**/Test.vue`);
 
 console.log(demoPages, 'demoPages');
@@ -11,13 +11,15 @@ const routes = Object.keys(demoPages).map((key) => {
 
   return {
     path,
+    name: path.replace('/', ''),
     component: demoPages[key],
   };
 });
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes,
 });
 
 export default router;
+export { routes };

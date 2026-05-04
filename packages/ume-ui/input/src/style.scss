@@ -1,0 +1,15 @@
+.u-input {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+
+.u-input__inner,
+input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--u-info-900);
+  height: 100%;
+  width: 100%;
+}

@@ -1,13 +1,13 @@
 import type { App, Plugin } from 'vue';
-import Button from './src/button.vue';
+import UButton from './src/button.vue';
 
-export const UiButton: Plugin = {
+const UiButton: Plugin = {
   install(app: App) {
-    app.component(Button.name!, Button);
+    app.component(UButton.name!, UButton);
   },
 };
 
-export { Button as UButton };
+export { UButton };
 export * from './src/types';
 
 export default UiButton;

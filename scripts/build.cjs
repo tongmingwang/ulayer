@@ -19,12 +19,16 @@ async function main() {
       console.log(`\n构建组件: ${name}`);
 
       await build({
+        configFile: false,
         plugins: [
+          vue(),
           dts({
-            tsConfigFilePath: resolve(__dirname, '../tsconfig.app.json'), // 正确指向应用的 tsconfig
-            include: [`../packages/ume-ui/${name}/**/*.{ts,vue,tsx}`], // 只包含当前组件的文件
-            outDir: resolve(__dirname, `../output/dist/${name}/dist`), // 确保类型定义输出到正确的目录
-            rollupTypes: true,
+            tsconfigPath: resolve(__dirname, '../tsconfig.app.json'),
+            include: [`packages/ume-ui/${name}/**/*.{ts,vue,tsx}`],
+            outDir: resolve(__dirname, `../output/dist/${name}/dist`),
+            entryRoot: `packages/ume-ui/${name}`,
+            insertTypesEntry: true,
+            cleanVueFileName: true,
           }),
         ],
         publicDir: false, // 不使用公共资源目录
@@ -55,12 +59,12 @@ async function main() {
     // 为每个组件创建 package.json
     for (const name of components) {
       const componentPackageJson = {
-        name: `@ume-ui/${name}`,
+        name: `ume-ui/${name}`,
         private: true,
-        main: './index.cjs.js', // CommonJS 入口
-        module: './index.mjs', // ES Module 入口
+        main: './index.js',
+        module: './index.js',
         style: './index.css',
-        types: './dist/index.d.ts', // 指向类型定义文件
+        types: './index.d.ts',
       };
 
       const outputPath = resolve(

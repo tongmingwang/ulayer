@@ -1,13 +1,14 @@
 <template>
-  <div class="ul-input">
+  <div :class="inputClass">
     <input
       v-bind="$attrs"
-      :type="type"
-      :value="modelValue"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      :readonly="readonly"
-      class="ul-input__inner"
+      ref="input"
+      :type="props.type"
+      :value="props.modelValue"
+      :placeholder="props.placeholder"
+      :disabled="props.disabled"
+      :readonly="props.readonly"
+      class="u-input__inner"
       @input="handleInput"
       @change="handleChange"
       @blur="handleBlur"
@@ -16,25 +17,30 @@
 </template>
 
 <script lang="ts" setup>
-  import { inputProps } from './types';
+  import { useTemplateRef, computed } from 'vue';
+  import type { UInputPropsType } from './types';
+
+  const inputRef = useTemplateRef<HTMLInputElement>('input');
 
   defineOptions({
-    name: 'UlInput',
+    name: 'UInput',
   });
-
-  const props = defineProps(inputProps);
-  const emit = defineEmits([
-    'update:modelValue',
-    'input',
-    'change',
-    'blur',
-    'focus',
-  ]);
+  defineExpose({
+    $el: inputRef.value,
+    focus: () => inputRef.value?.focus(),
+    blur: () => inputRef.value?.blur(),
+  });
+  const props = defineProps<UInputPropsType>();
+  const inputClass = computed(() => {
+    return ['u-input', props.size ? `u-input--${props.size}` : ''].filter(
+      Boolean
+    );
+  });
+  const emit = defineEmits(['update:modelValue', 'change', 'blur', 'focus']);
 
   const handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
     emit('update:modelValue', target.value);
-    emit('input', target.value);
   };
 
   const handleChange = (e: Event) => {
@@ -51,34 +57,6 @@
   };
 </script>
 
-<style>
-  .ul-input {
-    display: inline-block;
-    width: 100%;
-  }
-
-  .ul-input__inner {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #606266;
-    background-color: #fff;
-    border: 1px solid #dcdfe6;
-    border-radius: 4px;
-    box-sizing: border-box;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .ul-input__inner:focus {
-    border-color: #409eff;
-  }
-
-  .ul-input__inner:disabled {
-    background-color: #f5f7fa;
-    border-color: #e4e7ed;
-    color: #c0c4cc;
-    cursor: not-allowed;
-  }
+<style scoped lang="scss">
+  @use './style.scss';
 </style>

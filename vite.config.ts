@@ -11,11 +11,12 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      outDirs: resolve(__dirname, 'output/dist'),
-      include: ['packages/ume-ui/**/*.ts'],
-      staticImport: true,
-      insertTypesEntry: true,
+      outDirs: 'output/dist',
+      include: ['packages/**/*.ts', 'packages/**/*.vue'],
+      tsconfigPath: './tsconfig.app.json',
       cleanVueFileName: true,
+      insertTypesEntry: true,
+      entryRoot: 'packages',
     }),
   ],
   build: {

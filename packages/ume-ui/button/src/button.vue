@@ -23,27 +23,32 @@
 
 <script setup lang="ts">
   import type { ButtonProps } from './types';
-  import { computed, useTemplateRef } from 'vue';
+  import { computed, useTemplateRef, inject } from 'vue';
   import ripple from '@/directives/ripple';
+  import type { UButtonGroupProps } from '../../button-group/src/types';
 
   const emit = defineEmits(['click']);
+  const buttonGroupProps = inject<UButtonGroupProps>('u-button-group');
   const props = withDefaults(defineProps<ButtonProps>(), {
     color: '',
     variant: '',
     shape: '',
-    size: 'medium',
+    size: '',
   });
   const buttonRef = useTemplateRef<HTMLButtonElement>('button');
 
   // 组件类
   const className = computed(() => {
+    const groupSize = props.size || buttonGroupProps?.size || 'medium';
+    const groupColor = props.color || buttonGroupProps?.color || '';
+    const groupVariant = props.variant || buttonGroupProps?.variant || '';
     return [
       'u-button',
       props.disabled ? 'is-disabled' : '',
       props.loading ? 'is-loading' : '',
-      props.size ? `u-button--${props.size}` : '',
-      props.color ? `u-button--${props.color}` : '',
-      props.variant ? `u-button--${props.variant}` : '',
+      groupSize ? `u-button--${groupSize}` : '',
+      groupColor ? `u-button--${groupColor}` : '',
+      groupVariant ? `u-button--${groupVariant}` : '',
       props.shape ? `u-button--${props.shape}` : '',
     ];
   });
