@@ -1,25 +1,21 @@
 export interface UInputPropsType {
   modelValue: string | number;
-  type?:
-    | 'text'
-    | 'password'
-    | 'number'
-    | 'email'
-    | 'url'
-    | 'tel'
-    | 'search'
-    | 'month'
-    | 'week'
-    | 'date'
-    | 'datetime'
-    | 'datetime-local'
-    | 'time'
-    | 'color';
+  type?: 'text' | 'number' | 'password' | 'textarea' | string;
   placeholder?: string;
   disabled?: boolean;
   readonly?: boolean;
   clearable?: boolean;
   size?: 'large' | 'medium' | 'small';
-  prefixIcon?: string;
-  suffixIcon?: string;
+  prefix?: string;
+  suffix?: string;
+  variant?: 'outlined' | 'contained' | 'tonal';
+  rows?: number | string;
+  name?: string;
+  autocomplete?: string;
+  autofocus?: boolean;
+  maxlength?: number | string;
+  minlength?: number | string;
+  max?: number | string;
+  min?: number | string;
+  step?: number | string;
 }

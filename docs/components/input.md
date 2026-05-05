@@ -1,178 +1,170 @@
 # Input
 
-Input components are used to collect user input or allow users to enter data, supporting various types and states.
+Input component for collecting user input data.
+
+> For number input, see [InputNumber](./input-number.md) component
+> For multi-line text, see [Textarea](./textarea.md) component
 
 ## Basic Usage
 
-The simplest form of input that can have different types, sizes and other properties.
+The simplest input form with two-way data binding via `v-model`.
 
-:::demo
+<div class="demo-section">
+  <u-input v-model="value1" placeholder="Please enter content"></u-input>
+  <div class="demo-value">Current value: {{ value1 || '(empty)' }}</div>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input v-model="input1" placeholder="Basic input" />
-    <u-input v-model="input2" placeholder="Disabled input" :disabled="true" />
-    <u-input v-model="input3" placeholder="Readonly input" :readonly="true" />
-  </div>
+  <u-input v-model="value1" placeholder="Please enter content"></u-input>
+  <div>Current value: {{ value1 || '(empty)' }}</div>
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-  const input2 = ref('');
-  const input3 = ref('');
+  const value1 = ref('');
 </script>
-
-<style scoped>
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
 ```
 
-:::
+## Max Length
 
-## Different Types
+Limit the maximum number of characters with the `maxlength` attribute.
 
-Input supports different types such as text, password, email, etc.
-
-:::demo
+<div class="demo-section">
+  <u-input :maxlength="6" placeholder="Max 6 characters"></u-input>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input v-model="input1" type="text" placeholder="Text input" />
-    <u-input v-model="input2" type="password" placeholder="Password input" />
-    <u-input v-model="input3" type="email" placeholder="Email input" />
-  </div>
+  <u-input :maxlength="6" placeholder="Max 6 characters"></u-input>
 </template>
-
-<script setup>
-  import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-  const input2 = ref('');
-  const input3 = ref('');
-</script>
-
-<style scoped>
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
 ```
 
-:::
+## Prefix & Suffix
 
-## Input Sizes
+Add prefix and suffix content via `prefix` and `suffix` attributes, or customize through slots.
 
-Input fields have three sizes: small, medium, and large.
-
-:::demo
+<div class="demo-row">
+  <u-input placeholder="Please enter content" suffix=".com">
+    <template #prefix>
+      <u-icon name="search"></u-icon>
+    </template>
+  </u-input>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input v-model="input1" size="small" placeholder="Small input" />
-    <u-input v-model="input2" size="medium" placeholder="Medium input" />
-    <u-input v-model="input3" size="large" placeholder="Large input" />
-  </div>
+  <u-input placeholder="Please enter content" suffix=".com">
+    <template #prefix>
+      <u-icon name="search"></u-icon>
+    </template>
+  </u-input>
 </template>
 
 <script setup>
-  import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-  const input2 = ref('');
-  const input3 = ref('');
+  import { UIcon } from 'ume-ui';
 </script>
-
-<style scoped>
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
 ```
 
-:::
+## Password Input
 
-## Clearable Input
+Set `type="password"` to enable password input mode with toggle visibility support.
 
-Enable the clear button using the [clearable](file:///d:\github\ume-ui\packages\ume-ui\input/src/types.ts#L6-L6) property.
-
-:::demo
+<div class="demo-row">
+  <u-input placeholder="Enter password" type="password"></u-input>
+  <u-input placeholder="With prefix" type="password" prefix="password"></u-input>
+  <u-input placeholder="With suffix" type="password" suffix="hi"></u-input>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input v-model="input1" placeholder="Clearable input" clearable />
-  </div>
+  <u-input placeholder="Enter password" type="password"></u-input>
+  <u-input placeholder="With prefix" type="password" prefix="password"></u-input>
+  <u-input placeholder="With suffix" type="password" suffix="hi"></u-input>
 </template>
-
-<script setup>
-  import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-</script>
-
-<style scoped>
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
 ```
 
-:::
+## Sizes
 
-## Input with Icon
+Three input sizes available: small, medium, large.
 
-Add icons to the input field.
-
-:::demo
+<div class="demo-row">
+  <u-input placeholder="Small" size="small"></u-input>
+  <u-input placeholder="Medium" size="medium"></u-input>
+  <u-input placeholder="Large" size="large"></u-input>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input
-      v-model="input1"
-      placeholder="Input with prefix icon"
-      prefix-icon="🔍" />
-    <u-input
-      v-model="input2"
-      placeholder="Input with suffix icon"
-      suffix-icon="🔒" />
-  </div>
+  <u-input placeholder="Small" size="small"></u-input>
+  <u-input placeholder="Medium" size="medium"></u-input>
+  <u-input placeholder="Large" size="large"></u-input>
 </template>
+```
+
+## Disabled & Readonly
+
+Set disabled state via `disabled`, readonly state via `readonly`.
+
+<div class="demo-row">
+  <u-input placeholder="Disabled state" disabled></u-input>
+  <u-input placeholder="Readonly state" readonly></u-input>
+</div>
+
+```vue
+<template>
+  <u-input placeholder="Disabled state" disabled></u-input>
+  <u-input placeholder="Readonly state" readonly></u-input>
+</template>
+```
+
+## API
+
+| Attribute | Description | Type | Default |
+|-----------|-------------|------|---------|
+| modelValue | Binding value | `string \| number` | - |
+| type | Input type | `text \| password` | `text` |
+| placeholder | Placeholder text | `string` | - |
+| disabled | Whether disabled | `boolean` | `false` |
+| readonly | Whether readonly | `boolean` | `false` |
+| clearable | Whether clearable | `boolean` | `false` |
+| size | Input size | `large \| medium \| small` | `medium` |
+| prefix | Prefix content | `string` | - |
+| suffix | Suffix content | `string` | - |
+| maxlength | Maximum length | `number \| string` | - |
+| minlength | Minimum length | `number \| string` | - |
+
+## Slots
+
+| Slot Name | Description |
+|-----------|-------------|
+| prefix | Prefix content |
+| suffix | Suffix content |
+
+## Related Components
+
+- [InputNumber](./input-number.md)
+- [Textarea](./textarea.md)
 
 <script setup>
   import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-  const input2 = ref('');
+  const value1 = ref('');
 </script>
 
 <style scoped>
-  .input-group {
+  .demo-section {
+    margin-bottom: 16px;
+  }
+  .demo-row {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .demo-value {
+    padding: 8px 0;
+    color: #666;
+    font-size: 14px;
   }
 </style>
-```
-
-:::

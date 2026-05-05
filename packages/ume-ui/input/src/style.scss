@@ -1,52 +1,53 @@
-.u-input {
+.u-input-wrapper {
+  --u-input-radius: 4px;
+  --u-input-height: 36px;
+  --u-input-color: var(--u-info-800);
+  --u-input-bg: var(--u-bg);
+  --u-input-border-color: var(--u-info-500);
   display: inline-flex;
   align-items: center;
-  width: 280px;
-  border: 1px solid var(--u-neutral-300);
-  border-radius: 6px;
+  width: 100%;
+  border: 1px solid var(--u-input-border-color);
+  border-radius: var(--u-input-radius);
   padding: 0 12px;
-  background: #fff;
+  height: var(--u-input-height);
+  min-height: var(--u-input-height);
+  background: var(--u-bg);
   transition: all 0.2s;
+  gap: 8px;
 
+  &:focus-within,
+  &:hover {
+    --u-input-border-color: var(--u-primary-500);
+  }
   &:focus-within {
-    border-color: var(--u-primary-500);
-    box-shadow: 0 0 0 2px rgba(var(--u-primary-500-rgb), 0.1);
+    box-shadow: inset 0 0 0 1px var(--u-primary-500);
   }
 
   &--small {
-    height: 32px;
+    --u-input-height: 28px;
   }
 
-  &--medium,
-  &:not([class*='--']) {
-    height: 40px;
+  &--medium {
+    --u-input-height: 36px;
   }
 
   &--large {
-    height: 48px;
+    --u-input-height: 48px;
+  }
+  &--textarea {
+    height: auto;
+    padding: 0;
+  }
+  &--number {
+    padding-right: 0;
   }
 
-  &:has(input:disabled) {
-    background: var(--u-neutral-100);
-    cursor: not-allowed;
+  &.is-disabled {
+    pointer-events: none;
+    opacity: 0.6;
   }
-
-  &__inner {
-    flex: 1;
-    height: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 14px;
-    color: var(--u-neutral-800);
-
-    &::placeholder {
-      color: var(--u-neutral-500);
-    }
-
-    &:disabled {
-      color: var(--u-neutral-500);
-      cursor: not-allowed;
-    }
+  &.is-readonly {
+    pointer-events: none;
   }
 }

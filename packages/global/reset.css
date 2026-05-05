@@ -15,7 +15,33 @@ body {
     'Open Sans',
     'Helvetica Neue',
     sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--u-container-bg);
+  color: var(--u-info-700);
 }
 * {
   box-sizing: border-box;
+}
+
+.pdr-8 {
+  padding-right: 8px;
+}
+.pdl-8 {
+  padding-left: 8px;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--u-info-600);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--u-info-700);
 }

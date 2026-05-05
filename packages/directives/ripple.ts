@@ -51,12 +51,19 @@ function createRipple(el: RippleHTMLElement, clientX: number, clientY: number) {
   }
 
   ripple.animate(
-    {
-      transform: ['scale(0)', 'scale(1)'],
-    },
+    [
+      {
+        transform: isCircle ? 'scale(0.15)' : 'scale(0)',
+      },
+      {
+        transform: 'scale(1)',
+        offset: 1,
+      },
+    ],
     {
       duration: 550,
       fill: 'forwards',
+      easing: 'linear',
     }
   );
 

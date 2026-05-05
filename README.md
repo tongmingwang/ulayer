@@ -62,14 +62,16 @@ app.use(ume);
 ### On-demand Import | 按需引入
 
 ```ts
-import { UButton, UInput, ripple } from 'ume-ui';
+import { UButton, UInput, UIcon, ripple } from 'ume-ui';
 import 'ume-ui/dist/color.css';
 import 'ume-ui/dist/button/index.css';
 import 'ume-ui/dist/input/index.css';
+import 'ume-ui/dist/icon/index.css';
 
 // Register component
 app.component('UButton', UButton);
 app.component('UInput', UInput);
+app.component('UIcon', UIcon);
 
 // Register directive
 app.directive('ripple', ripple);
@@ -79,13 +81,14 @@ app.directive('ripple', ripple);
 
 ```vue
 <template>
-  <u-button v-ripple type="primary">Click Me</u-button>
+  <u-button v-ripple color="primary">Click Me</u-button>
   <u-input v-model="value" placeholder="Enter text" />
+  <u-icon name="search" size="20" />
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { UButton, UInput, ripple } from 'ume-ui';
+  import { UButton, UInput, UIcon } from 'ume-ui';
 
   const value = ref('');
 </script>
@@ -95,12 +98,21 @@ app.directive('ripple', ripple);
 
 ## 🧩 Available Components | 可用组件
 
+### Basic Components | 基础组件
+
 | Component    | Status | Docs                                                                         | Description            |
 | ------------ | ------ | ---------------------------------------------------------------------------- | ---------------------- |
 | UButton      | ✅     | [Button](https://tongmingwang.github.io/ume-ui/components/button)            | Basic button component |
-| UInput       | ✅     | [Input](https://tongmingwang.github.io/ume-ui/components/input)              | Input field component  |
 | UButtonGroup | ✅     | [ButtonGroup](https://tongmingwang.github.io/ume-ui/components/button-group) | Button group component |
-| Layout       | 🚧     | WIP                                                                          | Layout components      |
+| UFab         | ✅     | [Fab](https://tongmingwang.github.io/ume-ui/components/fab)                  | Floating action button |
+| UIcon        | ✅     | [Icon](https://tongmingwang.github.io/ume-ui/components/icon)                | Icon library           |
+
+### Form Components | 表单组件
+
+| Component | Status | Docs                                                                  | Description           |
+| --------- | ------ | --------------------------------------------------------------------- | --------------------- |
+| UInput    | ✅     | [Input](https://tongmingwang.github.io/ume-ui/components/input)       | Input field component |
+| UCheckbox | ✅     | [Checkbox](https://tongmingwang.github.io/ume-ui/components/checkbox) | Checkbox component    |
 
 ## 📐 Available Directives | 可用指令
 

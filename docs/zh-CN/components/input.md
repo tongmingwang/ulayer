@@ -1,185 +1,170 @@
 # Input 输入框
 
-输入框组件用于收集用户输入或允许用户录入数据，支持多种类型和状态。
+输入框组件用于收集用户输入或允许用户录入数据。
 
-## 语言切换 / Language Switching
+> 数字输入框请查看 [InputNumber](./input-number.md) 组件
+> 多行文本请查看 [Textarea](./textarea.md) 组件
 
-在中英文文档间切换:
+## 基础用法
 
-- 英文版: [docs/components/input.md](../../../docs/components/input.md)
-- 中文版: [docs/zh-CN/components/input.md](../../../docs/zh-CN/components/input.md)
+最简单的输入框形式，可以通过 `v-model` 双向绑定数据。
 
-## 基础用法 / Basic Usage
-
-最简单的输入框形式，可以设置不同类型、尺寸和其他属性。
-
-:::demo
+<div class="demo-section">
+  <u-input v-model="value1" placeholder="请输入内容"></u-input>
+  <div class="demo-value">当前值: {{ value1 || '(空)' }}</div>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input v-model="input1" placeholder="基本输入框" />
-    <u-input v-model="input2" placeholder="禁用输入框" :disabled="true" />
-    <u-input v-model="input3" placeholder="只读输入框" :readonly="true" />
-  </div>
+  <u-input v-model="value1" placeholder="请输入内容"></u-input>
+  <div>当前值: {{ value1 || '(空)' }}</div>
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-  const input2 = ref('');
-  const input3 = ref('');
+  const value1 = ref('');
 </script>
-
-<style scoped>
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
 ```
 
-:::
+## 最大长度
 
-## 不同类型 / Different Types
+通过 `maxlength` 属性限制输入的最大字符数。
 
-输入框支持不同类型，如文本、密码、邮箱等。
-
-:::demo
+<div class="demo-section">
+  <u-input :maxlength="6" placeholder="最多输入6个字符"></u-input>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input v-model="input1" type="text" placeholder="文本输入框" />
-    <u-input v-model="input2" type="password" placeholder="密码输入框" />
-    <u-input v-model="input3" type="email" placeholder="邮箱输入框" />
-  </div>
+  <u-input :maxlength="6" placeholder="最多输入6个字符"></u-input>
+</template>
+```
+
+## 前后缀
+
+通过 `prefix` 和 `suffix` 属性添加前后缀内容，也支持通过插槽自定义。
+
+<div class="demo-row">
+  <u-input placeholder="请输入内容" suffix=".com">
+    <template #prefix>
+      <u-icon name="search"></u-icon>
+    </template>
+  </u-input>
+</div>
+
+```vue
+<template>
+  <u-input placeholder="请输入内容" suffix=".com">
+    <template #prefix>
+      <u-icon name="search"></u-icon>
+    </template>
+  </u-input>
 </template>
 
 <script setup>
-  import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-  const input2 = ref('');
-  const input3 = ref('');
+  import { UIcon } from 'ume-ui';
 </script>
-
-<style scoped>
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
 ```
 
-:::
+## 密码输入框
 
-## 输入框尺寸 / Input Sizes
+设置 `type="password"` 开启密码输入模式，支持切换显示密码。
+
+<div class="demo-row">
+  <u-input placeholder="请输入密码" type="password"></u-input>
+  <u-input placeholder="带前缀" type="password" prefix="password"></u-input>
+  <u-input placeholder="带后缀" type="password" suffix="hi"></u-input>
+</div>
+
+```vue
+<template>
+  <u-input placeholder="请输入密码" type="password"></u-input>
+  <u-input placeholder="带前缀" type="password" prefix="password"></u-input>
+  <u-input placeholder="带后缀" type="password" suffix="hi"></u-input>
+</template>
+```
+
+## 不同尺寸
 
 输入框有三种尺寸：小号([small](file:///d:\github\ume-ui\packages\ume-ui\input\src\types.ts#L8-L8))、中号([medium](file:///d:\github\ume-ui\packages\ume-ui\input\src\types.ts#L9-L9))、大号([large](file:///d:\github\ume-ui\packages\ume-ui\input\src\types.ts#L10-L10))。
 
-:::demo
+<div class="demo-row">
+  <u-input placeholder="Small" size="small"></u-input>
+  <u-input placeholder="Medium" size="medium"></u-input>
+  <u-input placeholder="Large" size="large"></u-input>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input v-model="input1" size="small" placeholder="小号输入框" />
-    <u-input v-model="input2" size="medium" placeholder="中号输入框" />
-    <u-input v-model="input3" size="large" placeholder="大号输入框" />
-  </div>
+  <u-input placeholder="Small" size="small"></u-input>
+  <u-input placeholder="Medium" size="medium"></u-input>
+  <u-input placeholder="Large" size="large"></u-input>
 </template>
-
-<script setup>
-  import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-  const input2 = ref('');
-  const input3 = ref('');
-</script>
-
-<style scoped>
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
 ```
 
-:::
+## 禁用和只读状态
 
-## 可清除输入框 / Clearable Input
+通过 `disabled` 设置禁用状态，`readonly` 设置只读状态。
 
-通过 [clearable](file:///d:\github\ume-ui\packages\ume-ui\input\src\types.ts#L6-L6) 属性启用清除按钮。
-
-:::demo
+<div class="demo-row">
+  <u-input placeholder="禁用状态" disabled></u-input>
+  <u-input placeholder="只读状态" readonly></u-input>
+</div>
 
 ```vue
 <template>
-  <div class="input-group">
-    <u-input v-model="input1" placeholder="可清除输入框" clearable />
-  </div>
+  <u-input placeholder="禁用状态" disabled></u-input>
+  <u-input placeholder="只读状态" readonly></u-input>
 </template>
+```
+
+## API
+
+| 属性        | 说明       | 类型                       | 默认值   |
+| ----------- | ---------- | -------------------------- | -------- |
+| modelValue  | 绑定值     | `string \| number`         | -        |
+| type        | 输入框类型 | `text \| password`         | `text`   |
+| placeholder | 占位文本   | `string`                   | -        |
+| disabled    | 是否禁用   | `boolean`                  | `false`  |
+| readonly    | 是否只读   | `boolean`                  | `false`  |
+| clearable   | 是否可清除 | `boolean`                  | `false`  |
+| size        | 尺寸       | `large \| medium \| small` | `medium` |
+| prefix      | 前缀内容   | `string`                   | -        |
+| suffix      | 后缀内容   | `string`                   | -        |
+| maxlength   | 最大长度   | `number \| string`         | -        |
+| minlength   | 最小长度   | `number \| string`         | -        |
+
+## 插槽
+
+| 插槽名 | 说明     |
+| ------ | -------- |
+| prefix | 前缀内容 |
+| suffix | 后缀内容 |
+
+## 相关组件
+
+- [InputNumber 数字输入框](./input-number.md)
+- [Textarea 文本域](./textarea.md)
 
 <script setup>
   import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
+  const value1 = ref('');
 </script>
 
 <style scoped>
-  .input-group {
+  .demo-section {
+    margin-bottom: 16px;
+  }
+  .demo-row {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .demo-value {
+    padding: 8px 0;
+    color: #666;
+    font-size: 14px;
   }
 </style>
-```
-
-:::
-
-## 带图标输入框 / Input with Icon
-
-给输入框添加前后缀图标。
-
-:::demo
-
-```vue
-<template>
-  <div class="input-group">
-    <u-input
-      v-model="input1"
-      placeholder="带前缀图标的输入框"
-      prefix-icon="🔍" />
-    <u-input
-      v-model="input2"
-      placeholder="带后缀图标的输入框"
-      suffix-icon="🔒" />
-  </div>
-</template>
-
-<script setup>
-  import { ref } from 'vue';
-  import UInput from '@/ume-ui/input';
-
-  const input1 = ref('');
-  const input2 = ref('');
-</script>
-
-<style scoped>
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
-```
-
-:::

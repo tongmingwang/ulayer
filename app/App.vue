@@ -13,18 +13,28 @@
       </Btn>
     </div>
     <div class="content">
+      <UButton shape="circle" variant="contained" @click="toggleTheme">
+        <UIcon name="search" size="24"></UIcon>
+      </UButton>
+      <div v-ripple style="height: 48px">Hello</div>
       <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { UButton } from '../output/dist/button/index.js';
-  import '../output/dist/button/index.css';
+  import { UButton, UIcon, ripple } from '../packages/ume-ui';
   import { routes } from './router/index.js';
+  import { useTheme } from '../packages/hooks/useTheme.ts';
+
+  const { theme, toggleTheme } = useTheme();
+
   defineOptions({
     components: {
       Btn: UButton,
+    },
+    directives: {
+      ripple,
     },
   });
 </script>

@@ -2,12 +2,6 @@
 
 按钮组用于将一系列按钮组合在一起，支持水平和垂直布局，并可以统一设置组内所有按钮的尺寸、颜色和变体。
 
-<style scoped>
-.button-group-demo {
-  margin-bottom: 16px;
-}
-</style>
-
 ## 基础用法
 
 最简单的按钮组，用于组合一系列相关的操作。
@@ -103,13 +97,6 @@
     <u-button>警告</u-button>
   </u-button-group>
 </div>
-<div class="button-group-demo">
-  <u-button-group color="error">
-    <u-button>错误</u-button>
-    <u-button>错误</u-button>
-    <u-button>错误</u-button>
-  </u-button-group>
-</div>
 
 ```vue
 <template>
@@ -130,16 +117,32 @@
     <u-button>警告</u-button>
     <u-button>警告</u-button>
   </u-button-group>
+</template>
+```
 
-  <u-button-group color="error">
-    <u-button>错误</u-button>
-    <u-button>错误</u-button>
-    <u-button>错误</u-button>
+## 垂直布局
+
+通过 `vertical` 属性设置垂直排列的按钮组。
+
+<div class="button-group-demo">
+  <u-button-group vertical color="primary">
+    <u-button>按钮 1</u-button>
+    <u-button>按钮 2</u-button>
+    <u-button>按钮 3</u-button>
+  </u-button-group>
+</div>
+
+```vue
+<template>
+  <u-button-group vertical color="primary">
+    <u-button>按钮 1</u-button>
+    <u-button>按钮 2</u-button>
+    <u-button>按钮 3</u-button>
   </u-button-group>
 </template>
 ```
 
-## 统一样式
+## 统一变体
 
 通过 `variant` 属性统一设置组内所有按钮的变体样式。
 
@@ -157,13 +160,6 @@
     <u-button>文本</u-button>
   </u-button-group>
 </div>
-<div class="button-group-demo">
-  <u-button-group variant="tonal" color="primary">
-    <u-button>调性</u-button>
-    <u-button>调性</u-button>
-    <u-button>调性</u-button>
-  </u-button-group>
-</div>
 
 ```vue
 <template>
@@ -178,62 +174,20 @@
     <u-button>文本</u-button>
     <u-button>文本</u-button>
   </u-button-group>
-
-  <u-button-group variant="tonal" color="primary">
-    <u-button>调性</u-button>
-    <u-button>调性</u-button>
-    <u-button>调性</u-button>
-  </u-button-group>
 </template>
 ```
 
-## 垂直排列
+## API
 
-通过 `vertical` 属性设置按钮组为垂直布局。
+| 属性 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| size | 统一设置按钮尺寸 | `small \| medium \| large` | - |
+| color | 统一设置按钮颜色 | `primary \| success \| warning \| error \| info` | - |
+| variant | 统一设置按钮变体 | `contained \| outlined \| text \| tonal` | - |
+| vertical | 是否垂直排列 | `boolean` | `false` |
 
-<div class="button-group-demo">
-  <u-button-group vertical color="primary">
-    <u-button>上</u-button>
-    <u-button>中</u-button>
-    <u-button>下</u-button>
-  </u-button-group>
-</div>
-
-<div class="button-group-demo">
-  <u-button-group vertical variant="outlined" color="primary">
-    <u-button>上</u-button>
-    <u-button>中</u-button>
-    <u-button>下</u-button>
-  </u-button-group>
-</div>
-
-```vue
-<template>
-  <u-button-group vertical color="primary">
-    <u-button>上</u-button>
-    <u-button>中</u-button>
-    <u-button>下</u-button>
-  </u-button-group>
-
-  <u-button-group vertical variant="outlined" color="primary">
-    <u-button>上</u-button>
-    <u-button>中</u-button>
-    <u-button>下</u-button>
-  </u-button-group>
-</template>
-```
-
-## Props 属性
-
-| 属性     | 说明               | 类型    | 默认值 | 可选值                                     |
-| -------- | ------------------ | ------- | ------ | ------------------------------------------ |
-| size     | 组内按钮的统一尺寸 | string  | -      | small / medium / large                     |
-| color    | 组内按钮的统一颜色 | string  | -      | primary / success / warning / error / info |
-| variant  | 组内按钮的统一样式 | string  | -      | contained / outlined / text / tonal        |
-| vertical | 是否垂直排列       | boolean | false  | -                                          |
-
-## Slots 插槽
-
-| 插槽名  | 说明                          |
-| ------- | ----------------------------- |
-| default | 按钮组内容，放置 UButton 组件 |
+<style scoped>
+  .button-group-demo {
+    margin-bottom: 16px;
+  }
+</style>

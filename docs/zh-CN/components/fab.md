@@ -2,16 +2,6 @@
 
 悬浮操作按钮（Floating Action Button）是一个特殊的圆形按钮，用于表示应用程序中最重要的操作。它通常固定在屏幕的某个位置，带有阴影和悬浮动画效果，类似于 Material Design 中的 FAB 组件。
 
-<style scoped>
-.fab-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
-  margin-bottom: 24px;
-}
-</style>
-
 ## 基础用法
 
 最基本的悬浮按钮形式，支持不同的颜色主题。
@@ -104,64 +94,53 @@ Extended FAB 支持显示文字，可以选择是否同时显示图标。
 
 ## 固定定位
 
-通过 `fixed` 属性和 `top`、`right`、`bottom`、`left` 属性，可以将悬浮按钮固定在屏幕的任意位置。
-
-::: tip
-滚动页面观察，按钮会保持在固定位置
-:::
+通过 `fixed` 属性开启固定定位，并通过 `top`/`right`/`bottom`/`left` 调整位置。
 
 ```vue
 <template>
   <u-fab 
-    color="primary" 
     fixed 
     bottom="24px" 
-    right="24px"
-    @click="handleAction"
+    right="24px" 
+    color="primary"
   >
     +
-  </u-fab>
-
-  <u-fab 
-    color="error" 
-    size="small"
-    fixed 
-    bottom="100px" 
-    right="24px"
-  >
-    ↑
   </u-fab>
 </template>
 ```
 
-## Props
+## API
 
-| 属性名 | 说明 | 类型 | 默认值 | 可选值 |
-| ------ | ---- | ---- | ------ | ------ |
-| color | 按钮颜色主题 | string | `primary` | primary / success / warning / error / info |
-| size | 按钮尺寸 | string | `medium` | small / medium / large / extended |
-| disabled | 是否禁用 | boolean | `false` | - |
-| loading | 是否显示加载状态 | boolean | `false` | - |
-| fixed | 是否固定定位 | boolean | `false` | - |
-| top | 固定定位时的 top 值 | string | - | 如 `24px` |
-| right | 固定定位时的 right 值 | string | - | 如 `24px` |
-| bottom | 固定定位时的 bottom 值 | string | - | 如 `24px` |
-| left | 固定定位时的 left 值 | string | - | 如 `24px` |
-| shadow | 是否显示阴影 | boolean | `true` | - |
-| label | Extended 模式下的按钮文字 | string | - | - |
-| width | 按钮宽度 | string | - | - |
-| height | 按钮高度 | string | - | - |
-
-## 方法
-
-| 方法名 | 说明 | 参数 |
-| ------ | ---- | ---- |
-| focus | 让按钮获得焦点 | - |
-| blur | 让按钮失去焦点 | - |
+| 属性 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| color | 按钮颜色 | `primary \| success \| warning \| error \| info` | `primary` |
+| size | 按钮尺寸 | `small \| medium \| large \| extended` | `medium` |
+| disabled | 是否禁用 | `boolean` | `false` |
+| loading | 是否加载中 | `boolean` | `false` |
+| fixed | 是否固定定位 | `boolean` | `false` |
+| top | 固定时的上边距 | `string` | - |
+| right | 固定时的右边距 | `string` | - |
+| bottom | 固定时的下边距 | `string` | - |
+| left | 固定时的左边距 | `string` | - |
+| shadow | 是否显示阴影 | `boolean` | `true` |
+| ripple | 是否开启水波纹 | `boolean` | `true` |
+| width | 自定义宽度 | `string` | - |
+| height | 自定义高度 | `string` | - |
+| label | 按钮标签文本 | `string` | - |
 
 ## 插槽
 
 | 插槽名 | 说明 |
-| ------ | ---- |
-| default | 按钮内容或文字，extended 模式下为标签文字 |
-| icon | 自定义图标 |
+|--------|------|
+| default | 按钮内容 |
+| icon | 图标内容 |
+
+<style scoped>
+  .fab-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+</style>

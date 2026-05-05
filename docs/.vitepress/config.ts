@@ -33,14 +33,21 @@ export default defineConfig({
             ],
           },
           {
-            text: 'Components',
+            text: 'Basic Components',
             items: [
               { text: 'Button', link: '/components/button' },
               { text: 'Button Group', link: '/components/button-group' },
               { text: 'Fab', link: '/components/fab' },
-              { text: 'Checkbox', link: '/components/checkbox' },
               { text: 'Icon', link: '/components/icon' },
+            ],
+          },
+          {
+            text: 'Form Components',
+            items: [
               { text: 'Input', link: '/components/input' },
+              { text: 'InputNumber', link: '/components/input-number' },
+              { text: 'Textarea', link: '/components/textarea' },
+              { text: 'Checkbox', link: '/components/checkbox' },
             ],
           },
           {
@@ -100,14 +107,21 @@ export default defineConfig({
             ],
           },
           {
-            text: '组件',
+            text: '基础组件',
             items: [
               { text: '按钮', link: '/zh-CN/components/button' },
               { text: '按钮组', link: '/zh-CN/components/button-group' },
               { text: '悬浮按钮', link: '/zh-CN/components/fab' },
-              { text: '复选框', link: '/zh-CN/components/checkbox' },
               { text: '图标', link: '/zh-CN/components/icon' },
+            ],
+          },
+          {
+            text: '表单组件',
+            items: [
               { text: '输入框', link: '/zh-CN/components/input' },
+              { text: '数字输入框', link: '/zh-CN/components/input-number' },
+              { text: '文本域', link: '/zh-CN/components/textarea' },
+              { text: '复选框', link: '/zh-CN/components/checkbox' },
             ],
           },
           {
