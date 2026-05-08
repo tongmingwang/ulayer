@@ -23,7 +23,7 @@
     --u-list-active-bg: var(--u-primary-50);
     display: flex;
     flex-direction: column;
-    padding: 4px 0;
+    padding: 6px 0;
     background-color: var(--u-bg);
     overflow-y: auto;
     height: 100%;

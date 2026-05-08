@@ -82,6 +82,7 @@ ume-ui provides a complete theme customization system based on CSS variables. Th
 ```css
 --u-bg: #fff;
 --u-container-bg: #fafafa;
+--u-mask-bg: rgba(0, 0, 0, 0.33);
 ```
 
 ## Dark Theme Colors
@@ -91,6 +92,7 @@ When `data-ume-ui-theme="dark"`:
 ```css
 --u-bg: #0f0f0f;
 --u-container-bg: #1f1f1f;
+--u-mask-bg: rgba(255, 255, 255, 0.33);
 
 /* Primary colors (reversed) */
 --u-primary-50: #002766;

@@ -10,6 +10,8 @@ import { list, listItem, UList, UListItem } from './list';
 import Select, { USelect } from './select';
 import ripple from '@/directives/ripple';
 import { useTheme } from '@/hooks/useTheme';
+import Mask, { UMask } from './mask';
+import Dialog, { UDialog } from './dialog';
 
 import icon from './icon';
 
@@ -25,6 +27,8 @@ const components: Plugin[] = [
   list,
   listItem,
   Select,
+  Mask,
+  Dialog,
 ];
 
 export const install = (app: App) => {
@@ -48,6 +52,8 @@ export {
   UList,
   UListItem,
   USelect,
+  UMask,
+  UDialog,
 };
 
 export * from './button';

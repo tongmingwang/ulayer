@@ -43,19 +43,3 @@ body {
 .pdl-8 {
   padding-left: 8px;
 }
-
-/* 滚动条 */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--u-info-600);
-  border-radius: 8px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--u-info-700);
-}

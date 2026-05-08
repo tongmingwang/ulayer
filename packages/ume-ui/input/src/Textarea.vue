@@ -53,7 +53,7 @@
     font-family: inherit;
     background: transparent;
     padding: 4px 12px;
-    line-height: 1.5;
+    font-size: 14px;
     min-height: var(--u-input-height);
   }
 </style>

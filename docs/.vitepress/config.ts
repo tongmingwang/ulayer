@@ -45,6 +45,13 @@ export default defineConfig({
             ],
           },
           {
+            text: 'Feedback Components',
+            items: [
+              { text: 'Mask', link: '/components/mask' },
+              { text: 'Dialog', link: '/components/dialog' },
+            ],
+          },
+          {
             text: 'Form Components',
             items: [
               { text: 'Input', link: '/components/input' },
@@ -122,6 +129,13 @@ export default defineConfig({
               { text: '按钮组', link: '/zh-CN/components/button-group' },
               { text: '悬浮按钮', link: '/zh-CN/components/fab' },
               { text: '图标', link: '/zh-CN/components/icon' },
+            ],
+          },
+          {
+            text: '反馈组件',
+            items: [
+              { text: '遮罩层', link: '/zh-CN/components/mask' },
+              { text: '对话框', link: '/zh-CN/components/dialog' },
             ],
           },
           {

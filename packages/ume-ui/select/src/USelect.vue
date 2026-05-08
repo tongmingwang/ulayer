@@ -7,7 +7,7 @@
       'is-disabled': disabled,
     }"
     @click="setShowContent">
-    <Teleport to="body">
+    <UMask v-model:visible="visible" bg="transparent" :close-on-click="false">
       <Transition name="slide-y" css :appear="true">
         <div
           v-if="visible"
@@ -17,18 +17,14 @@
           <slot name="content"></slot>
         </div>
       </Transition>
-    </Teleport>
+    </UMask>
     <span class="u-select_input">
       <slot></slot>
     </span>
-    <svg
-      viewBox="0 0 1024 1024"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      :class="['u-select_down', visible && 'u-select_down--active']">
-      <path
-        d="M957.056 338.624C951.84 327.296 940.512 320 928 320L96 320c-12.512 0-23.84 7.296-29.088 18.624-5.216 11.36-3.328 24.704 4.768 34.208l416 485.344c6.08 7.104 14.944 11.2 24.288 11.2s18.208-4.096 24.288-11.2l416-485.344C960.448 363.328 962.272 349.984 957.056 338.624z"></path>
-    </svg>
+    <USvg
+      :icon="svgIcons.arrowDown"
+      class="u-select_down"
+      :class="{ 'u-select_down--active': visible }" />
   </div>
 </template>
 
@@ -37,8 +33,11 @@
   import { ref, useTemplateRef, watch } from 'vue';
   import { usePosition } from '@/hooks/usePosition';
   import { throttle } from '@/utils/common';
+  import { svgIcons, USvg } from '@/ume-ui/base';
+  import { useResize } from '@/hooks/useResize';
+  import { UMask } from '@/ume-ui/mask';
 
-  defineOptions({ name: 'USelect', components: { UInput } });
+  defineOptions({ name: 'USelect', components: { UInput, USvg, UMask } });
   const props = defineProps({
     visible: Boolean,
     disabled: Boolean,
@@ -58,13 +57,16 @@
     visible.value = bol;
     if (visible.value) {
       await new Promise((resolve) => setTimeout(resolve, 0));
-      updatePosition(selectRef.value!, contentRef.value!);
+      updatePosition(selectRef.value!, contentRef.value!, 0.88);
       document.addEventListener('click', hideContent, true);
     } else {
       document.removeEventListener('click', hideContent, true);
       resetPosition();
     }
   }, 100);
+  useResize(() => {
+    updatePosition(selectRef.value!, contentRef.value!, 0.88);
+  });
 
   function hideContent(e: MouseEvent) {
     if (
@@ -151,13 +153,13 @@
   }
 </style>
 
-<style>
+<style lang="scss">
   .u-select-wrapper {
     border-radius: 4px;
     box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.15);
-    overflow: hidden;
+    overflow: auto;
     max-height: 240px;
     position: fixed;
-    z-index: 999;
+    pointer-events: all;
   }
 </style>

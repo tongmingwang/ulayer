@@ -71,6 +71,7 @@ body.light {
 
   /* hover */
   --u-hover: rgba(0, 0, 0, 0.05);
+  --u-mask-bg: rgba(0, 0, 0, 0.33);
 }
 
 /* 暗黑主题 */
@@ -81,6 +82,7 @@ html.dark,
 body.dark {
   --u-bg: #0f0f0f;
   --u-container-bg: #1f1f1f;
+  --u-mask-bg: rgba(255, 255, 255, 0.33);
 
   /* primary 暗黑取反 - 50-900倒序 */
   --u-primary-50: #002766;
