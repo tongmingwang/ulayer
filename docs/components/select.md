@@ -1,209 +1,224 @@
 # Select
 
-A dropdown selector component with customizable content.
-
-**Dependencies:**
-- `UList` - List container component
-- `UListItem` - List item component
+Dropdown select component with customizable content and elegant expand animation.
 
 ## Basic Usage
 
-The simplest selector usage with custom dropdown content via `content` slot.
+The simplest select usage with options list via `items` prop.
 
 <div class="demo-section">
-  <u-select>
-    <span>Current: {{ value1 }}</span>
-    <template #content>
-      <u-list v-model="value1">
-        <u-list-item :value="i" v-for="i in 10">Option {{ i }}</u-list-item>
-      </u-list>
-    </template>
-  </u-select>
+  <u-select v-model="value1" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
 </div>
 
 ```vue
 <template>
-  <u-select>
-    <span>Current: {{ value1 }}</span>
-    <template #content>
-      <u-list v-model="value1">
-        <u-list-item :value="i" v-for="i in 10">Option {{ i }}</u-list-item>
-      </u-list>
-    </template>
-  </u-select>
+  <u-select
+    v-model="value"
+    :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  const value1 = ref('1');
+  const value = ref('Option 1');
 </script>
 ```
 
-## Theme Color
+## Set Color
 
-Set the selected state color via the `color` attribute of `u-list`.
+Set the color of selected state via `color` prop.
 
 <div class="demo-section">
-  <u-select>
-    <span>Current: {{ value2 }}</span>
-    <template #content>
-      <u-list v-model="value2" color="success">
-        <u-list-item :value="i" v-for="i in 10">Option {{ i }}</u-list-item>
-      </u-list>
-    </template>
-  </u-select>
+  <div class="select-row">
+    <u-select v-model="value2" color="primary" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
+    <u-select v-model="value2a" color="success" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
+    <u-select v-model="value2b" color="warning" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
+    <u-select v-model="value2c" color="error" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
+  </div>
 </div>
 
 ```vue
 <template>
-  <u-select>
-    <span>Current: {{ value2 }}</span>
-    <template #content>
-      <u-list v-model="value2" color="success">
-        <u-list-item :value="i" v-for="i in 10">Option {{ i }}</u-list-item>
-      </u-list>
-    </template>
-  </u-select>
+  <u-select
+    v-model="value"
+    color="success"
+    :items="['Option 1', 'Option 2', 'Option 3']" />
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  const value2 = ref('1');
+  const value = ref('Option 1');
 </script>
 ```
 
-## Custom Border Radius
+## Custom Trigger Content
 
-Customize list item border radius via `radius` attribute.
+Customize trigger display content via default slot.
 
 <div class="demo-section">
-  <u-select>
-    <span>Current: {{ value3 }}</span>
-    <template #content>
-      <u-list v-model="value3">
-        <u-list-item radius="8px 0 8px 0" :value="i" v-for="i in 10">
-          Option {{ i }}
-        </u-list-item>
-      </u-list>
-    </template>
+  <u-select v-model="value4" color="primary" :items="['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen', 'Hangzhou']">
+    <span class="custom-trigger">
+      <u-svg icon="chevronDown" />
+      <span>Selected: {{ value4 || 'Please Select' }}</span>
+    </span>
   </u-select>
 </div>
 
 ```vue
 <template>
-  <u-select>
-    <span>Current: {{ value3 }}</span>
-    <template #content>
-      <u-list v-model="value3">
-        <u-list-item radius="8px 0 8px 0" :value="i" v-for="i in 10">
-          Option {{ i }}
-        </u-list-item>
-      </u-list>
-    </template>
+  <u-select
+    v-model="value"
+    color="primary"
+    :items="['Beijing', 'Shanghai', 'Guangzhou']">
+    <span>Selected: {{ value || 'Please Select' }}</span>
   </u-select>
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  const value3 = ref('1');
+  const value = ref('');
 </script>
 ```
 
-## Custom Item Height
+## Disabled State
 
-Customize list item height via `height` attribute.
+Disable the select via `disabled` prop.
 
 <div class="demo-section">
-  <u-select>
-    <span>Current: {{ value4 }}</span>
-    <template #content>
-      <u-list v-model="value4">
-        <u-list-item height="60px" :value="i" v-for="i in 10">
-          Option {{ i }}
-        </u-list-item>
-      </u-list>
-    </template>
-  </u-select>
+  <u-select v-model="value5" disabled :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
 </div>
 
 ```vue
 <template>
-  <u-select>
-    <span>Current: {{ value4 }}</span>
-    <template #content>
-      <u-list v-model="value4">
-        <u-list-item height="60px" :value="i" v-for="i in 10">
-          Option {{ i }}
-        </u-list-item>
-      </u-list>
-    </template>
-  </u-select>
+  <u-select
+    v-model="value"
+    disabled
+    :items="['Option 1', 'Option 2', 'Option 3']" />
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  const value4 = ref('1');
+  const value = ref('Option 1');
 </script>
 ```
 
-## Disabled
+## Custom Dropdown Content
 
-Disable the selector via the `disabled` attribute.
+Customize dropdown content and style via `content` slot.
 
 <div class="demo-section">
-  <u-select disabled>
-    <span>Disabled</span>
+  <u-select v-model="value6">
+    <span>Selected: {{ value6 || 'Please Select' }}</span>
     <template #content>
-      <u-list v-model="value5">
-        <u-list-item :value="i" v-for="i in 5">Option {{ i }}</u-list-item>
-      </u-list>
+      <u-list-item :value="i" v-for="i in 5">Option {{ i }}</u-list-item>
     </template>
   </u-select>
 </div>
 
 ```vue
 <template>
-  <u-select disabled>
-    <span>Disabled</span>
+  <u-select v-model="value">
+    <span>Selected: {{ value || 'Please Select' }}</span>
     <template #content>
-      <u-list v-model="value5">
-        <u-list-item :value="i" v-for="i in 5">Option {{ i }}</u-list-item>
-      </u-list>
+      <u-list-item :value="i" v-for="i in 5">Option {{ i }}</u-list-item>
     </template>
   </u-select>
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  const value5 = ref('1');
+  const value = ref(1);
+</script>
+```
+
+### Custom List Item Style
+
+Customize list item style via `radius` and `height` props.
+
+<div class="demo-section">
+  <u-select v-model="value7">
+    <span>Selected: {{ value7 || 'Please Select' }}</span>
+    <template #content>
+      <u-list-item height="48px" :value="i" v-for="i in 5">Option {{ i }}</u-list-item>
+    </template>
+  </u-select>
+</div>
+
+```vue
+<template>
+  <u-select v-model="value">
+    <span>Selected: {{ value || 'Please Select' }}</span>
+    <template #content>
+      <u-list-item height="48px" :value="i" v-for="i in 5">
+        Option {{ i }}
+      </u-list-item>
+    </template>
+  </u-select>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const value = ref(1);
 </script>
 ```
 
 ## USelect API
 
-| Attribute | Description | Type | Default |
-|-----------|-------------|------|---------|
-| visible | Whether visible | `boolean` | `false` |
-| disabled | Whether disabled | `boolean` | `false` |
+| Property   | Description                   | Type                                                       | Default |
+| ---------- | ----------------------------- | ---------------------------------------------------------- | ------- |
+| modelValue | Current selected value        | `string \| number`                                         | -       |
+| disabled   | Whether to disable the select | `boolean`                                                  | `false` |
+| color      | Color of selected state       | `'primary' \| 'success' \| 'warning' \| 'error' \| 'info'` | -       |
+| items      | Options list                  | `Array<string>`                                            | -       |
 
 ## USelect Slots
 
-| Slot | Description |
-|------|-------------|
-| default | Trigger content |
+| Slot    | Description      |
+| ------- | ---------------- |
+| default | Trigger content  |
 | content | Dropdown content |
 
 <script setup>
   import { ref } from 'vue';
-  const value1 = ref('1');
-  const value2 = ref('1');
-  const value3 = ref('1');
-  const value4 = ref('1');
-  const value5 = ref('1');
+  const value1 = ref('Option 1');
+  const value2 = ref('Option 1');
+  const value2a = ref('Option 1');
+  const value2b = ref('Option 1');
+  const value2c = ref('Option 1');
+  const value4 = ref('');
+  const value5 = ref('Option 1');
+  const value6 = ref(1);
+  const value7 = ref(1);
 </script>
 
 <style scoped>
   .demo-section {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+  }
+
+  .select-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .custom-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--u-primary-600);
+    font-weight: 500;
+  }
+
+  .custom-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--u-info-900);
+  }
+
+  .custom-item u-svg {
+    width: 20px;
+    height: 20px;
+    color: var(--u-warning-500);
   }
 </style>

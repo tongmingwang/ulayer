@@ -29,7 +29,7 @@ function createRipple(el: RippleHTMLElement, clientX: number, clientY: number) {
   const height = rect.height;
   const diagonal = Math.sqrt(width ** 2 + height ** 2);
   const radius = diagonal;
-  const isCircle = Math.abs(width - height) <= 1;
+  const isCircle = Math.abs(width - height) <= 1 && height <= 100;
 
   const ripple = document.createElement('span');
   ripple.style.position = 'absolute';
@@ -53,7 +53,7 @@ function createRipple(el: RippleHTMLElement, clientX: number, clientY: number) {
   ripple.animate(
     [
       {
-        transform: isCircle ? 'scale(0.15)' : 'scale(0)',
+        transform: 'scale(0)',
       },
       {
         transform: 'scale(1)',

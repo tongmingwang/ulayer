@@ -1,29 +1,39 @@
 <template>
   <div>
     <h1>Dialog</h1>
-    <UDialog v-model:visible="visible">
-      <p>这是一个对话框</p>
+    <UDialog v-model="visible" :trigger="triggerRef" width="500px">
+      <UCard>
+        <UCardTitle>这是一个对话框</UCardTitle>
+        <UCardText>这是一个对话框</UCardText>
+      </UCard>
     </UDialog>
-    <button @click="visible = true">打开对话框</button>
+    <button @click="visible = true" ref="trigger">打开对话框</button>
 
     <h2>Fullscreen Dialog</h2>
-    <UDialog v-model:visible="visible2" fullscreen>
-      <p>这是一个全屏对话框</p>
+    <UDialog v-model="visible2" fullscreen>
+      <UCard height="100%">
+        这是一个全屏对话框
+        <u-select :items="[1, 2, 3, 4]"></u-select>
+      </UCard>
     </UDialog>
     <button @click="visible2 = true">打开全屏对话框</button>
 
     <h3>Custom Width</h3>
-    <UDialog v-model:visible="visible3" width="500px">
-      <p>这是一个自定义宽度的对话框</p>
+    <UDialog v-model="visible3" width="500px">
+      <UCard>这是一个自定义宽度的对话框</UCard>
     </UDialog>
     <button @click="visible3 = true">打开自定义宽度的对话框</button>
 
     <h3>嵌套</h3>
-    <UDialog v-model:visible="visible4" width="500px">
-      <p>这是一个嵌套的对话框</p>
-      <button @click="visible5 = true">打开嵌套的对话框</button>
-      <UDialog v-model:visible="visible5" width="300px">
-        <p>这是一个嵌套的对话框</p>
+    <UDialog v-model="visible4" width="500px">
+      <UCard>
+        这是一个嵌套的对话框
+
+        <button @click="visible5 = true">打开嵌套的对话框</button>
+      </UCard>
+
+      <UDialog v-model="visible5" width="300px">
+        <UCard>这是一个嵌套的对话框</UCard>
       </UDialog>
     </UDialog>
     <button @click="visible4 = true">打开嵌套的对话框</button>
@@ -31,7 +41,9 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, useTemplateRef } from 'vue';
+
+  const triggerRef = useTemplateRef<HTMLButtonElement>('trigger');
 
   const visible = ref(false);
   const visible2 = ref(false);

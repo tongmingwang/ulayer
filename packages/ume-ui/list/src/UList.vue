@@ -1,5 +1,5 @@
 <template>
-  <div :class="classNames">
+  <div :class="classNames" ref="uList">
     <slot></slot>
   </div>
 </template>
@@ -7,6 +7,7 @@
 <script setup lang="ts">
   import type { UListProps } from './types';
   import { useList } from './useList';
+
   defineOptions({ name: 'UList' });
   const props = withDefaults(defineProps<UListProps>(), { modelValue: '' });
   const emit = defineEmits(['update:modelValue']);

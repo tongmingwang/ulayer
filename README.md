@@ -106,6 +106,7 @@ app.directive('ripple', ripple);
 | UButtonGroup | ✅     | [ButtonGroup](https://tongmingwang.github.io/ume-ui/components/button-group) | Button group component |
 | UFab         | ✅     | [Fab](https://tongmingwang.github.io/ume-ui/components/fab)                  | Floating action button |
 | UIcon        | ✅     | [Icon](https://tongmingwang.github.io/ume-ui/components/icon)                | Icon library           |
+| UCard        | ✅     | [Card](https://tongmingwang.github.io/ume-ui/components/card)                | Card container         |
 
 ### Form Components | 表单组件
 
@@ -113,6 +114,21 @@ app.directive('ripple', ripple);
 | --------- | ------ | --------------------------------------------------------------------- | --------------------- |
 | UInput    | ✅     | [Input](https://tongmingwang.github.io/ume-ui/components/input)       | Input field component |
 | UCheckbox | ✅     | [Checkbox](https://tongmingwang.github.io/ume-ui/components/checkbox) | Checkbox component    |
+| URadio    | ✅     | [Radio](https://tongmingwang.github.io/ume-ui/components/radio)       | Radio button component |
+| USelect   | ✅     | [Select](https://tongmingwang.github.io/ume-ui/components/select)     | Select dropdown       |
+
+### Feedback Components | 反馈组件
+
+| Component | Status | Docs                                                                  | Description           |
+| --------- | ------ | --------------------------------------------------------------------- | --------------------- |
+| UDialog   | ✅     | [Dialog](https://tongmingwang.github.io/ume-ui/components/dialog)     | Modal dialog          |
+| UMask     | ✅     | [Mask](https://tongmingwang.github.io/ume-ui/components/mask)         | Mask layer            |
+
+### Data Components | 数据组件
+
+| Component | Status | Docs                                                                  | Description           |
+| --------- | ------ | --------------------------------------------------------------------- | --------------------- |
+| UList     | ✅     | [List](https://tongmingwang.github.io/ume-ui/components/list)         | List container        |
 
 ## 📐 Available Directives | 可用指令
 

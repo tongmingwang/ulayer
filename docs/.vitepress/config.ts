@@ -64,7 +64,10 @@ export default defineConfig({
           },
           {
             text: 'Data Components',
-            items: [{ text: 'List', link: '/components/list' }],
+            items: [
+              { text: 'List', link: '/components/list' },
+              { text: 'Card', link: '/components/card' },
+            ],
           },
           {
             text: 'Directives',
@@ -151,7 +154,10 @@ export default defineConfig({
           },
           {
             text: '数据组件',
-            items: [{ text: '列表', link: '/zh-CN/components/list' }],
+            items: [
+              { text: '列表', link: '/zh-CN/components/list' },
+              { text: '卡片', link: '/zh-CN/components/card' },
+            ],
           },
           {
             text: '指令',

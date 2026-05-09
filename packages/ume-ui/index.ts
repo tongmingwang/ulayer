@@ -12,7 +12,14 @@ import ripple from '@/directives/ripple';
 import { useTheme } from '@/hooks/useTheme';
 import Mask, { UMask } from './mask';
 import Dialog, { UDialog } from './dialog';
-
+import {
+  Card,
+  UCard,
+  CardText,
+  UCardText,
+  CardTitle,
+  UCardTitle,
+} from './card';
 import icon from './icon';
 
 const components: Plugin[] = [
@@ -29,6 +36,9 @@ const components: Plugin[] = [
   Select,
   Mask,
   Dialog,
+  Card,
+  CardText,
+  CardTitle,
 ];
 
 export const install = (app: App) => {
@@ -54,6 +64,9 @@ export {
   USelect,
   UMask,
   UDialog,
+  UCard,
+  UCardText,
+  UCardTitle,
 };
 
 export * from './button';

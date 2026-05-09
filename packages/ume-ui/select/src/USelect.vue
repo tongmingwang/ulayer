@@ -7,19 +7,36 @@
       'is-disabled': disabled,
     }"
     @click="setShowContent">
-    <UMask v-model:visible="visible" bg="transparent" :close-on-click="false">
-      <Transition name="slide-y" css :appear="true">
+    <Teleport to="body">
+      <Transition @enter="enter" @leave="leave">
         <div
-          v-if="visible"
-          class="u-select-wrapper"
-          :style="position"
-          ref="content">
-          <slot name="content"></slot>
+          class="u-select_layer"
+          :class="className"
+          v-bind="targetAttrs"
+          ref="target"
+          role="select"
+          @click="update(false)"
+          v-if="visible">
+          <div class="u-select_content" :style="position" ref="content">
+            <UList
+              v-model="selfVal"
+              :color="props.color"
+              @update:model-value="emits('update:modelValue', selfVal)">
+              <slot name="content">
+                <UListItem
+                  v-for="(item, index) in props.items"
+                  :key="index"
+                  :value="item">
+                  {{ item }}
+                </UListItem>
+              </slot>
+            </UList>
+          </div>
         </div>
       </Transition>
-    </UMask>
+    </Teleport>
     <span class="u-select_input">
-      <slot></slot>
+      <slot>{{ selfVal }}</slot>
     </span>
     <USvg
       :icon="svgIcons.arrowDown"
@@ -33,24 +50,34 @@
   import { ref, useTemplateRef, watch } from 'vue';
   import { usePosition } from '@/hooks/usePosition';
   import { throttle } from '@/utils/common';
-  import { svgIcons, USvg } from '@/ume-ui/base';
+  import { svgIcons, USvg, ULayer } from '@/ume-ui/base';
   import { useResize } from '@/hooks/useResize';
-  import { UMask } from '@/ume-ui/mask';
+  import UList from '@/ume-ui/list/src/UList.vue';
+  import UListItem from '@/ume-ui/list/src/UListItem.vue';
+  import { useNoScroll } from '@/hooks/useNoScroll';
 
-  defineOptions({ name: 'USelect', components: { UInput, USvg, UMask } });
-  const props = defineProps({
-    visible: Boolean,
-    disabled: Boolean,
+  const emits = defineEmits(['update:modelValue']);
+  defineOptions({
+    name: 'USelect',
+    components: { UInput, USvg, ULayer, UList, UListItem },
   });
-  const visible = ref(props.visible || false);
+  const props = defineProps<{
+    disabled?: boolean;
+    modelValue: string | number;
+    color?: 'primary' | 'success' | 'warning' | 'error' | 'info';
+    items?: Array<string>;
+  }>();
+  const visible = ref(false);
   const selectRef = useTemplateRef('select');
   const contentRef = useTemplateRef('content');
+  const selfVal = ref(props.modelValue || '');
   const { position, updatePosition, resetPosition } = usePosition();
+  const { targetAttrs, className, updateNoScroll } = useNoScroll('target');
 
   watch(
-    () => props.visible,
+    () => props.modelValue,
     () => {
-      update(props.visible);
+      selfVal.value = props.modelValue || '';
     }
   );
   const update = throttle(async (bol: boolean) => {
@@ -59,12 +86,18 @@
       await new Promise((resolve) => setTimeout(resolve, 0));
       updatePosition(selectRef.value!, contentRef.value!, 0.88);
       document.addEventListener('click', hideContent, true);
+      if (hasSelectRender()) {
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+      }
     } else {
       document.removeEventListener('click', hideContent, true);
       resetPosition();
     }
+    updateNoScroll();
   }, 100);
   useResize(() => {
+    update(false);
     updatePosition(selectRef.value!, contentRef.value!, 0.88);
   });
 
@@ -80,6 +113,48 @@
   const setShowContent = async () => {
     if (visible.value) return;
     update(true);
+  };
+  const enter = async (el: Element, done: () => void) => {
+    updateNoScroll();
+    const content = el.querySelector('.u-select_content')!;
+    content &&
+      content.animate(
+        [
+          { transform: 'scaleY(0.88)', opacity: 0 },
+          { transform: 'scaleY(0.88)', opacity: 0, offset: 0.33 },
+          { transform: 'scaleY(1)', opacity: 1 },
+        ],
+        {
+          duration: 300,
+          easing: 'ease',
+        }
+      );
+    content &&
+      (await Promise.all(content.getAnimations().map((item) => item.finished)));
+
+    done();
+  };
+  const leave = async (el: Element, done: () => void) => {
+    const content = el.querySelector('.u-select_content')!;
+    content &&
+      content.animate(
+        [
+          { transform: 'scaleY(1)', opacity: 1 },
+          { transform: 'scaleY(0.88)', opacity: 0 },
+        ],
+        {
+          duration: 200,
+          easing: 'ease',
+        }
+      );
+    content &&
+      (await Promise.all(content.getAnimations().map((item) => item.finished)));
+    done();
+    updateNoScroll();
+  };
+
+  const hasSelectRender = (): boolean => {
+    return !!document.querySelector('.u-select_layer[role="select"]');
   };
 </script>
 
@@ -136,30 +211,25 @@
       transform: rotate(180deg);
     }
   }
-
-  .slide-y {
-    /* 下面我们会解释这些 class 是做什么的 */
-    &-enter-active,
-    &-leave-active {
-      transition: all 300ms;
-      transform-origin: center top;
-    }
-
-    &-enter-from,
-    &-leave-to {
-      transform: scaleY(0.88);
-      opacity: 0;
-    }
-  }
 </style>
 
 <style lang="scss">
-  .u-select-wrapper {
-    border-radius: 4px;
-    box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.15);
-    overflow: auto;
-    max-height: 240px;
+  .u-select_layer {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
     pointer-events: all;
+    .u-select_content {
+      border-radius: 4px;
+      box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.15);
+      overflow: auto;
+      max-height: 240px;
+      position: fixed;
+      pointer-events: all;
+      transform-origin: center top;
+    }
   }
 </style>

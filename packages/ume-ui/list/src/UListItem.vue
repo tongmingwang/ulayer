@@ -14,7 +14,7 @@
 </script>
 
 <style scoped lang="scss">
-  .u-list-item {
+  .u-list_item {
     display: flex;
     align-items: center;
     justify-content: flex-start;
