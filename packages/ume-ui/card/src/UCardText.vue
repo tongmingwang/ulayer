@@ -13,6 +13,7 @@
 <style scoped lang="scss">
   .u-card_text {
     margin: 0;
+    padding: 16px;
     color: var(--u-info-700);
     line-height: 1.6;
   }

@@ -21,6 +21,7 @@ import {
   UCardTitle,
 } from './card';
 import icon from './icon';
+import Drawer, { UDrawer } from './drawer';
 
 const components: Plugin[] = [
   button,
@@ -39,6 +40,7 @@ const components: Plugin[] = [
   Card,
   CardText,
   CardTitle,
+  Drawer,
 ];
 
 export const install = (app: App) => {
@@ -67,6 +69,7 @@ export {
   UCard,
   UCardText,
   UCardTitle,
+  UDrawer,
 };
 
 export * from './button';

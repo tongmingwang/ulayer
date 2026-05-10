@@ -61,23 +61,28 @@
     }
     const content = el.querySelector('.u-dialog_content');
     if (content) {
-      const triggerDom = props.trigger;
-      if (triggerDom) {
-        const triggerRect = triggerDom.getBoundingClientRect();
-        const contentRect = content.getBoundingClientRect();
-        // 计算触发元素中心相对于对话框内容左上角的位置
-        const left =
-          triggerRect.left - contentRect.left + triggerRect.width / 2;
-        const top = triggerRect.top - contentRect.top + triggerRect.height / 2;
-        // @ts-ignore
-        content.style.transformOrigin = `${left}px ${top}px`;
+      try {
+        const triggerDom = props.trigger;
+        const triggerRect = triggerDom?.getBoundingClientRect() || null;
+        if (triggerDom && triggerRect) {
+          const triggerRect = triggerDom.getBoundingClientRect();
+          const contentRect = content.getBoundingClientRect();
+          // 计算触发元素中心相对于对话框内容左上角的位置
+          const left =
+            triggerRect.left - contentRect.left + triggerRect.width / 2;
+          const top =
+            triggerRect.top - contentRect.top + triggerRect.height / 2;
+          // @ts-ignore
+          content.style.transformOrigin = `${left}px ${top}px`;
+        }
+      } catch (error) {
+        console.error(error);
       }
       content.animate(
         props.fullscreen
           ? [{ transform: 'translateY(100%)' }, { transform: 'translateY(0%)' }]
           : [
               { opacity: 0, transform: 'scale(0)' },
-              { opacity: 0.1, transform: 'scale(0.33)', offset: 0.33 },
               { opacity: 1, transform: 'scale(1)' },
             ],
         {
@@ -112,7 +117,6 @@
           ? [{ transform: 'translateY(0%)' }, { transform: 'translateY(100%)' }]
           : [
               { opacity: 1, transform: 'scale(1)' },
-              { opacity: 0.1, transform: 'scale(0.5)', offset: 0.33 },
               { opacity: 0, transform: 'scale(0)' },
             ],
         {

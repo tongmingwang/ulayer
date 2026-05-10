@@ -22,7 +22,7 @@
 
 <style scoped lang="scss">
   .u-card {
-    --u-card-radius: 8px;
+    --u-card-radius: 4px;
     --u-card-shadow:
       0 4px 12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.06);
     background: var(--u-bg);
@@ -30,7 +30,8 @@
     min-height: 100px;
     border-radius: var(--u-card-radius);
     box-shadow: var(--u-card-shadow);
-    padding: 16px;
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
   }
 </style>

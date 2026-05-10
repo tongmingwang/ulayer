@@ -145,8 +145,6 @@
     const inputEl = inputRef.value?.$el;
     if (!inputEl) return;
     showPwd.value = !showPwd.value;
-    console.log(inputEl, 'inputRef.value');
-
     if (showPwd.value) {
       inputEl.type = 'text';
     } else {

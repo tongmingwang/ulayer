@@ -2,7 +2,7 @@
   <div>
     <h1>Mask</h1>
     <u-button @click="toggle">显示</u-button>
-    <u-mask v-model:visible="visible">
+    <u-mask v-model="visible">
       <div class="content">内容</div>
     </u-mask>
   </div>

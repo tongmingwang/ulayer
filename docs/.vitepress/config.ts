@@ -49,6 +49,7 @@ export default defineConfig({
             items: [
               { text: 'Mask', link: '/components/mask' },
               { text: 'Dialog', link: '/components/dialog' },
+              { text: 'Drawer', link: '/components/drawer' },
             ],
           },
           {
@@ -139,6 +140,7 @@ export default defineConfig({
             items: [
               { text: '遮罩层', link: '/zh-CN/components/mask' },
               { text: '对话框', link: '/zh-CN/components/dialog' },
+              { text: '抽屉', link: '/zh-CN/components/drawer' },
             ],
           },
           {

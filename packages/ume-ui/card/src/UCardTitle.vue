@@ -16,6 +16,6 @@
     font-weight: 600;
     color: var(--u-info-900);
     margin-top: 0;
-    margin-bottom: 8px;
+    padding: 12px 0 8px 16px;
   }
 </style>

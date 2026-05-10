@@ -10,7 +10,7 @@ async function main() {
       emptyOutDir: true,
       rolldownOptions: {
         input: {
-          global: resolve(__dirname, '../packages/global/var.css'),
+          global: resolve(__dirname, '../packages/global/index.ts'),
         },
         output: {
           assetFileNames: 'color.css',

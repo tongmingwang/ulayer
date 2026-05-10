@@ -12,8 +12,13 @@
     <h2>Fullscreen Dialog</h2>
     <UDialog v-model="visible2" fullscreen>
       <UCard height="100%">
-        这是一个全屏对话框
-        <u-select :items="[1, 2, 3, 4]"></u-select>
+        <UCardText>
+          这是一个全屏对话框
+          <div style="display: flex; gap: 8px">
+            <u-select :items="[1, 2, 3, 4]"></u-select>
+            <u-select :items="[1, 2, 3, 4]"></u-select>
+          </div>
+        </UCardText>
       </UCard>
     </UDialog>
     <button @click="visible2 = true">打开全屏对话框</button>
