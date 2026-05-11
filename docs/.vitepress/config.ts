@@ -69,6 +69,8 @@ export default defineConfig({
             items: [
               { text: 'List', link: '/components/list' },
               { text: 'Card', link: '/components/card' },
+              { text: 'Badge', link: '/components/badge' },
+              { text: 'Divider', link: '/components/divider' },
             ],
           },
           {
@@ -161,6 +163,8 @@ export default defineConfig({
             items: [
               { text: '列表', link: '/zh-CN/components/list' },
               { text: '卡片', link: '/zh-CN/components/card' },
+              { text: '徽标', link: '/zh-CN/components/badge' },
+              { text: '分隔线', link: '/zh-CN/components/divider' },
             ],
           },
           {

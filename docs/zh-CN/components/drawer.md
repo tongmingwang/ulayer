@@ -168,7 +168,7 @@
 | 属性名            | 描述              | 类型                          | 默认值  |
 | ----------------- | ----------------- | ----------------------------- | ------- |
 | modelValue        | 是否显示抽屉      | `boolean`                     | `false` |
-| size              | 抽屉尺寸          | `string`                      | `20%`   |
+| size              | 抽屉尺寸          | `string`                      | `240px` |
 | location          | 抽屉位置          | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` |
 | zIndex            | 抽屉层级          | `number`                      | `1000`  |
 | closeOnClickMask  | 点击遮罩是否关闭  | `boolean`                     | `true`  |

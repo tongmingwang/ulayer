@@ -11,7 +11,10 @@
           '--u-drawer-size': props.size,
         }">
         <div class="u-drawer_bg"></div>
-        <div class="u-drawer_content" :class="['u-drawer_' + props.location]">
+        <div
+          class="u-drawer_content"
+          @click.stop
+          :class="['u-drawer_' + props.location]">
           <slot></slot>
         </div>
       </div>
@@ -36,7 +39,7 @@
     }>(),
     {
       modelValue: false,
-      size: '20%',
+      size: '240px',
       location: 'left',
       zIndex: 1000,
       closeOnClickMask: true,
@@ -119,21 +122,21 @@
     }
     &_content {
       position: absolute;
-      width: var(--u-drawer-size, 20%);
+      width: var(--u-drawer-size, 240px);
       height: 100%;
       overflow-y: auto;
       background: var(--u-bg, #fff);
       z-index: 1000;
     }
     &_left {
-      width: var(--u-drawer-size, 20%);
+      width: var(--u-drawer-size, 240px);
       height: 100%;
       left: 0;
       top: 0;
       box-shadow: 5px 0 15px rgba(0, 0, 0, 0.15);
     }
     &_right {
-      width: var(--u-drawer-size, 20%);
+      width: var(--u-drawer-size, 240px);
       height: 100%;
       right: 0;
       top: 0;
@@ -141,14 +144,14 @@
     }
     &_top {
       width: 100%;
-      height: var(--u-drawer-size, 20%);
+      height: var(--u-drawer-size, 240px);
       top: 0;
       left: 0;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     }
     &_bottom {
       width: 100%;
-      height: var(--u-drawer-size, 20%);
+      height: var(--u-drawer-size, 240px);
       bottom: 0;
       left: 0;
       box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.15);

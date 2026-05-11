@@ -23,6 +23,8 @@ import {
 import icon from './icon';
 import Drawer, { UDrawer } from './drawer';
 import Alert, { UAlert } from './alert';
+import Badge, { UBadge } from './badge';
+import Divider, { UDivider } from './divider';
 
 const components: Plugin[] = [
   button,
@@ -43,6 +45,8 @@ const components: Plugin[] = [
   CardTitle,
   Drawer,
   Alert,
+  Badge,
+  Divider,
 ];
 
 export const install = (app: App) => {
@@ -73,6 +77,8 @@ export {
   UCardTitle,
   UDrawer,
   UAlert,
+  UBadge,
+  UDivider,
 };
 
 export * from './button';
@@ -81,6 +87,7 @@ export * from './button-group';
 export * from './checkbox';
 export * from './radio';
 export * from './fab';
+export * from './divider';
 
 export default {
   install,

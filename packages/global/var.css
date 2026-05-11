@@ -68,7 +68,7 @@ body.light {
   /* 背景色 */
   --u-bg: #fff;
   --u-container-bg: #fafafa;
-  --u-scrollbar-bg: 0, 0, 0;
+  --u-rgb: 0, 0, 0;
 
   /* hover */
   --u-hover: rgba(0, 0, 0, 0.05);
@@ -84,7 +84,7 @@ body.dark {
   --u-bg: #1f1f1f;
   --u-container-bg: rgb(20, 20, 20);
   --u-mask-bg: rgba(255, 255, 255, 0.33);
-  --u-scrollbar-bg: 255, 255, 255;
+  --u-rgb: 255, 255, 255;
 
   /* primary 暗黑取反 - 50-900倒序 */
   --u-primary-50: #002766;

@@ -168,7 +168,7 @@ Prevent drawer from closing when clicking the mask layer.
 | Property         | Description                    | Type                                     | Default  |
 | ---------------- | ------------------------------ | ---------------------------------------- | -------- |
 | modelValue       | Whether to show the drawer     | `boolean`                                | `false`  |
-| size             | Drawer size                    | `string`                                 | `20%`    |
+| size             | Drawer size                    | `string`                                 | `240px`  |
 | location         | Drawer position                | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` |
 | zIndex           | Drawer z-index                 | `number`                                 | `1000`   |
 | closeOnClickMask | Whether to close on mask click | `boolean`                                | `true`   |
