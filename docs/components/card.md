@@ -1,16 +1,17 @@
 # Card
 
-Card component for displaying information content with support for title, text and various content forms.
+Card component for displaying information content with support for title, text, actions and various content forms.
 
 **Component Composition:**
 
 - `UCard` - Card container component
 - `UCardTitle` - Card title component
 - `UCardText` - Card text component
+- `UCardAction` - Card action area component
 
 ## Basic Usage
 
-The simplest card usage with title and text components.
+The simplest card usage with title, text and action components.
 
 <div class="demo-section">
   <u-card class="basic-card">
@@ -18,6 +19,9 @@ The simplest card usage with title and text components.
     <u-card-text>
       <p>This is a basic card component for displaying related information. Cards support custom styles and layouts.</p>
     </u-card-text>
+    <u-card-action>
+      <u-button>Close</u-button>
+    </u-card-action>
   </u-card>
 </div>
 
@@ -28,6 +32,9 @@ The simplest card usage with title and text components.
     <u-card-text>
       <p>This is a basic card component.</p>
     </u-card-text>
+    <u-card-action>
+      <u-button>Close</u-button>
+    </u-card-action>
   </u-card>
 </template>
 ```
@@ -43,24 +50,36 @@ Display multiple cards in a grid layout.
       <u-card-text>
         <p>Manage system user information with CRUD operations.</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">View</u-button>
+      </u-card-action>
     </u-card>
     <u-card class="grid-card">
       <u-card-title>Permission Settings</u-card-title>
       <u-card-text>
         <p>Configure user roles and permissions for data security.</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">View</u-button>
+      </u-card-action>
     </u-card>
     <u-card class="grid-card">
       <u-card-title>Data Statistics</u-card-title>
       <u-card-text>
         <p>View system data statistics reports and analytics charts.</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">View</u-button>
+      </u-card-action>
     </u-card>
     <u-card class="grid-card">
       <u-card-title>System Settings</u-card-title>
       <u-card-text>
         <p>Configure system parameters and global settings.</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">View</u-button>
+      </u-card-action>
     </u-card>
   </div>
 </div>
@@ -73,29 +92,48 @@ Display multiple cards in a grid layout.
       <u-card-text>
         <p>Manage system user information.</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">View</u-button>
+      </u-card-action>
     </u-card>
+  </div>
+</template>
+```
 
-    <u-card>
-      <u-card-title>Permission Settings</u-card-title>
+## Border & Shadow
+
+Control card border and shadow via `bordered` and `shadow` props.
+
+<div class="demo-section">
+  <div class="card-row">
+    <u-card class="feature-card">
+      <u-card-title>Shadow (Default)</u-card-title>
       <u-card-text>
-        <p>Configure user roles and permissions.</p>
+        <p>Card with shadow enabled by default.</p>
       </u-card-text>
     </u-card>
-
-    <u-card>
-      <u-card-title>Data Statistics</u-card-title>
+    <u-card class="feature-card" bordered :shadow="false">
+      <u-card-title>Border Only</u-card-title>
       <u-card-text>
-        <p>View system data statistics reports.</p>
-      </u-card-text>
-    </u-card>
-
-    <u-card>
-      <u-card-title>System Settings</u-card-title>
-      <u-card-text>
-        <p>Configure system parameters and global settings.</p>
+        <p>Card with border enabled and shadow disabled.</p>
       </u-card-text>
     </u-card>
   </div>
+</div>
+
+```vue
+<template>
+  <!-- Default: shadow enabled, no border -->
+  <u-card>
+    <u-card-title>Shadow</u-card-title>
+    <u-card-text>Card with shadow.</u-card-text>
+  </u-card>
+
+  <!-- Border enabled, shadow disabled -->
+  <u-card bordered :shadow="false">
+    <u-card-title>Border Only</u-card-title>
+    <u-card-text>Card with border only.</u-card-text>
+  </u-card>
 </template>
 ```
 
@@ -140,99 +178,87 @@ Set card height via `height` prop.
 </template>
 ```
 
-## Usage with Buttons
+## Custom Radius
 
-Use buttons inside cards for interactive functionality.
+Set card border radius via `radius` prop.
 
 <div class="demo-section">
-  <u-card class="action-card">
-    <u-card-title>Action Card</u-card-title>
-    <u-card-text>
-      <p>Click the buttons below to perform related actions, supporting multiple interaction scenarios.</p>
-    </u-card-text>
-    <div class="card-actions">
-      <u-button color="primary">Primary Action</u-button>
-      <u-button>Secondary Action</u-button>
-    </div>
-  </u-card>
+  <div class="card-row">
+    <u-card class="feature-card" radius="12px">
+      <u-card-title>Large Radius</u-card-title>
+      <u-card-text>
+        <p>This card has a border radius of 12px.</p>
+      </u-card-text>
+    </u-card>
+    <u-card class="feature-card" radius="0px">
+      <u-card-title>No Radius</u-card-title>
+      <u-card-text>
+        <p>This card has no border radius.</p>
+      </u-card-text>
+    </u-card>
+  </div>
 </div>
 
 ```vue
 <template>
-  <u-card>
-    <u-card-title>Action Card</u-card-title>
-    <u-card-text>
-      <p>Click the buttons below to perform related actions.</p>
-    </u-card-text>
-    <div class="card-actions">
-      <u-button color="primary">Primary Action</u-button>
-      <u-button>Secondary Action</u-button>
-    </div>
+  <u-card radius="12px">
+    <u-card-title>Large Radius</u-card-title>
+    <u-card-text>This card has a 12px border radius.</u-card-text>
+  </u-card>
+
+  <u-card radius="0px">
+    <u-card-title>No Radius</u-card-title>
+    <u-card-text>This card has no border radius.</u-card-text>
   </u-card>
 </template>
 ```
 
-## Nested Cards
+## Card Color
 
-Nest cards inside other cards for hierarchical display.
+Set card background color via `color` prop. Supports preset color types (`primary`, `success`, `warning`, `error`) and custom color values.
 
 <div class="demo-section">
-  <u-card class="nested-card">
-    <u-card-title>Parent Card</u-card-title>
-    <u-card-text>
-      <p>Below are nested child cards:</p>
-      <div class="nested-container">
-        <u-card class="child-card">
-          <u-card-title>Child Card 1</u-card-title>
-          <u-card-text>
-            <p>This is the first child card content.</p>
-          </u-card-text>
-        </u-card>
-        <u-card class="child-card">
-          <u-card-title>Child Card 2</u-card-title>
-          <u-card-text>
-            <p>This is the second child card content.</p>
-          </u-card-text>
-        </u-card>
-      </div>
-    </u-card-text>
-  </u-card>
+  <div class="card-row">
+    <u-card class="feature-card" color="primary">
+      <u-card-title>Primary</u-card-title>
+      <u-card-text>
+        <p>Card with primary color background.</p>
+      </u-card-text>
+    </u-card>
+    <u-card class="feature-card" color="#e8f5e9">
+      <u-card-title>Custom Color</u-card-title>
+      <u-card-text>
+        <p>Card with custom hex color background.</p>
+      </u-card-text>
+    </u-card>
+  </div>
 </div>
 
 ```vue
 <template>
-  <u-card>
-    <u-card-title>Parent Card</u-card-title>
-    <u-card-text>
-      <p>Below are nested child cards:</p>
-      <div class="nested-container">
-        <u-card>
-          <u-card-title>Child Card 1</u-card-title>
-          <u-card-text>
-            <p>This is the first child card content.</p>
-          </u-card-text>
-        </u-card>
+  <!-- Preset color -->
+  <u-card color="primary">
+    <u-card-title>Primary</u-card-title>
+    <u-card-text>Card with primary color.</u-card-text>
+  </u-card>
 
-        <u-card>
-          <u-card-title>Child Card 2</u-card-title>
-          <u-card-text>
-            <p>This is the second child card content.</p>
-          </u-card-text>
-        </u-card>
-      </div>
-    </u-card-text>
+  <!-- Custom color -->
+  <u-card color="#e8f5e9">
+    <u-card-title>Custom Color</u-card-title>
+    <u-card-text>Card with custom hex color.</u-card-text>
   </u-card>
 </template>
 ```
 
 ## UCard API
 
-| Property | Description            | Type      | Default |
-| -------- | ---------------------- | --------- | ------- |
-| height   | Card height            | `string`  | -       |
-| bordered | Whether to show border | `boolean` | -       |
-| shadow   | Whether to show shadow | `boolean` | -       |
-| radius   | Border radius          | `string`  | -       |
+| Property | Description            | Type                                | Default |
+| -------- | ---------------------- | ----------------------------------- | ------- |
+| bordered | Whether to show border | `boolean`                           | `false` |
+| shadow   | Whether to show shadow | `boolean`                           | `true`  |
+| radius   | Border radius          | `string`                            | `'4px'` |
+| height   | Card height            | `string`                            | -       |
+| color    | Card background color  | `'primary' \| 'success' \| 'warning' \| 'error' \| string` | -       |
 
 ## UCard Slots
 
@@ -259,6 +285,16 @@ No properties
 | Slot    | Description  |
 | ------- | ------------ |
 | default | Text content |
+
+## UCardAction API
+
+No properties
+
+## UCardAction Slots
+
+| Slot    | Description     |
+| ------- | --------------- |
+| default | Action content  |
 
 <style scoped>
   .demo-section {
@@ -290,32 +326,11 @@ No properties
     gap: 16px;
   }
 
-  .height-card {
+  .feature-card {
     overflow: hidden;
   }
 
-  .action-card {
-    max-width: 400px;
-  }
-
-  .card-actions {
-    display: flex;
-    gap: 12px;
-    padding: 0 16px 16px;
-  }
-
-  .nested-card {
-    max-width: 600px;
-  }
-
-  .nested-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .child-card {
-    background: var(--u-bg-secondary);
+  .height-card {
+    overflow: hidden;
   }
 </style>

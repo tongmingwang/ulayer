@@ -9,6 +9,7 @@
   font-size: 14px;
   color: var;
   vertical-align: middle;
+  background-color: transparent;
 
   &.is-disabled {
     pointer-events: none;
@@ -32,6 +33,7 @@
     color: var(--u-checkbox-color);
     transition: all 0.2s;
     border-radius: var(--u-checkbox-size);
+
     &:hover {
       --u-checkbox-bg: rgba(var(--u-rgb), 0.05);
     }
@@ -49,11 +51,11 @@
   @each $color in primary, success, warning, error {
     &--#{$color} {
       --u-checkbox-color: var(--u-#{$color});
-      &:hover {
-        .u-checkbox_input {
-          --u-checkbox-bg: var(--u-#{$color}-light-hover);
-        }
+
+      .u-checkbox_input:hover {
+        --u-checkbox-bg: var(--u-#{$color}-light-hover);
       }
+
       &.is-checked,
       &.is-indeterminate {
         --u-checkbox-color: var(--u-#{$color});

@@ -75,7 +75,7 @@ const handleClick = () => {
 }
 .fab-group {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 24px;

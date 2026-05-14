@@ -2,14 +2,14 @@ import { ref, useTemplateRef } from 'vue';
 
 export const useNoScroll = (refName: string) => {
   const targetRef = useTemplateRef<HTMLElement>(refName);
-  const className = 'u-no-scroll';
+  const noScrollClassName = 'u-no-scroll';
   const targetAttrs = ref<Record<string, string>>({
     'data-no-scroll': 'true',
     role: 'noscroll',
   });
   const updateNoScroll = async () => {
     const hasDom = document.querySelector(
-      `.${className}[data-no-scroll="true"]`
+      `.${noScrollClassName}[data-no-scroll="true"]`
     );
 
     if (hasDom) {
@@ -20,5 +20,5 @@ export const useNoScroll = (refName: string) => {
       document.body.style.overflow = '';
     }
   };
-  return { targetRef, targetAttrs, updateNoScroll, className };
+  return { targetRef, targetAttrs, updateNoScroll, noScrollClassName };
 };

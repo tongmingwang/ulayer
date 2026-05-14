@@ -23,6 +23,7 @@ button {
   color: var(--u-btn-color);
   overflow: hidden;
   vertical-align: middle;
+  white-space: nowrap;
   position: relative;
 
   .u-button_inner {
@@ -115,16 +116,16 @@ button {
     --u-btn-bg: transparent;
     border: 1px solid var(--u-primary);
     &:hover {
-      --u-btn-bg: var(--u-primary-light-hover);
+      --u-btn-bg: transparent;
     }
   }
   &--text {
-    --u-btn-color: var(--u-primary);
+    --u-btn-color: var(--u-text-1);
     --u-btn-bg: transparent;
     border: none;
     padding: 0 8px;
     &:hover {
-      --u-btn-bg: var(--u-primary-light-hover);
+      --u-btn-bg: rgba(var(--u-rgb), 0.05);
     }
   }
   &--contained {
@@ -158,7 +159,7 @@ button {
         --u-btn-bg: transparent;
         border: 1px solid var(--u-#{$color});
         &:hover {
-          --u-btn-bg: var(--u-#{$color}-light-hover);
+          --u-btn-bg: transparent;
         }
       }
 

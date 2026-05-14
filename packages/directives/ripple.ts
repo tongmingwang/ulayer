@@ -8,9 +8,14 @@ async function fadeOutRipple(ripple: HTMLElement) {
     ripple.getAnimations().map((animation) => animation.finished)
   );
   ripple.animate(
-    {
-      opacity: 0,
-    },
+    [
+      {
+        opacity: 0.33,
+      },
+      {
+        opacity: 0,
+      },
+    ],
     {
       duration: 200,
       fill: 'forwards',
@@ -52,14 +57,14 @@ function createRipple(el: RippleHTMLElement, clientX: number, clientY: number) {
   ripple.animate(
     [
       {
-        transform: isCircle ? 'scale(0)' :'scale(0.28)',
+        transform: isCircle ? 'scale(0)' : 'scale(0.28)',
         offset: 0,
         opacity: 0.06,
       },
       {
         transform: 'scale(1)',
         offset: 1,
-        opacity: 0.3,
+        opacity: 0.33,
       },
     ],
     {
@@ -75,8 +80,9 @@ function createRipple(el: RippleHTMLElement, clientX: number, clientY: number) {
     document.removeEventListener('mouseup', startFadeOut);
   };
   document.addEventListener('mouseup', startFadeOut);
+  document.addEventListener('touchend', startFadeOut);
+  document.addEventListener('touchcancel', startFadeOut);
 }
-
 
 const ripple = {
   mounted(el: RippleHTMLElement) {
@@ -97,10 +103,16 @@ const ripple = {
     const handleMouseDown = (e: MouseEvent) => {
       createRipple(el, e.clientX, e.clientY);
     };
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      createRipple(el, touch.clientX, touch.clientY);
+    };
 
     el.addEventListener('mousedown', handleMouseDown, true);
+    el.addEventListener('touchstart', handleTouchStart, true);
     el._rippleCleanup = () => {
       el.removeEventListener('mousedown', handleMouseDown, true);
+      el.removeEventListener('touchstart', handleTouchStart, true);
     };
   },
 

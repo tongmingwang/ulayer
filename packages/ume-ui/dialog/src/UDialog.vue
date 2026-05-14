@@ -4,7 +4,7 @@
       <div
         v-if="show"
         class="u-dialog"
-        :class="className"
+        :class="noScrollClassName"
         v-bind="targetAttrs"
         role="dialog"
         aria-modal="true"
@@ -40,7 +40,7 @@
     trigger: undefined,
   });
   const emit = defineEmits(['update:modelValue', 'close']);
-  const { targetAttrs, updateNoScroll, className, targetRef } =
+  const { targetAttrs, updateNoScroll, noScrollClassName, targetRef } =
     useNoScroll('dialog');
   const { show, onClick } = useDialog(props, emit, targetRef);
   watch(

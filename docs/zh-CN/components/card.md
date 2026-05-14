@@ -1,16 +1,17 @@
 # Card 卡片
 
-卡片组件用于展示信息内容，支持标题、文本等多种内容形式。
+卡片组件用于展示信息内容，支持标题、文本、操作区域等多种内容形式。
 
 **组件组成：**
 
 - `UCard` - 卡片容器组件
 - `UCardTitle` - 卡片标题组件
 - `UCardText` - 卡片文本组件
+- `UCardAction` - 卡片操作区域组件
 
 ## 基础用法
 
-最简单的卡片用法，配合标题和文本组件使用。
+最简单的卡片用法，配合标题、文本和操作区域组件使用。
 
 <div class="demo-section">
   <u-card class="basic-card">
@@ -18,6 +19,9 @@
     <u-card-text>
       <p>这是一个基础卡片组件，用于展示相关信息内容。卡片支持自定义样式和布局。</p>
     </u-card-text>
+    <u-card-action>
+      <u-button>关闭</u-button>
+    </u-card-action>
   </u-card>
 </div>
 
@@ -28,6 +32,9 @@
     <u-card-text>
       <p>这是一个基础卡片组件。</p>
     </u-card-text>
+    <u-card-action>
+      <u-button>关闭</u-button>
+    </u-card-action>
   </u-card>
 </template>
 ```
@@ -43,24 +50,36 @@
       <u-card-text>
         <p>管理系统用户信息，支持增删改查操作。</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">查看</u-button>
+      </u-card-action>
     </u-card>
     <u-card class="grid-card">
       <u-card-title>权限设置</u-card-title>
       <u-card-text>
         <p>配置用户角色和权限，确保数据安全。</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">查看</u-button>
+      </u-card-action>
     </u-card>
     <u-card class="grid-card">
       <u-card-title>数据统计</u-card-title>
       <u-card-text>
         <p>查看系统数据统计报表和分析图表。</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">查看</u-button>
+      </u-card-action>
     </u-card>
     <u-card class="grid-card">
       <u-card-title>系统设置</u-card-title>
       <u-card-text>
         <p>配置系统参数和全局设置选项。</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">查看</u-button>
+      </u-card-action>
     </u-card>
   </div>
 </div>
@@ -73,29 +92,48 @@
       <u-card-text>
         <p>管理系统用户信息。</p>
       </u-card-text>
+      <u-card-action>
+        <u-button color="primary">查看</u-button>
+      </u-card-action>
     </u-card>
+  </div>
+</template>
+```
 
-    <u-card>
-      <u-card-title>权限设置</u-card-title>
+## 边框与阴影
+
+通过 `bordered` 和 `shadow` 属性控制卡片的边框和阴影显示。
+
+<div class="demo-section">
+  <div class="card-row">
+    <u-card class="feature-card">
+      <u-card-title>阴影（默认）</u-card-title>
       <u-card-text>
-        <p>配置用户角色和权限。</p>
+        <p>默认启用阴影效果的卡片。</p>
       </u-card-text>
     </u-card>
-
-    <u-card>
-      <u-card-title>数据统计</u-card-title>
+    <u-card class="feature-card" bordered :shadow="false">
+      <u-card-title>仅边框</u-card-title>
       <u-card-text>
-        <p>查看系统数据统计报表。</p>
-      </u-card-text>
-    </u-card>
-
-    <u-card>
-      <u-card-title>系统设置</u-card-title>
-      <u-card-text>
-        <p>配置系统参数和全局设置。</p>
+        <p>启用边框并禁用阴影的卡片。</p>
       </u-card-text>
     </u-card>
   </div>
+</div>
+
+```vue
+<template>
+  <!-- 默认：启用阴影，无边框 -->
+  <u-card>
+    <u-card-title>阴影</u-card-title>
+    <u-card-text>启用阴影的卡片。</u-card-text>
+  </u-card>
+
+  <!-- 启用边框，禁用阴影 -->
+  <u-card bordered :shadow="false">
+    <u-card-title>仅边框</u-card-title>
+    <u-card-text>仅启用边框的卡片。</u-card-text>
+  </u-card>
 </template>
 ```
 
@@ -140,99 +178,87 @@
 </template>
 ```
 
-## 配合按钮使用
+## 自定义圆角
 
-卡片内配合按钮组件，实现交互功能。
+通过 `radius` 属性设置卡片圆角大小。
 
 <div class="demo-section">
-  <u-card class="action-card">
-    <u-card-title>操作卡片</u-card-title>
-    <u-card-text>
-      <p>点击下方按钮执行相关操作，支持多种交互场景。</p>
-    </u-card-text>
-    <div class="card-actions">
-      <u-button color="primary">主要操作</u-button>
-      <u-button>次要操作</u-button>
-    </div>
-  </u-card>
+  <div class="card-row">
+    <u-card class="feature-card" radius="12px">
+      <u-card-title>大圆角</u-card-title>
+      <u-card-text>
+        <p>此卡片圆角为 12px。</p>
+      </u-card-text>
+    </u-card>
+    <u-card class="feature-card" radius="0px">
+      <u-card-title>无圆角</u-card-title>
+      <u-card-text>
+        <p>此卡片无圆角。</p>
+      </u-card-text>
+    </u-card>
+  </div>
 </div>
 
 ```vue
 <template>
-  <u-card>
-    <u-card-title>操作卡片</u-card-title>
-    <u-card-text>
-      <p>点击下方按钮执行相关操作。</p>
-    </u-card-text>
-    <div class="card-actions">
-      <u-button color="primary">主要操作</u-button>
-      <u-button>次要操作</u-button>
-    </div>
+  <u-card radius="12px">
+    <u-card-title>大圆角</u-card-title>
+    <u-card-text>圆角为 12px 的卡片。</u-card-text>
+  </u-card>
+
+  <u-card radius="0px">
+    <u-card-title>无圆角</u-card-title>
+    <u-card-text>无圆角的卡片。</u-card-text>
   </u-card>
 </template>
 ```
 
-## 嵌套卡片
+## 卡片颜色
 
-卡片内嵌套其他卡片，实现层级展示。
+通过 `color` 属性设置卡片背景颜色。支持预设颜色类型（`primary`、`success`、`warning`、`error`）和自定义颜色值。
 
 <div class="demo-section">
-  <u-card class="nested-card">
-    <u-card-title>父级卡片</u-card-title>
-    <u-card-text>
-      <p>以下是嵌套的子卡片：</p>
-      <div class="nested-container">
-        <u-card class="child-card">
-          <u-card-title>子卡片 1</u-card-title>
-          <u-card-text>
-            <p>这是第一个子卡片内容。</p>
-          </u-card-text>
-        </u-card>
-        <u-card class="child-card">
-          <u-card-title>子卡片 2</u-card-title>
-          <u-card-text>
-            <p>这是第二个子卡片内容。</p>
-          </u-card-text>
-        </u-card>
-      </div>
-    </u-card-text>
-  </u-card>
+  <div class="card-row">
+    <u-card class="feature-card" color="primary">
+      <u-card-title>Primary</u-card-title>
+      <u-card-text>
+        <p>使用 primary 预设颜色的卡片。</p>
+      </u-card-text>
+    </u-card>
+    <u-card class="feature-card" color="#e8f5e9">
+      <u-card-title>自定义颜色</u-card-title>
+      <u-card-text>
+        <p>使用十六进制自定义颜色的卡片。</p>
+      </u-card-text>
+    </u-card>
+  </div>
 </div>
 
 ```vue
 <template>
-  <u-card>
-    <u-card-title>父级卡片</u-card-title>
-    <u-card-text>
-      <p>以下是嵌套的子卡片：</p>
-      <div class="nested-container">
-        <u-card>
-          <u-card-title>子卡片 1</u-card-title>
-          <u-card-text>
-            <p>这是第一个子卡片内容。</p>
-          </u-card-text>
-        </u-card>
+  <!-- 预设颜色 -->
+  <u-card color="primary">
+    <u-card-title>Primary</u-card-title>
+    <u-card-text>使用 primary 颜色。</u-card-text>
+  </u-card>
 
-        <u-card>
-          <u-card-title>子卡片 2</u-card-title>
-          <u-card-text>
-            <p>这是第二个子卡片内容。</p>
-          </u-card-text>
-        </u-card>
-      </div>
-    </u-card-text>
+  <!-- 自定义颜色 -->
+  <u-card color="#e8f5e9">
+    <u-card-title>自定义颜色</u-card-title>
+    <u-card-text>使用自定义十六进制颜色。</u-card-text>
   </u-card>
 </template>
 ```
 
 ## UCard API
 
-| 属性     | 说明         | 类型      | 默认值 |
-| -------- | ------------ | --------- | ------ |
-| height   | 卡片高度     | `string`  | -      |
-| bordered | 是否显示边框 | `boolean` | -      |
-| shadow   | 是否显示阴影 | `boolean` | -      |
-| radius   | 圆角大小     | `string`  | -      |
+| 属性     | 说明         | 类型                                            | 默认值  |
+| -------- | ------------ | ----------------------------------------------- | ------- |
+| bordered | 是否显示边框 | `boolean`                                       | `false` |
+| shadow   | 是否显示阴影 | `boolean`                                       | `true`  |
+| radius   | 圆角大小     | `string`                                        | `'4px'` |
+| height   | 卡片高度     | `string`                                        | -       |
+| color    | 背景颜色     | `'primary' \| 'success' \| 'warning' \| 'error' \| string` | -       |
 
 ## UCard 插槽
 
@@ -259,6 +285,16 @@
 | 插槽名  | 说明     |
 | ------- | -------- |
 | default | 文本内容 |
+
+## UCardAction API
+
+无属性
+
+## UCardAction 插槽
+
+| 插槽名  | 说明     |
+| ------- | -------- |
+| default | 操作内容 |
 
 <style scoped>
   .demo-section {
@@ -290,32 +326,11 @@
     gap: 16px;
   }
 
-  .height-card {
+  .feature-card {
     overflow: hidden;
   }
 
-  .action-card {
-    max-width: 400px;
-  }
-
-  .card-actions {
-    display: flex;
-    gap: 12px;
-    padding: 0 16px 16px;
-  }
-
-  .nested-card {
-    max-width: 600px;
-  }
-
-  .nested-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .child-card {
-    background: var(--u-bg-secondary);
+  .height-card {
+    overflow: hidden;
   }
 </style>

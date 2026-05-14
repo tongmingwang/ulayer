@@ -25,28 +25,48 @@ The simplest select usage with options list via `items` prop.
 
 ## Set Color
 
-Set the color of selected state via `color` prop.
+Set the color of selected state via `color` prop on `u-option`.
 
 <div class="demo-section">
   <div class="select-row">
-    <u-select v-model="value2" color="primary" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
-    <u-select v-model="value2a" color="success" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
-    <u-select v-model="value2b" color="warning" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
-    <u-select v-model="value2c" color="error" :items="['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5']" />
+    <u-select v-model="value2">
+      <template #content>
+        <u-option v-for="item in colorOptions" :key="item" :value="item" color="primary">{{ item }}</u-option>
+      </template>
+    </u-select>
+    <u-select v-model="value2a">
+      <template #content>
+        <u-option v-for="item in colorOptions" :key="item" :value="item" color="success">{{ item }}</u-option>
+      </template>
+    </u-select>
+    <u-select v-model="value2b">
+      <template #content>
+        <u-option v-for="item in colorOptions" :key="item" :value="item" color="warning">{{ item }}</u-option>
+      </template>
+    </u-select>
+    <u-select v-model="value2c">
+      <template #content>
+        <u-option v-for="item in colorOptions" :key="item" :value="item" color="error">{{ item }}</u-option>
+      </template>
+    </u-select>
   </div>
 </div>
 
 ```vue
 <template>
-  <u-select
-    v-model="value"
-    color="success"
-    :items="['Option 1', 'Option 2', 'Option 3']" />
+  <u-select v-model="value">
+    <template #content>
+      <u-option v-for="item in options" :key="item" :value="item" color="success">
+        {{ item }}
+      </u-option>
+    </template>
+  </u-select>
 </template>
 
 <script setup>
   import { ref } from 'vue';
   const value = ref('Option 1');
+  const options = ['Option 1', 'Option 2', 'Option 3'];
 </script>
 ```
 
@@ -55,7 +75,7 @@ Set the color of selected state via `color` prop.
 Customize trigger display content via default slot.
 
 <div class="demo-section">
-  <u-select v-model="value4" color="primary" :items="['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen', 'Hangzhou']">
+  <u-select v-model="value4" :items="['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen', 'Hangzhou']">
     <span class="custom-trigger">
       <u-svg icon="chevronDown" />
       <span>Selected: {{ value4 || 'Please Select' }}</span>
@@ -67,7 +87,6 @@ Customize trigger display content via default slot.
 <template>
   <u-select
     v-model="value"
-    color="primary"
     :items="['Beijing', 'Shanghai', 'Guangzhou']">
     <span>Selected: {{ value || 'Please Select' }}</span>
   </u-select>
@@ -103,13 +122,13 @@ Disable the select via `disabled` prop.
 
 ## Custom Dropdown Content
 
-Customize dropdown content and style via `content` slot.
+Use `u-option` component via `content` slot to customize dropdown options.
 
 <div class="demo-section">
   <u-select v-model="value6">
     <span>Selected: {{ value6 || 'Please Select' }}</span>
     <template #content>
-      <u-list-item :value="i" v-for="i in 5">Option {{ i }}</u-list-item>
+      <u-option :value="item.value" v-for="item in options1" :key="item.value">{{ item.label }}</u-option>
     </template>
   </u-select>
 </div>
@@ -119,26 +138,34 @@ Customize dropdown content and style via `content` slot.
   <u-select v-model="value">
     <span>Selected: {{ value || 'Please Select' }}</span>
     <template #content>
-      <u-list-item :value="i" v-for="i in 5">Option {{ i }}</u-list-item>
+      <u-option :value="item.value" v-for="item in options" :key="item.value">
+        {{ item.label }}
+      </u-option>
     </template>
   </u-select>
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  const value = ref(1);
+  const value = ref('');
+  const options = [
+    { value: 'beijing', label: 'Beijing' },
+    { value: 'shanghai', label: 'Shanghai' },
+    { value: 'guangzhou', label: 'Guangzhou' },
+    { value: 'shenzhen', label: 'Shenzhen' },
+  ];
 </script>
 ```
 
-### Custom List Item Style
+### Disabled Option
 
-Customize list item style via `radius` and `height` props.
+Set `disabled` prop on `u-option` to disable a specific option.
 
 <div class="demo-section">
   <u-select v-model="value7">
     <span>Selected: {{ value7 || 'Please Select' }}</span>
     <template #content>
-      <u-list-item height="48px" :value="i" v-for="i in 5">Option {{ i }}</u-list-item>
+      <u-option :value="item.value" v-for="item in options2" :key="item.value" :disabled="item.disabled">{{ item.label }}</u-option>
     </template>
   </u-select>
 </div>
@@ -148,9 +175,45 @@ Customize list item style via `radius` and `height` props.
   <u-select v-model="value">
     <span>Selected: {{ value || 'Please Select' }}</span>
     <template #content>
-      <u-list-item height="48px" :value="i" v-for="i in 5">
+      <u-option :value="item.value" v-for="item in options" :key="item.value" :disabled="item.disabled">
+        {{ item.label }}
+      </u-option>
+    </template>
+  </u-select>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const value = ref('');
+  const options = [
+    { value: 'a', label: 'Option A', disabled: false },
+    { value: 'b', label: 'Option B', disabled: true },
+    { value: 'c', label: 'Option C', disabled: false },
+  ];
+</script>
+```
+
+### Custom Option Style
+
+Customize option style via `height` and `radius` props on `u-option`.
+
+<div class="demo-section">
+  <u-select v-model="value8">
+    <span>Selected: {{ value8 || 'Please Select' }}</span>
+    <template #content>
+      <u-option height="48px" :value="i" v-for="i in 5">Option {{ i }}</u-option>
+    </template>
+  </u-select>
+</div>
+
+```vue
+<template>
+  <u-select v-model="value">
+    <span>Selected: {{ value || 'Please Select' }}</span>
+    <template #content>
+      <u-option height="48px" :value="i" v-for="i in 5">
         Option {{ i }}
-      </u-list-item>
+      </u-option>
     </template>
   </u-select>
 </template>
@@ -163,12 +226,18 @@ Customize list item style via `radius` and `height` props.
 
 ## USelect API
 
-| Property   | Description                   | Type                                                       | Default |
-| ---------- | ----------------------------- | ---------------------------------------------------------- | ------- |
-| modelValue | Current selected value        | `string \| number`                                         | -       |
-| disabled   | Whether to disable the select | `boolean`                                                  | `false` |
-| color      | Color of selected state       | `'primary' \| 'success' \| 'warning' \| 'error' \| 'info'` | -       |
-| items      | Options list                  | `Array<string>`                                            | -       |
+| Property    | Description                   | Type                                                       | Default |
+| ----------- | ----------------------------- | ---------------------------------------------------------- | ------- |
+| modelValue  | Current selected value        | `string \| number`                                         | -       |
+| disabled    | Whether to disable the select | `boolean`                                                  | `false` |
+| items       | Options list                  | `Array<string \| number>`                                  | -       |
+| placeholder | Placeholder text              | `string`                                                   | -       |
+
+## USelect Events
+
+| Event | Description                | Type                       |
+| ----- | -------------------------- | -------------------------- |
+| change | Triggered when value changes | `(value: string \| number) => void` |
 
 ## USelect Slots
 
@@ -177,6 +246,22 @@ Customize list item style via `radius` and `height` props.
 | default | Trigger content  |
 | content | Dropdown content |
 
+## UOption API
+
+| Property | Description          | Type                                                       | Default |
+| -------- | -------------------- | ---------------------------------------------------------- | ------- |
+| value    | Option value         | `string \| number`                                         | -       |
+| disabled | Whether to disable   | `boolean`                                                  | `false` |
+| color    | Color of active state | `'primary' \| 'success' \| 'warning' \| 'error' \| 'info'` | -       |
+| radius   | Border radius        | `string`                                                   | -       |
+| height   | Option height        | `string`                                                   | -       |
+
+## UOption Slots
+
+| Slot    | Description     |
+| ------- | --------------- |
+| default | Option content  |
+
 <script setup>
   import { ref } from 'vue';
   const value1 = ref('Option 1');
@@ -184,10 +269,23 @@ Customize list item style via `radius` and `height` props.
   const value2a = ref('Option 1');
   const value2b = ref('Option 1');
   const value2c = ref('Option 1');
+  const colorOptions = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
   const value4 = ref('');
   const value5 = ref('Option 1');
-  const value6 = ref(1);
-  const value7 = ref(1);
+  const value6 = ref('');
+  const value7 = ref('');
+  const value8 = ref(1);
+  const options1 = [
+    { value: 'beijing', label: 'Beijing' },
+    { value: 'shanghai', label: 'Shanghai' },
+    { value: 'guangzhou', label: 'Guangzhou' },
+    { value: 'shenzhen', label: 'Shenzhen' },
+  ];
+  const options2 = [
+    { value: 'a', label: 'Option A', disabled: false },
+    { value: 'b', label: 'Option B', disabled: true },
+    { value: 'c', label: 'Option C', disabled: false },
+  ];
 </script>
 
 <style scoped>

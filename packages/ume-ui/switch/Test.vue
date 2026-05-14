@@ -24,9 +24,9 @@
   </div>
 
   <div class="demo">
-    <u-switch v-model="checked" disabled="small"></u-switch>
-    <u-switch v-model="checked" disabled="medium"></u-switch>
-    <u-switch v-model="checked" disabled="large"></u-switch>
+    <u-switch v-model="checked" disabled ></u-switch>
+    <u-switch v-model="checked" disabled ></u-switch>
+    <u-switch v-model="checked" disabled></u-switch>
   </div>
 
   <div class="demo">

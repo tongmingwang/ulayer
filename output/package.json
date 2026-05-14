@@ -1,6 +1,6 @@
 {
   "name": "ume-ui",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "description": "A Vue 3 component library",
   "type": "module",
   "main": "./dist/ume-ui.cjs.js",

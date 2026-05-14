@@ -63,6 +63,7 @@ export default defineConfig({
               { text: 'Radio', link: '/components/radio' },
               { text: 'Select', link: '/components/select' },
               { text: 'Switch', link: '/components/switch' },
+              { text: 'Slider', link: '/components/slider' },
             ],
           },
           {
@@ -158,6 +159,7 @@ export default defineConfig({
               { text: '单选框', link: '/zh-CN/components/radio' },
               { text: '选择器', link: '/zh-CN/components/select' },
               { text: '开关', link: '/zh-CN/components/switch' },
+              { text: '滑块', link: '/zh-CN/components/slider' },
             ],
           },
           {

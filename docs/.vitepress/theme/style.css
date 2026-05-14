@@ -5,42 +5,6 @@
 
 /**
  * Colors
- *
- * Each colors have exact same color scale system with 3 levels of solid
- * colors with different brightness, and 1 soft color.
- *
- * - `XXX-1`: The most solid color used mainly for colored text. It must
- *   satisfy the contrast ratio against when used on top of `XXX-soft`.
- *
- * - `XXX-2`: The color used mainly for hover state of the button.
- *
- * - `XXX-3`: The color for solid background, such as bg color of the button.
- *   It must satisfy the contrast ratio with pure white (#ffffff) text on
- *   top of it.
- *
- * - `XXX-soft`: The color used for subtle background such as custom container
- *   or badges. It must satisfy the contrast ratio when putting `XXX-1` colors
- *   on top of it.
- *
- *   The soft color must be semi transparent alpha channel. This is crucial
- *   because it allows adding multiple "soft" colors on top of each other
- *   to create an accent, such as when having inline code block inside
- *   custom containers.
- *
- * - `default`: The color used purely for subtle indication without any
- *   special meanings attached to it such as bg color for menu hover state.
- *
- * - `brand`: Used for primary brand colors, such as link text, button with
- *   brand theme, etc.
- *
- * - `tip`: Used to indicate useful information. The default theme uses the
- *   brand color for this by default.
- *
- * - `warning`: Used to indicate warning to the users. Used in custom
- *   container, badges, etc.
- *
- * - `danger`: Used to show error, or dangerous message to the users. Used
- *   in custom container, badges, etc.
  * -------------------------------------------------------------------------- */
 
 :root {
@@ -87,23 +51,97 @@
 }
 
 /**
- * Component: Home
+ * Component: Home - Hero
  * -------------------------------------------------------------------------- */
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #bd34fe 30%,
-    #41d1ff
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    #1e88e5 0%,
+    #42a5f5 30%,
+    #90caf9 60%,
+    #1e88e5 100%
   );
+  --vp-home-hero-name-background-size: 200% 200%;
 
   --vp-home-hero-image-background-image: linear-gradient(
     -45deg,
-    #bd34fe 50%,
-    #47caff 50%
+    #1e88e5 30%,
+    #42a5f5 50%,
+    #90caf9 70%,
+    #1e88e5 100%
   );
+  --vp-home-hero-image-background-size: 400% 400%;
   --vp-home-hero-image-filter: blur(44px);
+}
+
+/* Hero name gradient animation */
+.VPHero .name {
+  background: var(--vp-home-hero-name-background) !important;
+  background-size: var(--vp-home-hero-name-background-size) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  animation: hero-name-gradient 6s ease infinite;
+}
+
+@keyframes hero-name-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero image glow animation */
+.VPHero .image-bg {
+  background: var(--vp-home-hero-image-background-image) !important;
+  background-size: var(--vp-home-hero-image-background-size) !important;
+  animation: hero-image-glow 8s ease infinite;
+  opacity: 0.5;
+}
+
+@keyframes hero-image-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero image float animation */
+.VPHero .image-container {
+  animation: hero-image-float 4s ease-in-out infinite;
+}
+
+@keyframes hero-image-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Hero entrance animations */
+.VPHero .name {
+  animation: hero-name-gradient 6s ease infinite,
+             hero-fade-in 0.8s ease-out both;
+}
+
+.VPHero .text {
+  animation: hero-fade-in 0.8s ease-out 0.15s both;
+}
+
+.VPHero .tagline {
+  animation: hero-fade-in 0.8s ease-out 0.3s both;
+}
+
+.VPHero .actions {
+  animation: hero-fade-in 0.8s ease-out 0.45s both;
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 640px) {
@@ -119,6 +157,54 @@
 }
 
 /**
+ * Component: Home - Features
+ * -------------------------------------------------------------------------- */
+
+/* Feature card entrance animation */
+.VPFeature {
+  animation: feature-fade-in 0.6s ease-out both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(30, 136, 229, 0.12);
+}
+
+.VPFeature:nth-child(1) { animation-delay: 0.1s; }
+.VPFeature:nth-child(2) { animation-delay: 0.18s; }
+.VPFeature:nth-child(3) { animation-delay: 0.26s; }
+.VPFeature:nth-child(4) { animation-delay: 0.34s; }
+.VPFeature:nth-child(5) { animation-delay: 0.42s; }
+.VPFeature:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes feature-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Feature icon pulse animation */
+.VPFeature .icon {
+  animation: feature-icon-pulse 3s ease-in-out infinite;
+  transition: transform 0.25s ease;
+}
+
+.VPFeature:hover .icon {
+  transform: scale(1.15);
+}
+
+@keyframes feature-icon-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/**
  * Component: Custom Block
  * -------------------------------------------------------------------------- */
 
@@ -128,6 +214,10 @@
   --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 }
+
+/**
+ * Global
+ * -------------------------------------------------------------------------- */
 
 html,
 body {
@@ -143,4 +233,14 @@ body {
     'Open Sans',
     'Helvetica Neue',
     sans-serif !important;
+}
+
+/* Install command block styling on homepage */
+.VPHero + .VPFeatures + div .language-bash {
+  animation: hero-fade-in 0.8s ease-out 0.65s both;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }

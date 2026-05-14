@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: 'Ume Ui'
-  text: 'A Vue3 UI library'
-  tagline: A lightweight and elegant component library built for Vue 3
+  name: 'Ume UI'
+  text: 'Vue 3 Component Library'
+  tagline: Lightweight, elegant, and themeable — built for the modern web
   image:
     dark: /logo.svg
     light: /dark.svg
@@ -15,28 +15,31 @@ hero:
       text: Get Started
       link: /guide
     - theme: alt
-      text: View on GitHub
+      text: Components
+      link: /components/button
+    - theme: alt
+      text: GitHub
       link: https://github.com/tongmingwang/ume-ui
 
 features:
   - icon: 🚀
-    title: Lightweight
-    details: Designed to be lightweight and fast with tree-shaking support
+    title: Lightweight & Tree-shakeable
+    details: Minimal bundle size with on-demand imports. Only ship the components you actually use.
   - icon: ⚡️
-    title: Vue 3 Based
-    details: Built specifically for Vue 3 with Composition API and TypeScript
+    title: Vue 3 + TypeScript
+    details: Built from the ground up with Composition API and full TypeScript support for type-safe development.
   - icon: 🎨
-    title: Themable
-    details: Fully customizable with CSS variables and theme support
+    title: MUI-based Theming
+    details: Complete CSS variable theming system with light/dark mode. 6-level color palette for precise customization.
   - icon: 📱
-    title: Responsive
-    details: Responsive components that work on all device sizes
+    title: Responsive Design
+    details: Components adapt seamlessly across all device sizes, from mobile to desktop.
   - icon: 🔧
-    title: Developer Friendly
-    details: Intuitive APIs and comprehensive documentation
+    title: Developer Experience
+    details: Intuitive APIs, auto-documented props, and rich interactive examples for rapid development.
   - icon: 🌙
-    title: Dark Mode
-    details: Built-in dark mode support for comfortable viewing
+    title: Dark Mode Ready
+    details: Built-in dark mode with smooth transitions. Automatic system preference detection out of the box.
 ---
 
 ```bash

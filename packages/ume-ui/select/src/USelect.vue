@@ -10,33 +10,27 @@
     <Teleport to="body">
       <Transition @enter="enter" @leave="leave">
         <div
-          class="u-select_layer"
-          :class="className"
+          :class="[...selectClassNames, noScrollClassName]"
           v-bind="targetAttrs"
-          ref="target"
           role="select"
+          ref="layer"
           @click="update(false)"
           v-if="visible">
           <div class="u-select_content" :style="position" ref="content">
-            <UList
-              v-model="selfVal"
-              :color="props.color"
-              @update:model-value="emits('update:modelValue', selfVal)">
               <slot name="content">
-                <UListItem
+                <UOption
                   v-for="(item, index) in props.items"
                   :key="index"
                   :value="item">
                   {{ item }}
-                </UListItem>
+                </UOption>
               </slot>
-            </UList>
           </div>
         </div>
       </Transition>
     </Teleport>
-    <span class="u-select_input">
-      <slot>{{ selfVal }}</slot>
+    <span class="u-select_input--box">
+      <slot><input type="text" class="u-select_input" :value="active" :placeholder="props.placeholder" readonly></slot>
     </span>
     <USvg
       :icon="svgIcons.arrowDown"
@@ -46,38 +40,36 @@
 </template>
 
 <script setup lang="ts">
-  import UInput from '@/ume-ui/input/src/UInput.vue';
   import { ref, useTemplateRef, watch } from 'vue';
   import { usePosition } from '@/hooks/usePosition';
   import { throttle } from '@/utils/common';
-  import { svgIcons, USvg, ULayer } from '@/ume-ui/base';
+  import { svgIcons, USvg } from '@/ume-ui/base';
   import { useResize } from '@/hooks/useResize';
-  import UList from '@/ume-ui/list/src/UList.vue';
-  import UListItem from '@/ume-ui/list/src/UListItem.vue';
   import { useNoScroll } from '@/hooks/useNoScroll';
+  import type { USelectProps } from './types';
+  import { useSelect } from './hook';
+  import UOption from './UOption.vue';
 
-  const emits = defineEmits(['update:modelValue']);
+  const props = withDefaults(defineProps<USelectProps>(), { modelValue: '' });
+  const emits = defineEmits(['update:modelValue','change']);
   defineOptions({
     name: 'USelect',
-    components: { UInput, USvg, ULayer, UList, UListItem },
+    components: { USvg, UOption },
   });
-  const props = defineProps<{
-    disabled?: boolean;
-    modelValue: string | number;
-    color?: 'primary' | 'success' | 'warning' | 'error' | 'info';
-    items?: Array<string>;
-  }>();
+
   const visible = ref(false);
   const selectRef = useTemplateRef('select');
   const contentRef = useTemplateRef('content');
-  const selfVal = ref(props.modelValue || '');
+  
   const { position, updatePosition, resetPosition } = usePosition();
-  const { targetAttrs, className, updateNoScroll } = useNoScroll('target');
+  const { targetAttrs, noScrollClassName, updateNoScroll, targetRef } =
+    useNoScroll('layer');
+  const { selectClassNames, scrollToActive, active } = useSelect(props, emits);
 
   watch(
     () => props.modelValue,
     () => {
-      selfVal.value = props.modelValue || '';
+      active.value = props.modelValue || '';
     }
   );
   const update = throttle(async (bol: boolean) => {
@@ -116,12 +108,17 @@
   };
   const enter = async (el: Element, done: () => void) => {
     updateNoScroll();
+    scrollToActive(targetRef.value!)
     const content = el.querySelector('.u-select_content')!;
     content &&
       content.animate(
         [
           { transform: 'scaleY(0.88) translateY(-2px)', opacity: 0 },
-          { transform: 'scaleY(0.88) translateY(-2px)', opacity: 0, offset: 0.33 },
+          {
+            transform: 'scaleY(0.88) translateY(-2px)',
+            opacity: 0,
+            offset: 0.33,
+          },
           { transform: 'scaleY(1)', opacity: 1 },
         ],
         {
@@ -190,17 +187,24 @@
       pointer-events: none;
       opacity: 0.65;
     }
-
-    &_input {
+    &_input--box {
       flex: 1;
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       color: inherit;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+      height: 100%;
+      border: none;
+      outline: none;
+    }
+
+    &_input {
+      height: 100%;
+      width: 100%;
+      color: inherit;
+      outline: none;
+      border: none;
+      background-color: transparent;
     }
   }
   .u-select_down {
@@ -214,7 +218,7 @@
 </style>
 
 <style lang="scss">
-  .u-select_layer {
+  .u-select-layer {
     position: fixed;
     top: 0;
     left: 0;
@@ -222,11 +226,16 @@
     height: 100%;
     z-index: 1000;
     pointer-events: all;
+    background-color: transparent;
     .u-select_content {
+      padding: 6px 0;
       border-radius: 4px;
-      box-shadow: 0 0 2px 0 rgba(var(--u-rgb),0.15),0 5px 12px 0 rgba(var(--u-rgb),0.15);
+      background-color: var(--u-bg);
+      box-shadow:
+        0 0 2px 0 rgba(0, 0, 0, 0.1),
+        0 5px 12px 0 rgba(0, 0, 0, 0.15);
       overflow: auto;
-      max-height: 240px;
+      max-height: 212px;
       position: fixed;
       pointer-events: all;
       transform-origin: center top;

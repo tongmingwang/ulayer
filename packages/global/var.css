@@ -6,35 +6,35 @@ html.light,
 body.light {
   /* primary 主色 (MUI Blue) */
   --u-primary-light-hover: #e3f2fd;
-  --u-primary-light: #cbe8fd;
-  --u-primary-light-active: #aedcfd;
-  --u-primary-hover: #1565c0;
-  --u-primary: #1976d2;
+  --u-primary-light: #bbdefb;
+  --u-primary-light-active: #90caf9;
+  --u-primary-hover: #1976d2;
+  --u-primary: #1e88e5;
   --u-primary-active: #0d47a1;
 
   /* 成功色彩 (MUI Green) */
-  --u-success-light-hover: #e8f5e9; /* MUI green[50] */
-  --u-success-light: #c9e7c9; /* MUI green[200] */
-  --u-success-light-active: #ade6af; /* MUI green[300] */
-  --u-success-hover: #2e7d32; /* MUI green[800] */
-  --u-success: #388e3c; /* MUI green[700] */
-  --u-success-active: #1b5e20; /* MUI green[900] */
+  --u-success-light-hover: #e8f5e9;
+  --u-success-light: #c9e7c9;
+  --u-success-light-active: #ade6af;
+  --u-success-hover: #2e7d32;
+  --u-success: #388e3c;
+  --u-success-active: #1b5e20;
 
   /* 警告色彩 (MUI Orange) */
-  --u-warning-light-hover: #fff3e0; /* MUI orange[50] */
-  --u-warning-light: #fdeed6; /* MUI orange[200] */
-  --u-warning-light-active: #eed1a7; /* MUI orange[300] */
-  --u-warning-hover: #e65100; /* MUI orange[900] */
-  --u-warning: #ed6c02; /* MUI orange[700] 警告主色 */
-  --u-warning-active: #bf360c; /* MUI deepOrange[900] */
+  --u-warning-light-hover: #fff3e0;
+  --u-warning-light: #fdeed6;
+  --u-warning-light-active: #eed1a7;
+  --u-warning-hover: #e65100;
+  --u-warning: #ed6c02;
+  --u-warning-active: #bf360c;
 
   /* 错误色彩 (MUI Red) */
-  --u-error-light-hover: #ffebee; /* MUI red[50] */
-  --u-error-light: #fac8c8; /* MUI red[200] */
-  --u-error-light-active: #f0b4b4; /* MUI red[300] */
-  --u-error-hover: #c62828; /* MUI red[800] */
-  --u-error: #d32f2f; /* MUI red[700] 错误主色 */
-  --u-error-active: #b71c1c; /* MUI red[900] */
+  --u-error-light-hover: #ffebee;
+  --u-error-light: #fac8c8;
+  --u-error-light-active: #f0b4b4;
+  --u-error-hover: #c62828;
+  --u-error: #d32f2f;
+  --u-error-active: #b71c1c;
 
   /* 背景色 */
   --u-bg: #fff;
@@ -42,15 +42,15 @@ body.light {
   /* rgba 值 */
   --u-rgb: 0, 0, 0;
   /* 主文本色彩 */
-  --u-text-1: rgba(0, 0, 0, 0.87); /* MUI text primary */
+  --u-text-1: rgba(0, 0, 0, 0.87);
   /* 此文本色彩 */
-  --u-text-2: rgba(0, 0, 0, 0.6); /* MUI text secondary */
+  --u-text-2: rgba(0, 0, 0, 0.6);
   /* 次文本色彩 */
-  --u-text-3: rgba(0, 0, 0, 0.38); /* MUI text disabled */
+  --u-text-3: rgba(0, 0, 0, 0.38);
   /* 白色字体 */
   --u-text-white: #fff;
   /* 边框颜色 */
-  --u-border: rgba(0, 0, 0, 0.12); /* MUI divider */
+  --u-border: rgba(0, 0, 0, 0.12);
 
   /* size */
   --u-small: 28px;
@@ -69,45 +69,45 @@ body.dark {
   --u-container-bg: #1e1e1e; /* MUI dark paper background */
   --u-rgb: 255, 255, 255;
   /* 主文本色彩 */
-  --u-text-1: rgba(255, 255, 255, 0.9); /* MUI dark text primary */
+  --u-text-1: rgba(255, 255, 255, 0.9);
   /* 此文本色彩 */
-  --u-text-2: rgba(255, 255, 255, 0.7); /* MUI dark text secondary */
+  --u-text-2: rgba(255, 255, 255, 0.7);
   /* 次文本色彩 */
-  --u-text-3: rgba(255, 255, 255, 0.5); /* MUI dark text disabled */
+  --u-text-3: rgba(255, 255, 255, 0.5);
   /* 白色字体 */
   --u-text-white: #121212;
   /* 边框颜色 */
   --u-border: rgba(255, 255, 255, 0.12); /* MUI dark divider */
 
   /* primary 主色 (MUI Dark Blue 适当提亮以保证对比度) */
-  --u-primary-light-hover: #0d47a1; /* MUI blue[900] */
-  --u-primary-light: #1565c0; /* MUI blue[800] */
-  --u-primary-light-active: #1976d2; /* MUI blue[700] */
-  --u-primary-hover: #42a5f5; /* MUI blue[400] */
-  --u-primary: #90caf9; /* MUI blue[200] */
-  --u-primary-active: #e3f2fd; /* MUI blue[50] */
+  --u-primary-light-hover: #0d47a1;
+  --u-primary-light: #1565c0;
+  --u-primary-light-active: #1976d2;
+  --u-primary-hover: #42a5f5;
+  --u-primary: #90caf9;
+  --u-primary-active: #e3f2fd;
 
   /* 成功色彩 (MUI Dark Green) */
-  --u-success-light-hover: #1b5e20; /* MUI green[900] */
-  --u-success-light: #2e7d32; /* MUI green[800] */
-  --u-success-light-active: #388e3c; /* MUI green[700] */
-  --u-success-hover: #81c784; /* MUI green[300] */
-  --u-success: #a5d6a7; /* MUI green[200] */
-  --u-success-active: #e8f5e9; /* MUI green[50] */
+  --u-success-light-hover: #1b5e20;
+  --u-success-light: #2e7d32;
+  --u-success-light-active: #388e3c;
+  --u-success-hover: #81c784;
+  --u-success: #a5d6a7;
+  --u-success-active: #e8f5e9;
 
   /* 警告色彩 (MUI Dark Orange) */
-  --u-warning-light-hover: #bf360c; /* MUI deepOrange[900] */
-  --u-warning-light: #e65100; /* MUI orange[900] */
-  --u-warning-light-active: #ed6c02; /* MUI orange[700] */
-  --u-warning-hover: #ffb74d; /* MUI orange[300] */
-  --u-warning: #ffcc80; /* MUI orange[200] */
-  --u-warning-active: #fff3e0; /* MUI orange[50] */
+  --u-warning-light-hover: #bf360c;
+  --u-warning-light: #e65100;
+  --u-warning-light-active: #ed6c02;
+  --u-warning-hover: #ffb74d;
+  --u-warning: #ffcc80;
+  --u-warning-active: #fff3e0;
 
   /* 错误色彩 (MUI Dark Red) */
-  --u-error-light-hover: #640808; /* MUI red[900] */
-  --u-error-light: #580101; /* MUI red[800] */
-  --u-error-light-active: #3a0101; /* MUI red[700] */
-  --u-error-hover: #ef9a9a; /* MUI red[200] */
-  --u-error: #e57373; /* MUI red[300] */
-  --u-error-active: #ffebee; /* MUI red[50] */
+  --u-error-light-hover: #640808;
+  --u-error-light: #580101;
+  --u-error-light-active: #3a0101;
+  --u-error-hover: #ef9a9a;
+  --u-error: #e57373;
+  --u-error-active: #ffebee;
 }

@@ -7,7 +7,7 @@ import { radio, radioGroup, URadio, URadioGroup } from './radio';
 import fab, { UFab } from './fab';
 import { UIcon } from './icon';
 import { list, listItem, UList, UListItem } from './list';
-import Select, { USelect } from './select';
+import Select, { USelect,Option,UOption } from './select';
 import ripple from '@/directives/ripple';
 import { useTheme } from '@/hooks/useTheme';
 import Mask, { UMask } from './mask';
@@ -28,6 +28,8 @@ import Alert, { UAlert } from './alert';
 import Badge, { UBadge } from './badge';
 import Divider, { UDivider } from './divider';
 import Switch, { USwitch } from './switch';
+import Slider, { USlider}  from './slider';
+import { Menu, MenuItem, SubMenu, UMenu, UMenuItem, USubMenu } from './menu';
 
 const components: Plugin[] = [
   button,
@@ -52,6 +54,9 @@ const components: Plugin[] = [
   Divider,
   CardAction,
   Switch,
+  Option,
+  Slider,
+  Menu, MenuItem, SubMenu
 ];
 
 export const install = (app: App) => {
@@ -86,6 +91,11 @@ export {
   UDivider,
   UCardAction,
   USwitch,
+  UOption,
+  USlider,
+  UMenu,
+  UMenuItem,
+  USubMenu
 };
 
 export * from './button';

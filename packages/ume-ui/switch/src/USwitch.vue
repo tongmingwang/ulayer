@@ -53,7 +53,7 @@
   const emit = defineEmits(['update:modelValue', 'change']);
 
   const handleChange = (e: Event) => {
-    checked.value = !!(e.target as HTMLInputElement).checked;
+    checked.value = Boolean((e.target as HTMLInputElement).checked);
     emit('update:modelValue', checked.value);
     emit('change', checked.value);
   };

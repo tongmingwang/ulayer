@@ -1,6 +1,6 @@
 export interface FabProps {
-  color?: 'primary' | 'success' | 'warning' | 'error' | 'info' | '';
-  size?: 'small' | 'medium' | 'large' | 'extended' | '';
+  color?: 'primary' | 'success' | 'warning' | 'error' | '';
+  size?: 'small' | 'medium' | 'large' | 'extended' | 'mini' | '';
   disabled?: boolean;
   loading?: boolean;
   fixed?: boolean;

@@ -5,7 +5,7 @@
     <USelect v-model="value">
       <span>List Item {{ value }}</span>
       <template #content>
-        <UListItem :value="i" v-for="i in 50">List Item {{ i }}</UListItem>
+        <UOption :value="i" v-for="i in 50">List Item {{ i }}</UOption>
       </template>
     </USelect>
     <br />
@@ -13,7 +13,7 @@
     <USelect v-model="value" color="success">
       <span>List Item {{ value }}</span>
       <template #content>
-        <UListItem :value="i" v-for="i in 50">List Item {{ i }}</UListItem>
+        <UOption :value="i" v-for="i in 50">List Item {{ i }}</UOption>
       </template>
     </USelect>
 
@@ -21,9 +21,9 @@
     <USelect v-model="value">
       <span>List Item {{ value }}</span>
       <template #content>
-        <UListItem radius="8px 0 8px 0" :value="i" v-for="i in 50">
+        <UOption radius="16px 0 16px 0" :value="i" v-for="i in 50">
           List Item {{ i }}
-        </UListItem>
+        </UOption>
       </template>
     </USelect>
 
@@ -31,9 +31,9 @@
     <USelect v-model="value">
       <span>List Item {{ value }}</span>
       <template #content>
-        <UListItem height="60px" :value="i" v-for="i in 50">
+        <UOption height="60px" :value="i" v-for="i in 50">
           List Item {{ i }}
-        </UListItem>
+        </UOption>
       </template>
     </USelect>
 
@@ -46,9 +46,9 @@
     <USelect disabled v-model="value">
       <span>List Item {{ value }}</span>
       <template #content>
-        <UListItem height="60px" :value="i" v-for="i in 50">
+        <UOption height="60px" :value="i" v-for="i in 50">
           List Item {{ i }}
-        </UListItem>
+        </UOption>
       </template>
     </USelect>
   </div>

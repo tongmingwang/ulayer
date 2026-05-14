@@ -1,5 +1,5 @@
 .u-fab {
-  --u-fab-size: 36px;
+  --u-fab-size: var(--u-medium, 36px);
   --u-fab-color: var(--u-text-white);
   --u-fab-bg: var(--u-primary);
   display: inline-flex;
@@ -80,18 +80,22 @@
 
   // size variants
   &--small {
-    --u-fab-size: 36px;
+    --u-fab-size: var(--u-small, 28px);
     font-size: 14px;
   }
 
   &--large {
-    --u-fab-size: 48px;
+    --u-fab-size: var(--u-large, 48px);
     font-size: 18px;
   }
 
   &--medium {
-    --u-fab-size: 36px;
+    --u-fab-size: var(--u-medium, 36px);
     font-size: 14px;
+  }
+  &--mini {
+    --u-fab-size: var(--u-mini, 24px);
+    font-size: 12px;
   }
 
   &--extended {
