@@ -5,7 +5,7 @@ export interface UInputPropsType {
   disabled?: boolean;
   readonly?: boolean;
   clearable?: boolean;
-  size?: 'large' | 'medium' | 'small';
+  size?: 'large' | 'medium' | 'small' | 'mini';
   prefix?: string;
   suffix?: string;
   variant?: 'outlined' | 'contained' | 'tonal';

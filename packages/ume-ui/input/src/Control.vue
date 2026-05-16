@@ -49,6 +49,7 @@
 <style scoped lang="scss">
   .u-input-control {
     height: 100%;
+    min-width: fit-content;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -58,6 +59,7 @@
   }
 
   .u-input-control__btn {
+    min-width: calc(var(--u-input-height) * 0.8);
     width: calc(var(--u-input-height) * 0.8);
     height: 100%;
     cursor: pointer;

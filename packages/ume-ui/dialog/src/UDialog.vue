@@ -11,17 +11,24 @@
         ref="dialog"
         data-u-dialog="true"
         @click.stop="onClick">
-        <div class="u-dialog_bg"></div>
+        <div class="u-dialog__mask"></div>
         <div
-          class="u-dialog_content"
-          :style="{ '--u-dialog-width': props.width }"
+          class="u-dialog__content"
+          :style="{
+            '--u-dialog-width': props.width,
+            '--dialog-bg': props.bgColor,
+            '--u-dialog-radius': props.radius,
+          }"
           :class="{ 'is-fullscreen': props.fullscreen }"
           @click.stop>
-          <slot />
+          <div class="w-full h-full">
+            <slot />
+          </div>
         </div>
       </div>
     </Transition>
   </Teleport>
+  <slot name="trigger" :props="{ onMousedown: onClickHandle }"></slot>
 </template>
 
 <script setup lang="ts">
@@ -38,11 +45,17 @@
     closeOnEsc: true,
     modelValue: false,
     trigger: undefined,
+    bgColor: 'var(--u-bg)',
+    radius: '4px',
   });
   const emit = defineEmits(['update:modelValue', 'close']);
   const { targetAttrs, updateNoScroll, noScrollClassName, targetRef } =
     useNoScroll('dialog');
   const { show, onClick } = useDialog(props, emit, targetRef);
+  const handleEvent = {
+    clientX: 0,
+    clientY: 0,
+  };
   watch(
     () => props.modelValue,
     (newVal) => {
@@ -50,30 +63,33 @@
     }
   );
 
+  const frameOpt = {
+    duration: 300,
+    easing: 'ease',
+  };
+
+  const onClickHandle = (e: MouseEvent) => {
+    if (e && e.clientY) {
+      handleEvent.clientX = e.clientX;
+      handleEvent.clientY = e.clientY;
+    }
+  };
+
   async function onEnter(el: Element, done: () => void) {
-    const mask = el.querySelector('.u-dialog_bg');
+    const mask = el.querySelector('.u-dialog__mask');
     updateNoScroll();
     if (mask) {
-      mask?.animate([{ opacity: 0 }, { opacity: 1 }], {
-        duration: 300,
-        easing: 'ease',
-      });
+      mask?.animate([{ opacity: 0 }, { opacity: 1 }], frameOpt);
     }
-    const content = el.querySelector('.u-dialog_content');
+    const content = el.querySelector('.u-dialog__content') as HTMLElement;
     if (content) {
       try {
-        const triggerDom = props.trigger;
-        const triggerRect = triggerDom?.getBoundingClientRect() || null;
-        if (triggerDom && triggerRect) {
-          const triggerRect = triggerDom.getBoundingClientRect();
+        if (handleEvent.clientX) {
           const contentRect = content.getBoundingClientRect();
           // 计算触发元素中心相对于对话框内容左上角的位置
-          const left =
-            triggerRect.left - contentRect.left + triggerRect.width / 2;
-          const top =
-            triggerRect.top - contentRect.top + triggerRect.height / 2;
-          // @ts-ignore
-          content.style.transformOrigin = `${left}px ${top}px`;
+          const left = handleEvent.clientX - contentRect.left;
+          const top = handleEvent.clientY - contentRect.top;
+          content.style.setProperty('transform-origin', `${left}px ${top}px`);
         }
       } catch (error) {
         console.error(error);
@@ -81,59 +97,83 @@
       content.animate(
         props.fullscreen
           ? [{ transform: 'translateY(100%)' }, { transform: 'translateY(0%)' }]
-          : [
-              { opacity: 0, transform: 'scale(0)' },
-              { opacity: 0.1, transform: 'scale(0.33)',offset: 0.33 },
-              { opacity: 1, transform: 'scale(1)' },
-            ],
-        {
-          duration: 300,
-          easing: 'ease',
-        }
+          : [{ transform: 'scale(0)' }, { transform: 'scale(1)' }],
+        frameOpt
+      );
+      Array.from(content.children).forEach((element: Element) => {
+        element.animate(
+          [
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 0,
+              transform: 'translateY(-2px)',
+              offset: 0.5,
+            },
+            {
+              opacity: 1,
+              offset: 1,
+            },
+          ],
+          {
+            ...frameOpt,
+            duration: frameOpt.duration * 2,
+          }
+        );
+      });
+    }
+    if (mask) {
+      await Promise.all(
+        mask.getAnimations().map((animation) => animation.finished)
       );
     }
-    mask &&
-      (await Promise.all(
-        mask.getAnimations().map((animation) => animation.finished)
-      ));
-    content &&
-      (await Promise.all(
+    if (content) {
+      await Promise.all(
         content.getAnimations().map((animation) => animation.finished)
-      ));
-
+      );
+    }
     done();
   }
 
   async function onLeave(el: Element, done: () => void) {
-    const mask = el.querySelector('.u-dialog_bg');
-    mask &&
-      mask.animate([{ opacity: 1 }, { opacity: 0 }], {
-        duration: 300,
-        easing: 'ease',
+    const mask = el.querySelector('.u-dialog__mask');
+    if (mask) {
+      mask.animate([{ opacity: 1 }, { opacity: 0 }], frameOpt);
+    }
+
+    const content = el.querySelector('.u-dialog__content');
+    if (content) {
+      Array.from(content.children).forEach((ele: Element) => {
+        ele.animate(
+          [
+            { opacity: 1 },
+            { opacity: 0, offset: 0.2 },
+            { opacity: 0, offset: 1 },
+          ],
+          frameOpt
+        );
       });
-    const content = el.querySelector('.u-dialog_content');
-    content &&
       content.animate(
         props.fullscreen
           ? [{ transform: 'translateY(0%)' }, { transform: 'translateY(100%)' }]
           : [
               { opacity: 1, transform: 'scale(1)' },
-              { opacity: 0.05, transform: 'scale(0.5)',offset: 0.33 },
               { opacity: 0, transform: 'scale(0)' },
             ],
-        {
-          duration: 300,
-          easing: 'ease',
-        }
+        frameOpt
       );
-    mask &&
-      (await Promise.all(
+    }
+    if (mask) {
+      await Promise.all(
         mask.getAnimations().map((animation) => animation.finished)
-      ));
-    content &&
-      (await Promise.all(
+      );
+    }
+    if (content) {
+      await Promise.all(
         content.getAnimations().map((animation) => animation.finished)
-      ));
+      );
+    }
     done();
     updateNoScroll();
   }
@@ -149,17 +189,19 @@
     width: 100%;
     height: 100%;
     display: flex;
-    .u-dialog_bg {
+    .u-dialog__mask {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(var(--u-rgb),0.33);
+      background-color: rgba(var(--u-rgb), 0.33);
       z-index: 0;
     }
-    .u-dialog_content {
+    .u-dialog__content {
       width: var(--u-dialog-width);
+      background: var(--dialog-bg);
+      border-radius: var(--u-dialog-radius);
       height: auto;
       margin: auto;
       position: relative;
@@ -173,6 +215,7 @@
         height: 100%;
         max-width: 100%;
         height: 100%;
+        border-radius: 0 !important;
       }
     }
   }

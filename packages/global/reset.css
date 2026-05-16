@@ -11,7 +11,6 @@ body {
     -apple-system,
     Roboto,
     sans-serif;
-     scrollbar-color: rgba(var(--u-rgb),0.33) var(--u-container-bg);
 }
 * {
   box-sizing: border-box;
@@ -26,3 +25,35 @@ body {
   padding-left: 8px;
 }
 
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
+
+/* 媒体查询 Pc滚动条 */
+@media screen and (min-width: 768px) {
+  /* 滚动条 */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--u-container-bg);
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(var(--u-rgb), 0.33);
+    border-radius: 8px;
+  }
+}
+@media screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}

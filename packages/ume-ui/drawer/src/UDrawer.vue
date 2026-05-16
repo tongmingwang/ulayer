@@ -9,13 +9,16 @@
         :style="{
           zIndex: props.zIndex,
           '--u-drawer-size': props.size,
+          '--u-drawer-bg': props.bgColor,
         }">
         <div class="u-drawer_bg"></div>
         <div
           class="u-drawer_content"
           @click.stop
           :class="['u-drawer_' + props.location]">
-          <slot></slot>
+          <div class="w-full h-full">
+            <slot />
+          </div>
         </div>
       </div>
     </Transition>
@@ -36,6 +39,7 @@
       location?: 'left' | 'right' | 'top' | 'bottom';
       zIndex?: number;
       closeOnClickMask?: boolean;
+      bgColor?: string;
     }>(),
     {
       modelValue: false,
@@ -43,6 +47,7 @@
       location: 'left',
       zIndex: 1000,
       closeOnClickMask: true,
+      bgColor: 'var(--u-bg)',
     }
   );
   const show = ref(props.modelValue || false);
@@ -84,6 +89,20 @@
       [{ transform: startVal.value }, { transform: 'translate(0)' }],
       frameOPt
     );
+    Array.from(content.children).forEach((element: Element) => {
+      element.animate(
+        [
+          { opacity: 0 },
+          {
+            opacity: 0,
+            transform: 'translateY(-2px)',
+            offset: 0.5,
+          },
+          { opacity: 1, offset: 1 },
+        ],
+        { ...frameOPt, duration: frameOPt.duration * 2 }
+      );
+    });
     mask?.animate([{ opacity: 0 }, { opacity: 1 }], frameOPt);
     await Promise.all(content?.getAnimations().map((item) => item.finished));
     done();
@@ -91,6 +110,16 @@
   const leave = async (el: Element, done: () => void) => {
     const content = el.querySelector('.u-drawer_content')!;
     const mask = el.querySelector('.u-drawer_bg')!;
+    Array.from(content?.children || []).forEach((element: Element) => {
+      element.animate(
+        [
+          { opacity: 1 },
+          { opacity: 0, offset: 0.33 },
+          { opacity: 0, offset: 1 },
+        ],
+        { ...frameOPt, duration: frameOPt.duration }
+      );
+    });
     content?.animate(
       [{ transform: 'translate(0)' }, { transform: startVal.value }],
       frameOPt
@@ -125,9 +154,9 @@
       width: var(--u-drawer-size, 240px);
       height: 100%;
       overflow-y: auto;
-      background: var(--u-bg, #fff);
+      background: var(--u-drawer-bg, #fff);
       z-index: 1000;
-      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.12));
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.05));
     }
     &_left {
       width: var(--u-drawer-size, 240px);

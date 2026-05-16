@@ -1,7 +1,6 @@
 :root,
 html[data-ume-ui-theme='light'],
 body[data-ume-ui-theme='light'],
-[data-ume-ui-theme='light'],
 html.light,
 body.light {
   /* primary 主色 (MUI Blue) */
@@ -62,7 +61,6 @@ body.light {
 /* 暗黑主题 (MUI Dark Mode 方案) */
 html[data-ume-ui-theme='dark'],
 body[data-ume-ui-theme='dark'],
-[data-ume-ui-theme='dark'],
 html.dark,
 body.dark {
   --u-bg: #121212; /* MUI dark background default */

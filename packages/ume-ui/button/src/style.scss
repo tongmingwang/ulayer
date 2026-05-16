@@ -87,21 +87,22 @@ button {
     max-height: var(--u-btn-height);
     min-width: var(--u-btn-height);
     min-height: var(--u-btn-height);
+    padding: 0px !important;
   }
   // size
   &--mini {
     --u-btn-height: var(--u-mini);
-    padding: 0 4px;
+    padding: 0 8px;
     font-size: 12px;
   }
   &--small {
     --u-btn-height: var(--u-small);
-    padding: 0 8px;
+    padding: 0 12px;
     font-size: 12px;
   }
   &--large {
     --u-btn-height: var(--u-large);
-    padding: 0 16px;
+    padding: 0 24px;
     font-size: 18px;
   }
   &--medium {
@@ -123,7 +124,6 @@ button {
     --u-btn-color: var(--u-text-1);
     --u-btn-bg: transparent;
     border: none;
-    padding: 0 8px;
     &:hover {
       --u-btn-bg: rgba(var(--u-rgb), 0.05);
     }
@@ -131,7 +131,7 @@ button {
   &--contained {
     --u-btn-color: var(--u-text-white);
     --u-btn-bg: var(--u-primary);
-    box-shadow: 0 1px 4px 0 rgba(var(--u-rgb), 0.25);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0, 0.25);
     &:hover {
       --u-btn-bg: var(--u-primary-hover);
     }

@@ -71,7 +71,6 @@
     @each $color in primary, success, warning, error {
       &--#{$color} {
         --u-radio-color: var(--u-#{$color});
-        --u-radio-bg: var(--u-#{$color}-light);
       }
     }
   }

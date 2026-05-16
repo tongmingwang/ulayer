@@ -6,8 +6,11 @@
         <UCardTitle>这是一个对话框</UCardTitle>
         <UCardText>这是一个对话框</UCardText>
       </UCard>
+      <template v-slot:trigger="{props}">
+        <button v-bind="props" @click="visible = true">打开对话框</button>
+      </template>
     </UDialog>
-    <button @click="visible = true" ref="trigger">打开对话框</button>
+    
 
     <h2>Fullscreen Dialog</h2>
     <UDialog v-model="visible2" fullscreen>

@@ -22,6 +22,8 @@ export interface USubMenuProps {
   title?: string;
   align?: 'left' | 'right';
   disabled?: boolean;
+  opened?: boolean;
+  radius?: '0px';
 }
 
 export type UMenuProvider = {

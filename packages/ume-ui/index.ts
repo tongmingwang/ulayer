@@ -7,7 +7,7 @@ import { radio, radioGroup, URadio, URadioGroup } from './radio';
 import fab, { UFab } from './fab';
 import { UIcon } from './icon';
 import { list, listItem, UList, UListItem } from './list';
-import Select, { USelect,Option,UOption } from './select';
+import Select, { USelect, Option, UOption } from './select';
 import ripple from '@/directives/ripple';
 import { useTheme } from '@/hooks/useTheme';
 import Mask, { UMask } from './mask';
@@ -28,8 +28,12 @@ import Alert, { UAlert } from './alert';
 import Badge, { UBadge } from './badge';
 import Divider, { UDivider } from './divider';
 import Switch, { USwitch } from './switch';
-import Slider, { USlider}  from './slider';
+import Slider, { USlider } from './slider';
 import { Menu, MenuItem, SubMenu, UMenu, UMenuItem, USubMenu } from './menu';
+import Dropdown, { UDropdown, DropdownItem, UDropdownItem } from './dropdown';
+import { Tabs, TabPane, UTabs, UTabPane } from './tabs';
+import { Form, FormItem, UForm, UFormItem } from './form';
+import { Table, TableColumn, UTable, UTableColumn } from './table';
 
 const components: Plugin[] = [
   button,
@@ -56,7 +60,17 @@ const components: Plugin[] = [
   Switch,
   Option,
   Slider,
-  Menu, MenuItem, SubMenu
+  Menu,
+  MenuItem,
+  SubMenu,
+  Dropdown,
+  DropdownItem,
+  Tabs,
+  TabPane,
+  Form,
+  FormItem,
+  Table,
+  TableColumn,
 ];
 
 export const install = (app: App) => {
@@ -95,16 +109,16 @@ export {
   USlider,
   UMenu,
   UMenuItem,
-  USubMenu
+  USubMenu,
+  UDropdown,
+  UDropdownItem,
+  UTabs,
+  UTabPane,
+  UForm,
+  UFormItem,
+  UTable,
+  UTableColumn,
 };
-
-export * from './button';
-export * from './input';
-export * from './button-group';
-export * from './checkbox';
-export * from './radio';
-export * from './fab';
-export * from './divider';
 
 export default {
   install,

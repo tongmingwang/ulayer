@@ -30,7 +30,7 @@
     transition: all 0.2s;
     border-radius: 50%;
     &:hover {
-      --u-radio-bg: var(--u-primary-light-hover);
+      --u-radio-bg: rgba(var(--u-rgb), 0.05);
     }
   }
 
@@ -46,12 +46,6 @@
   @each $color in primary, success, warning, error {
     &--#{$color} {
       --u-radio-color: var(--u-#{$color});
-
-      .u-radio_input {
-        &:hover {
-          --u-radio-bg: var(--u-#{$color}-light-hover);
-        }
-      }
       &.is-checked {
         --u-radio-color: var(--u-#{$color});
       }

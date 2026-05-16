@@ -67,8 +67,6 @@
     font-size: 14px;
     color: inherit;
     border-radius: inherit;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;

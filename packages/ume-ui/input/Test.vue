@@ -1,10 +1,15 @@
 <template>
   <div>
     <h1>UInput 输入框</h1>
-
     <section>
       <h2>基础用法</h2>
-      <div class="row">
+      <div>
+        <u-input
+          style="width: 150px"
+          v-model="value1"
+          type="number"
+          placeholder="请输入内容"></u-input>
+        <u-select :items="[1]" style="width: 150px"></u-select>
         <u-input v-model="value1" placeholder="请输入内容"></u-input>
       </div>
       <p>当前值: {{ value1 || '(空)' }}</p>

@@ -5,7 +5,7 @@
       v-if="props.modelValue"
       class="u-mask"
       :style="{
-        backgroundColor: bg,
+        backgroundColor: props.bgColor,
       }"
       @click="handleMaskClick">
       <slot></slot>
@@ -18,11 +18,11 @@
     defineProps<{
       modelValue: boolean;
       closeOnClick?: boolean;
-      bg?: string;
+      bgColor?: string;
     }>(),
     {
       closeOnClick: true,
-      bg: '',
+      bgColor: '',
     }
   );
   defineOptions({

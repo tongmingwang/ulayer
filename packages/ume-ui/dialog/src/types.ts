@@ -4,5 +4,6 @@ export interface UDialogProps {
   closeOnEsc?: boolean;
   fullscreen?: boolean;
   width?: string;
-  trigger?: HTMLElement;
+  bgColor?: string
+  radius?: string
 }

@@ -5,6 +5,7 @@ export interface USelectProps {
   disabled?: boolean;
   items?: Array<string | number>;
   placeholder?: string;
+  bgColor?: string
 }
 
 export interface UOptionProps {

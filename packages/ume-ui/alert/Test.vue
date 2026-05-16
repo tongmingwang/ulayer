@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>demo</h2>
     <u-alert color="success">This is a message</u-alert>
     <u-alert color="warning">This is a message</u-alert>
     <u-alert color="error">This is a message</u-alert>

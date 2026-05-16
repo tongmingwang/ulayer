@@ -4,8 +4,6 @@ Icons are used to visually represent actions and information. Click on any icon 
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import UIcon from '../../packages/ume-ui/icon/src/UIcon.vue';
-import '../../packages/ume-ui/icon/src/icon.css';
 import icons from '../public/uicon.json'
 
 const copied = ref('');
@@ -102,9 +100,9 @@ Click on any icon to copy `<u-icon name="..." />` code.
     class="icon-card"
     :class="{ copied: copied === icon.font_class }"
     @click="copyIcon(icon)"
+    v-ripple
   >
     <u-icon :name="icon.font_class" size="28"></u-icon>
-    <span class="icon-name">{{ icon.font_class }}</span>
     <span class="icon-class">{{ icon.font_class }}</span>
   </div>
 </div>
@@ -130,31 +128,18 @@ Click on any icon to copy `<u-icon name="..." />` code.
   align-items: center;
   justify-content: center;
   padding: 20px 12px;
-  border: 1px solid var(--u-info-500);
+  border: 1px solid var(--u-border);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
   background: var(--u-bg);
 }
-.icon-card:hover {
-  border-color: var(--u-primary-600);
-  transform: translateY(-2px);
-}
-.icon-card.copied {
-  border-color: var(--u-success-600);
-  background: var(--u-success-100);
-}
-.icon-card .icon-name {
+
+.icon-card .icon-class {
   margin-top: 8px;
   font-size: 12px;
-  color: var(--u-info-900);
   text-align: center;
   word-break: break-all;
 }
-.icon-card .icon-class {
-  margin-top: 4px;
-  font-size: 11px;
-  color: var(--u-info-600);
-  font-family: monospace;
-}
+
 </style>

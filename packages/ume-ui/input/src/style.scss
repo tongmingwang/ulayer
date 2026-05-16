@@ -1,11 +1,12 @@
 .u-input-wrapper {
   --u-input-radius: 4px;
-  --u-input-height: 36px;
+  --u-input-height: var(--u-medium, 36px);
   --u-input-color: var(--u-text-1);
   --u-input-bg: var(--u-bg);
   --u-input-border-color: var(--u-border);
   display: inline-flex;
   align-items: center;
+  flex-wrap: nowrap;
   width: 100%;
   border: 1px solid var(--u-input-border-color);
   border-radius: var(--u-input-radius);
@@ -13,27 +14,32 @@
   height: var(--u-input-height);
   min-height: var(--u-input-height);
   background: var(--u-bg);
-  transition: all 0.2s;
+  transition: border-color 0.2s;
   gap: 8px;
+  position: relative;
 
   &:focus-within,
   &:hover {
     --u-input-border-color: var(--u-primary);
+    z-index: 1;
   }
   &:focus-within {
-    box-shadow: inset 0 0 0 1px var(--u-input-border-color);
+    outline: 1px solid var(--u-input-border-color);
   }
 
   &--small {
-    --u-input-height: 28px;
+    --u-input-height: var(--u-small, 28px);
+  }
+  &--mini {
+    --u-input-height: var(--u-mini, 24px);
   }
 
   &--medium {
-    --u-input-height: 36px;
+    --u-input-height: var(--u-medium, 36px);
   }
 
   &--large {
-    --u-input-height: 48px;
+    --u-input-height: var(--u-large, 48px);
   }
   &--textarea {
     height: auto;
@@ -45,7 +51,7 @@
 
   &.is-disabled {
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.65;
   }
   &.is-readonly {
     pointer-events: all;

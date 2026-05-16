@@ -12,25 +12,35 @@
         <div
           :class="[...selectClassNames, noScrollClassName]"
           v-bind="targetAttrs"
+          :style="{
+            '--u-select-bg': props.bgColor,
+          }"
           role="select"
           ref="layer"
           @click="update(false)"
           v-if="visible">
           <div class="u-select_content" :style="position" ref="content">
-              <slot name="content">
-                <UOption
-                  v-for="(item, index) in props.items"
-                  :key="index"
-                  :value="item">
-                  {{ item }}
-                </UOption>
-              </slot>
+            <slot name="content">
+              <UOption
+                v-for="(item, index) in props.items"
+                :key="index"
+                :value="item">
+                {{ item }}
+              </UOption>
+            </slot>
           </div>
         </div>
       </Transition>
     </Teleport>
     <span class="u-select_input--box">
-      <slot><input type="text" class="u-select_input" :value="active" :placeholder="props.placeholder" readonly></slot>
+      <slot>
+        <input
+          type="text"
+          class="u-select_input"
+          :value="active"
+          :placeholder="props.placeholder"
+          readonly />
+      </slot>
     </span>
     <USvg
       :icon="svgIcons.arrowDown"
@@ -41,7 +51,7 @@
 
 <script setup lang="ts">
   import { ref, useTemplateRef, watch } from 'vue';
-  import { usePosition } from '@/hooks/usePosition';
+  import { usePosition } from '@/ume-ui/select/src/usePosition';
   import { throttle } from '@/utils/common';
   import { svgIcons, USvg } from '@/ume-ui/base';
   import { useResize } from '@/hooks/useResize';
@@ -50,8 +60,11 @@
   import { useSelect } from './hook';
   import UOption from './UOption.vue';
 
-  const props = withDefaults(defineProps<USelectProps>(), { modelValue: '' });
-  const emits = defineEmits(['update:modelValue','change']);
+  const props = withDefaults(defineProps<USelectProps>(), {
+    modelValue: '',
+    bgColor: 'var(--u-bg)',
+  });
+  const emits = defineEmits(['update:modelValue', 'change']);
   defineOptions({
     name: 'USelect',
     components: { USvg, UOption },
@@ -60,7 +73,7 @@
   const visible = ref(false);
   const selectRef = useTemplateRef('select');
   const contentRef = useTemplateRef('content');
-  
+
   const { position, updatePosition, resetPosition } = usePosition();
   const { targetAttrs, noScrollClassName, updateNoScroll, targetRef } =
     useNoScroll('layer');
@@ -75,8 +88,6 @@
   const update = throttle(async (bol: boolean) => {
     visible.value = bol;
     if (visible.value) {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-      updatePosition(selectRef.value!, contentRef.value!, 0.88);
       document.addEventListener('click', hideContent, true);
       if (hasSelectRender()) {
         document.documentElement.style.overflow = 'hidden';
@@ -90,7 +101,7 @@
   }, 100);
   useResize(() => {
     update(false);
-    updatePosition(selectRef.value!, contentRef.value!, 0.88);
+    updatePosition(selectRef.value!, 212);
   });
 
   function hideContent(e: MouseEvent) {
@@ -106,46 +117,66 @@
     if (visible.value) return;
     update(true);
   };
+
+  // 动画
+  const frameOpt = { duration: 300, easing: 'ease' };
   const enter = async (el: Element, done: () => void) => {
     updateNoScroll();
-    scrollToActive(targetRef.value!)
+    scrollToActive(targetRef.value!);
     const content = el.querySelector('.u-select_content')!;
-    content &&
+    if (content) {
+      updatePosition(selectRef.value!, content.clientHeight || 212);
+      Array.from(content.children)
+        .slice(0, 5)
+        .forEach((ele: Element) => {
+          ele.animate(
+            [
+              { opacity: 0 },
+              { opacity: 0, offset: 0.5 },
+              { opacity: 1, offset: 1 },
+            ],
+            {
+              ...frameOpt,
+              duration: frameOpt.duration * 2,
+            }
+          );
+        });
       content.animate(
-        [
-          { transform: 'scaleY(0.88) translateY(-2px)', opacity: 0 },
-          {
-            transform: 'scaleY(0.88) translateY(-2px)',
-            opacity: 0,
-            offset: 0.33,
-          },
-          { transform: 'scaleY(1)', opacity: 1 },
-        ],
-        {
-          duration: 300,
-          easing: 'ease',
-        }
+        [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }],
+        frameOpt
       );
-    content &&
-      (await Promise.all(content.getAnimations().map((item) => item.finished)));
+    }
+
+    if (content) {
+      await Promise.all(content.getAnimations().map((item) => item.finished));
+    }
 
     done();
   };
   const leave = async (el: Element, done: () => void) => {
     const content = el.querySelector('.u-select_content')!;
-    content &&
+    if (content) {
+      Array.from(content.children)
+        .slice(0, 5)
+        .forEach((ele: Element) => {
+          ele.animate(
+            [
+              { opacity: 1 },
+              { opacity: 0, offset: 0.33 },
+              { opacity: 0, offset: 1 },
+            ],
+            frameOpt
+          );
+        });
       content.animate(
         [
           { transform: 'scaleY(1)', opacity: 1 },
-          { transform: 'scaleY(0.88) translateY(-2px)', opacity: 0 },
+          { transform: 'scaleY(0)', opacity: 0 },
         ],
-        {
-          duration: 200,
-          easing: 'ease',
-        }
+        frameOpt
       );
-    content &&
-      (await Promise.all(content.getAnimations().map((item) => item.finished)));
+      await Promise.all(content.getAnimations().map((item) => item.finished));
+    }
     done();
     updateNoScroll();
   };
@@ -174,14 +205,18 @@
     height: var(--u-select-height);
     border-radius: var(--u-select-radius);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: border-color 0.2s;
+    position: relative;
 
-    &:hover {
+    &:hover,
+    &:focus-within {
       --u-select-border-color: var(--u-primary);
+      z-index: 1;
     }
     &.is-active {
       --u-select-border-color: var(--u-primary);
-      box-shadow: 0 0 0 1px var(--u-primary) inset;
+      outline: 1px solid var(--u-select-border-color);
+      z-index: 1;
     }
     &.is-disabled {
       pointer-events: none;
@@ -228,17 +263,16 @@
     pointer-events: all;
     background-color: transparent;
     .u-select_content {
-      padding: 6px 0;
+      padding: 4px;
       border-radius: 4px;
-      background-color: var(--u-bg);
+      background-color: var(--u-select-bg);
       box-shadow:
-        0 0 2px 0 rgba(0, 0, 0, 0.1),
-        0 5px 12px 0 rgba(0, 0, 0, 0.15);
+        0 0 3px 0 rgba(var(--u-rgb), 0.18),
+        0 5px 12px rgba(0, 0, 0, 0.12);
       overflow: auto;
       max-height: 212px;
       position: fixed;
       pointer-events: all;
-      transform-origin: center top;
     }
   }
 </style>

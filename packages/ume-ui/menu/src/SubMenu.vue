@@ -8,15 +8,9 @@
         <UIcon name="unfold" size="14" />
       </span>
     </div>
-    <Transition
-      @before-enter="onBeforeEnter"
-      @enter="onEnter"
-      @after-enter="onAfterEnter"
-      @before-leave="onBeforeLeave"
-      @leave="onLeave"
-      @after-leave="onAfterLeave">
+    <Transition @enter="onEnter" @leave="onLeave">
       <div class="u-sub-menu__children" v-show="isOpen">
-        <slot />
+        <div class="w-full h-full"><slot /></div>
       </div>
     </Transition>
   </div>
@@ -28,54 +22,65 @@
   import { useSubMenu } from './hooks';
 
   defineOptions({ name: 'USubMenu' });
-
+  const emits = defineEmits<{
+    (e: 'update:opened', value: boolean): void;
+  }>();
   const props = withDefaults(defineProps<USubMenuProps>(), {
     title: '',
     align: 'left',
     disabled: false,
+    opened: false,
+    radius: '0px',
   });
-  const { isOpen, toggle, subMenuClass, titleStyle } = useSubMenu(props);
+  const { isOpen, toggle, subMenuClass, titleStyle } = useSubMenu(props, emits);
 
-  const onBeforeEnter = (el: Element) => {
-    (el as HTMLElement).style.overflow = 'hidden';
-  };
   const onEnter = async (el: Element, done: () => void) => {
-    const htmlEl = el as HTMLElement;
-    const height = htmlEl.scrollHeight;
-    htmlEl.style.height = '0';
-    // 强制回流，确保起始状态生效
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    htmlEl.offsetHeight;
-    const anim = htmlEl.animate(
-      [{ height: '0px' }, { height: `${height}px` }],
-      { duration: 250, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    const htmlEL = el as HTMLElement;
+    htmlEL.style.setProperty('height', htmlEL.clientHeight + 'px');
+    const anim = el.animate(
+      [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }],
+      { duration: 150, easing: 'ease' }
     );
+    Array.from(el.children).forEach((ele: Element) => {
+      ele.animate(
+        [
+          { opacity: 0, offset: 0 },
+          { opacity: 0, offset: 0.33 },
+          { opacity: 1, offset: 1 },
+        ],
+        { duration: 300, easing: 'ease' }
+      );
+    });
     await anim.finished;
-    htmlEl.style.height = 'auto';
-    htmlEl.style.overflow = '';
+    htmlEL.style.setProperty('height', 'auto');
     done();
   };
-  const onAfterEnter = () => {};
-  const onBeforeLeave = (el: Element) => {
-    const htmlEl = el as HTMLElement;
-    htmlEl.style.height = `${htmlEl.scrollHeight}px`;
-    htmlEl.style.overflow = 'hidden';
-    // 强制回流
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    htmlEl.offsetHeight;
-  };
+
   const onLeave = async (el: Element, done: () => void) => {
     const htmlEl = el as HTMLElement;
+    htmlEl.style.setProperty('height', '0px');
+    Array.from(el.children).forEach((ele: Element) => {
+      ele.animate(
+        [
+          { opacity: 1, offset: 0 },
+          { opacity: 0.05, offset: 0.1 },
+          { opacity: 0, offset: 1 },
+        ],
+        { duration: 300, easing: 'ease' }
+      );
+    });
     const anim = htmlEl.animate(
-      [{ height: `${htmlEl.scrollHeight}px` }, { height: '0px' }],
-      { duration: 200, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+      [
+        { transform: 'scaleY(1)', offset: 0 },
+        { transform: 'scaleY(0)', offset: 1 },
+      ],
+      { duration: 150, easing: 'ease' }
     );
     await anim.finished;
-    htmlEl.style.height = '';
-    htmlEl.style.overflow = '';
+    htmlEl.style.setProperty('height', 'auto');
     done();
   };
-  const onAfterLeave = () => {};
 </script>
 
 <style scoped lang="scss">
@@ -83,6 +88,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    transition: all 0.2s;
 
     &__title {
       display: flex;
@@ -157,6 +163,8 @@
     &__children {
       display: flex;
       flex-direction: column;
+      transform-origin: center top;
+      transition: height 0.2s;
     }
   }
 </style>

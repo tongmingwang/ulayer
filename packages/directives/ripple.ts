@@ -10,7 +10,7 @@ async function fadeOutRipple(ripple: HTMLElement) {
   ripple.animate(
     [
       {
-        opacity: 0.33,
+        opacity: 0.2,
       },
       {
         opacity: 0,
@@ -40,16 +40,19 @@ function createRipple(el: RippleHTMLElement, clientX: number, clientY: number) {
 
   const ripple = document.createElement('span');
   ripple.style.position = 'absolute';
-  ripple.style.width = `${radius * 2}px`;
-  ripple.style.height = `${radius * 2}px`;
+
   ripple.style.borderRadius = '50%';
   ripple.style.pointerEvents = 'none';
   ripple.style.backgroundColor = cStyle.color;
 
   if (isCircle) {
-    ripple.style.left = `${(width - radius * 2) / 2}px`;
-    ripple.style.top = `${(height - radius * 2) / 2}px`;
+    ripple.style.width = `${radius}px`;
+    ripple.style.height = `${radius}px`;
+    ripple.style.left = `${(width - radius) / 2}px`;
+    ripple.style.top = `${(height - radius) / 2}px`;
   } else {
+    ripple.style.width = `${radius * 2}px`;
+    ripple.style.height = `${radius * 2}px`;
     ripple.style.left = `${clientX - rect.left - radius}px`;
     ripple.style.top = `${clientY - rect.top - radius}px`;
   }
@@ -57,19 +60,25 @@ function createRipple(el: RippleHTMLElement, clientX: number, clientY: number) {
   ripple.animate(
     [
       {
-        transform: isCircle ? 'scale(0)' : 'scale(0.28)',
+        transform: 'scale(0.33)',
         offset: 0,
-        opacity: 0.06,
+        opacity: 0.05,
+      },
+      {
+        offset: 0.5,
+        transform: 'scale(0.5)',
+        opacity: 0.3,
       },
       {
         transform: 'scale(1)',
         offset: 1,
-        opacity: 0.33,
+        opacity: 0.2,
       },
     ],
     {
-      duration: 240,
+      duration: 300,
       fill: 'forwards',
+      easing: 'ease',
     }
   );
 
@@ -87,7 +96,6 @@ function createRipple(el: RippleHTMLElement, clientX: number, clientY: number) {
 const ripple = {
   mounted(el: RippleHTMLElement) {
     if (!el) return;
-
     const rippleContainer = document.createElement('span');
     rippleContainer.style.cssText =
       'position: absolute;inset: 0;overflow: hidden;pointer-events: none;border-radius: inherit;';

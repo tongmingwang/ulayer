@@ -1,7 +1,20 @@
-import { inject, provide, ref, computed, onMounted, useTemplateRef } from 'vue';
-import type { UMenuProps, UMenuProvider, UMenuItemProps, USubMenuProps,UMenuEmits } from './types';
+import {
+  inject,
+  provide,
+  ref,
+  computed,
+  onMounted,
+  useTemplateRef,
+  watch,
+} from 'vue';
+import type {
+  UMenuProps,
+  UMenuProvider,
+  UMenuItemProps,
+  USubMenuProps,
+  UMenuEmits,
+} from './types';
 const key = Symbol('U_MENU_PROVIDER');
-
 
 export const useList = (props: UMenuProps, emits: UMenuEmits) => {
   const active = ref(props.modelValue);
@@ -40,7 +53,8 @@ export const useList = (props: UMenuProps, emits: UMenuEmits) => {
 
 export const useListItem = (props: UMenuItemProps) => {
   const listProvide = inject<UMenuProvider>(key, null);
-  const isVal = (val: string | number | undefined) => val !== null && val !== undefined;
+  const isVal = (val: string | number | undefined) =>
+    val !== null && val !== undefined;
   const handleClick = () => {
     if (props.disabled || !isVal(props.value)) return;
     listProvide?.setActive(props.value!);
@@ -79,12 +93,24 @@ export const useListItem = (props: UMenuItemProps) => {
   };
 };
 
-export const useSubMenu = (props: USubMenuProps) => {
+export const useSubMenu = (
+  props: USubMenuProps,
+  emits: {
+    (e: 'update:opened', value: boolean): void;
+  }
+) => {
   const listProvide = inject<UMenuProvider>(key, null);
   const parentLevel = listProvide?.level ?? 0;
   const currentLevel = parentLevel + 1;
 
-  const isOpen = ref(false);
+  watch(
+    () => props.opened,
+    () => {
+      isOpen.value = !!props.opened;
+    }
+  );
+
+  const isOpen = ref(props.opened || false);
   // 收集子项 value
   const childValues = ref<Set<string | number>>(new Set());
 
@@ -93,12 +119,16 @@ export const useSubMenu = (props: USubMenuProps) => {
   };
 
   const isChildActive = computed(() => {
-    return listProvide?.active?.value != null && childValues.value.has(listProvide.active.value);
+    return (
+      listProvide?.active?.value != null &&
+      childValues.value.has(listProvide.active.value)
+    );
   });
 
   const toggle = () => {
     if (props.disabled) return;
     isOpen.value = !isOpen.value;
+    emits('update:opened', isOpen.value);
   };
 
   // 向子级提供递增后的 level 和 registerItem
@@ -121,6 +151,7 @@ export const useSubMenu = (props: USubMenuProps) => {
 
   const titleStyle = computed(() => ({
     paddingLeft: `${12 + parentLevel * 16}px`,
+    borderRadius: props.radius,
   }));
 
   return {

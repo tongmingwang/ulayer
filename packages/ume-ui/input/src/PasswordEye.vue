@@ -45,7 +45,7 @@
     justify-content: center;
     transition: all 0.2s;
     &:hover {
-      background: rgba(var(--u-rgb),0.05);
+      background: rgba(var(--u-rgb), 0.05);
     }
   }
 </style>

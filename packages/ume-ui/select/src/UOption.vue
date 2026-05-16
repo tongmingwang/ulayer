@@ -14,18 +14,18 @@
 </script>
 
 <style scoped lang="scss">
-  .u-option{
+  .u-option {
     --u-option-bg: var(--u-primary-light-hover);
     --u-option-color: var(--u-primary);
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    text-align: left;
     width: 100%;
-    padding: 8px 12px;
+    padding: 6px 12px;
     color: var(--u-text-1);
-    line-height: 1.5;
+    line-height: 1;
     height: 40px;
+    border-radius: var(--u-select-radius, 4px);
     min-width: fit-content;
     cursor: pointer;
     font-weight: 500;
@@ -36,7 +36,7 @@
     background: transparent;
 
     &:hover {
-      background: rgba(var(--u-rgb),0.05);
+      background: rgba(var(--u-rgb), 0.05);
     }
 
     &.is-disabled {

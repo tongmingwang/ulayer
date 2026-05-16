@@ -45,7 +45,6 @@
   import { computed, inject, useTemplateRef } from 'vue';
   import ripple from '@/directives/ripple';
 
-  const emit = defineEmits(['change', 'update:modelValue']);
   const props = withDefaults(defineProps<RadioProps>(), {
     disabled: false,
     value: undefined,
@@ -63,7 +62,7 @@
     return false;
   });
 
-  function isVal(val: any) {
+  function isVal(val: unknown) {
     return val !== null && val !== undefined;
   }
 

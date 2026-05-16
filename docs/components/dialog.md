@@ -7,17 +7,19 @@ Modal dialog component for displaying important information or requiring user co
 The simplest dialog usage, centered by default with scale animation.
 
 <div class="demo-section">
-  <u-button @click="visible1 = true" color="primary" ref="trigger">Open Dialog</u-button>
-  <u-dialog v-model="visible1" :trigger="triggerRef" width="500px">
+  <u-dialog v-model="visible1" width="500px">
     <u-card class="dialog-card">
       <u-card-title>Basic Dialog</u-card-title>
       <u-card-text>
         <p>This is a basic dialog that can be closed by clicking the mask or pressing ESC.</p>
       </u-card-text>
-      <div class="dialog-actions">
-        <u-button @click="visible1 = false" color="primary">OK</u-button>
-      </div>
+      <u-card-action class="dialog-actions">
+        <u-button @click="visible1 = false" color="primary" variant="text">OK</u-button>
+      </u-card-action>
     </u-card>
+    <template v-slot:trigger="{props}">
+        <u-button @click="visible1 = true" v-bind="props" color="primary">Open Dialog</u-button>
+     </template>
   </u-dialog>
 </div>
 
@@ -31,7 +33,7 @@ The simplest dialog usage, centered by default with scale animation.
         <p>This is a basic dialog.</p>
       </u-card-text>
       <div class="dialog-actions">
-        <u-button @click="visible = false" color="primary">OK</u-button>
+        <u-button @click="visible = false" color="primary" variant="text">OK</u-button>
       </div>
     </u-card>
   </u-dialog>
@@ -223,7 +225,6 @@ Standard confirmation dialog pattern with button group.
 | fullscreen   | Whether to use fullscreen mode | `boolean`     | `false` |
 | closeOnClick | Whether to close on mask click | `boolean`     | `true`  |
 | closeOnEsc   | Whether to close on ESC key    | `boolean`     | `true`  |
-| trigger      | Trigger element reference      | `HTMLElement` | -       |
 
 ## UDialog Slots
 
@@ -239,8 +240,7 @@ Standard confirmation dialog pattern with button group.
 | close             | Emitted when dialog closes      |
 
 <script setup>
-  import { ref,useTemplateRef } from 'vue';
-  const triggerRef = useTemplateRef('trigger');
+  import { ref } from 'vue';
   const visible1 = ref(false);
   const visible2 = ref(false);
   const visible3 = ref(false);

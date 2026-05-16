@@ -1,14 +1,13 @@
 # Icon 图标
 
-图标用于可视化地表示操作和信息。点击任意图标即可复制其使用代码。
+图标用于可视化地表示操作和信息。点击任意图标即可复制其名称。
 
 <script setup>
-import { ref } from 'vue';
-import UIcon from '../../../packages/ume-ui/icon/src/UIcon.vue';
-import '../../../packages/ume-ui/icon/src/icon.css';
+import { ref, onMounted } from 'vue';
 import icons from '../../public/uicon.json'
 
 const copied = ref('');
+
 const copyIcon = (icon) => {
   navigator.clipboard.writeText(`<u-icon name="${icon.font_class}" />`);
   copied.value = icon.font_class;
@@ -92,7 +91,7 @@ const copyIcon = (icon) => {
 
 ## 图标列表
 
-点击任意图标即可复制 `<u-icon name="..." />` 使用代码。
+点击任意图标即可复制 `<u-icon name="..." />` 代码。
 
 <div class="icon-gallery">
   <div 
@@ -101,9 +100,9 @@ const copyIcon = (icon) => {
     class="icon-card"
     :class="{ copied: copied === icon.font_class }"
     @click="copyIcon(icon)"
+    v-ripple
   >
     <u-icon :name="icon.font_class" size="28"></u-icon>
-    <span class="icon-name">{{ icon.name }}</span>
     <span class="icon-class">{{ icon.font_class }}</span>
   </div>
 </div>
@@ -129,31 +128,18 @@ const copyIcon = (icon) => {
   align-items: center;
   justify-content: center;
   padding: 20px 12px;
-  border: 1px solid var(--u-info-500);
+  border: 1px solid var(--u-border);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
   background: var(--u-bg);
 }
-.icon-card:hover {
-  border-color: var(--u-primary-600);
-  transform: translateY(-2px);
-}
-.icon-card.copied {
-  border-color: var(--u-success-600);
-  background: var(--u-success-100);
-}
-.icon-card .icon-name {
+
+.icon-card .icon-class {
   margin-top: 8px;
   font-size: 12px;
-  color: var(--u-info-900);
   text-align: center;
   word-break: break-all;
 }
-.icon-card .icon-class {
-  margin-top: 4px;
-  font-size: 11px;
-  color: var(--u-info-600);
-  font-family: monospace;
-}
+
 </style>

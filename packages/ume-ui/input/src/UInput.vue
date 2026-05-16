@@ -3,7 +3,6 @@
     <template v-if="cType === 'textarea'">
       <Textarea
         v-bind="{
-          ...$attrs,
           ...props,
           ref: 'input',
           onInput: handleInput,
@@ -15,7 +14,6 @@
     <template v-else-if="cType == 'number'">
       <InputNumber
         v-bind="{
-          ...$attrs,
           ...props,
         }"
         @increase="onIncrease"
@@ -25,7 +23,6 @@
         </slot>
         <Input
           v-bind="{
-            ...$attrs,
             ...props,
             ref: 'input',
             onInput: handleInput,
@@ -44,7 +41,6 @@
       </slot>
       <Input
         v-bind="{
-          ...$attrs,
           ...props,
           ref: 'input',
           onInput: handleInput,

@@ -64,6 +64,7 @@ export default defineConfig({
               { text: 'Select', link: '/components/select' },
               { text: 'Switch', link: '/components/switch' },
               { text: 'Slider', link: '/components/slider' },
+              { text: 'Form', link: '/components/form' },
             ],
           },
           {
@@ -73,6 +74,13 @@ export default defineConfig({
               { text: 'Card', link: '/components/card' },
               { text: 'Badge', link: '/components/badge' },
               { text: 'Divider', link: '/components/divider' },
+            ],
+          },
+          {
+            text: 'Navigation Components',
+            items: [
+              { text: 'Dropdown', link: '/components/dropdown' },
+              { text: 'Tabs', link: '/components/tabs' },
             ],
           },
           {
@@ -160,6 +168,7 @@ export default defineConfig({
               { text: '选择器', link: '/zh-CN/components/select' },
               { text: '开关', link: '/zh-CN/components/switch' },
               { text: '滑块', link: '/zh-CN/components/slider' },
+              { text: '表单', link: '/zh-CN/components/form' },
             ],
           },
           {
@@ -169,6 +178,13 @@ export default defineConfig({
               { text: '卡片', link: '/zh-CN/components/card' },
               { text: '徽标', link: '/zh-CN/components/badge' },
               { text: '分隔线', link: '/zh-CN/components/divider' },
+            ],
+          },
+          {
+            text: '导航组件',
+            items: [
+              { text: '下拉菜单', link: '/zh-CN/components/dropdown' },
+              { text: '标签页', link: '/zh-CN/components/tabs' },
             ],
           },
           {

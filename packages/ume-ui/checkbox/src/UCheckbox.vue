@@ -1,6 +1,7 @@
 <template>
   <label :class="className">
-    <span class="u-checkbox_input" v-ripple>
+    <span class="u-checkbox_input">
+      <span class="u-checkbox_inner" v-ripple></span>
       <svg
         focusable="false"
         aria-hidden="true"
