@@ -27,22 +27,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Setup npm
         uses: npm/action-setup@v4
         with:
           version: 10
           run_install: false
-
-      - name: Check npm installation
-        run: |
-          echo "NPM path: $(which npm)"
-          npm --version
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm # 或 pnpm / yarn
 
       - name: Install dependencies
         run: npm install
@@ -55,7 +46,6 @@ jobs:
         with:
           path: docs/.vitepress/dist
 
-  # 部署工作
   deploy:
     environment:
       name: github-pages
