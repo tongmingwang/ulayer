@@ -170,6 +170,88 @@ Display dialog in fullscreen mode with slide-up animation.
 </script>
 ```
 
+## Custom Background and Radius
+
+Customize dialog background color and border radius.
+
+<div class="demo-section">
+  <u-button @click="visible6 = true" color="primary">Custom Style</u-button>
+  <u-dialog v-model="visible6" bgColor="var(--u-success-50)" radius="16px">
+    <u-card class="dialog-card">
+      <u-card-title>Custom Style</u-card-title>
+      <u-card-text>
+        <p>This dialog has a custom background color and rounded corners.</p>
+      </u-card-text>
+      <div class="dialog-actions">
+        <u-button @click="visible6 = false" color="primary">OK</u-button>
+      </div>
+    </u-card>
+  </u-dialog>
+</div>
+
+```vue
+<template>
+  <u-button @click="visible = true" color="primary">Custom Style</u-button>
+  <u-dialog v-model="visible" bgColor="var(--u-success-50)" radius="16px">
+    <u-card>
+      <u-card-title>Custom Style</u-card-title>
+      <u-card-text>
+        <p>This dialog has a custom background color and rounded corners.</p>
+      </u-card-text>
+      <div class="dialog-actions">
+        <u-button @click="visible = false" color="primary">OK</u-button>
+      </div>
+    </u-card>
+  </u-dialog>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const visible = ref(false);
+</script>
+```
+
+## Location
+
+Set the animation origin location via `location` prop.
+
+<div class="demo-section">
+  <u-button @click="visible7 = true" color="primary">Top Location</u-button>
+  <u-dialog v-model="visible7" location="top">
+    <u-card class="dialog-card">
+      <u-card-title>Top Animation</u-card-title>
+      <u-card-text>
+        <p>This dialog animates from the top of the screen.</p>
+      </u-card-text>
+      <div class="dialog-actions">
+        <u-button @click="visible7 = false" color="primary">OK</u-button>
+      </div>
+    </u-card>
+  </u-dialog>
+</div>
+
+```vue
+<template>
+  <u-button @click="visible = true" color="primary">Top Location</u-button>
+  <u-dialog v-model="visible" location="top">
+    <u-card>
+      <u-card-title>Top Animation</u-card-title>
+      <u-card-text>
+        <p>This dialog animates from the top of the screen.</p>
+      </u-card-text>
+      <div class="dialog-actions">
+        <u-button @click="visible = false" color="primary">OK</u-button>
+      </div>
+    </u-card>
+  </u-dialog>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const visible = ref(false);
+</script>
+```
+
 ## Confirm Dialog
 
 Standard confirmation dialog pattern with button group.
@@ -218,19 +300,24 @@ Standard confirmation dialog pattern with button group.
 
 ## UDialog API
 
-| Property     | Description                    | Type          | Default |
-| ------------ | ------------------------------ | ------------- | ------- |
-| modelValue   | Whether to show the dialog     | `boolean`     | `false` |
-| width        | Dialog width                   | `string`      | `90%`   |
-| fullscreen   | Whether to use fullscreen mode | `boolean`     | `false` |
-| closeOnClick | Whether to close on mask click | `boolean`     | `true`  |
-| closeOnEsc   | Whether to close on ESC key    | `boolean`     | `true`  |
+| Property     | Description                    | Type                    | Default          |
+| ------------ | ------------------------------ | ----------------------- | ---------------- |
+| modelValue   | Whether to show the dialog     | `boolean`               | `false`          |
+| width        | Dialog width                   | `string`                | `'520px'`        |
+| fullscreen   | Whether to use fullscreen mode | `boolean`               | `false`          |
+| closeOnClick | Whether to close on mask click | `boolean`               | `true`           |
+| closeOnEsc   | Whether to close on ESC key    | `boolean`               | `true`           |
+| bgColor      | Dialog background color       | `string`                | `'var(--u-bg)'`  |
+| radius       | Dialog border radius           | `string`                | `'4px'`          |
+| zIndex       | Dialog z-index                 | `number`                | `1000`           |
+| location     | Animation origin location      | `'bottom' \| 'top' \| 'center'` | `'bottom'` |
 
 ## UDialog Slots
 
 | Slot    | Description    |
 | ------- | -------------- |
 | default | Dialog content |
+| trigger | Trigger element |
 
 ## UDialog Events
 
@@ -246,6 +333,8 @@ Standard confirmation dialog pattern with button group.
   const visible3 = ref(false);
   const visible4 = ref(false);
   const visible5 = ref(false);
+  const visible6 = ref(false);
+  const visible7 = ref(false);
 </script>
 
 <style scoped>

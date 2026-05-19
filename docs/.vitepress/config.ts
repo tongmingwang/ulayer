@@ -81,6 +81,7 @@ export default defineConfig({
             items: [
               { text: 'Dropdown', link: '/components/dropdown' },
               { text: 'Tabs', link: '/components/tabs' },
+              { text: 'Tooltip', link: '/components/tooltip' },
             ],
           },
           {
@@ -185,6 +186,7 @@ export default defineConfig({
             items: [
               { text: '下拉菜单', link: '/zh-CN/components/dropdown' },
               { text: '标签页', link: '/zh-CN/components/tabs' },
+              { text: '文字提示', link: '/zh-CN/components/tooltip' },
             ],
           },
           {

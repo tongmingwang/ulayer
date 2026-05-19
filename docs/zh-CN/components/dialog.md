@@ -170,6 +170,88 @@
 </script>
 ```
 
+## 自定义背景色和圆角
+
+自定义对话框的背景色和圆角。
+
+<div class="demo-section">
+  <u-button @click="visible6 = true" color="primary">自定义样式</u-button>
+  <u-dialog v-model="visible6" bgColor="var(--u-success-50)" radius="16px">
+    <u-card class="dialog-card">
+      <u-card-title>自定义样式</u-card-title>
+      <u-card-text>
+        <p>此对话框具有自定义背景色和圆角。</p>
+      </u-card-text>
+      <div class="dialog-actions">
+        <u-button @click="visible6 = false" color="primary">确定</u-button>
+      </div>
+    </u-card>
+  </u-dialog>
+</div>
+
+```vue
+<template>
+  <u-button @click="visible = true" color="primary">自定义样式</u-button>
+  <u-dialog v-model="visible" bgColor="var(--u-success-50)" radius="16px">
+    <u-card>
+      <u-card-title>自定义样式</u-card-title>
+      <u-card-text>
+        <p>此对话框具有自定义背景色和圆角。</p>
+      </u-card-text>
+      <div class="dialog-actions">
+        <u-button @click="visible = false" color="primary">确定</u-button>
+      </div>
+    </u-card>
+  </u-dialog>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const visible = ref(false);
+</script>
+```
+
+## 动画位置
+
+通过 `location` 属性设置动画原点位置。
+
+<div class="demo-section">
+  <u-button @click="visible7 = true" color="primary">顶部动画</u-button>
+  <u-dialog v-model="visible7" location="top">
+    <u-card class="dialog-card">
+      <u-card-title>顶部动画</u-card-title>
+      <u-card-text>
+        <p>此对话框从屏幕顶部滑入。</p>
+      </u-card-text>
+      <div class="dialog-actions">
+        <u-button @click="visible7 = false" color="primary">确定</u-button>
+      </div>
+    </u-card>
+  </u-dialog>
+</div>
+
+```vue
+<template>
+  <u-button @click="visible = true" color="primary">顶部动画</u-button>
+  <u-dialog v-model="visible" location="top">
+    <u-card>
+      <u-card-title>顶部动画</u-card-title>
+      <u-card-text>
+        <p>此对话框从屏幕顶部滑入。</p>
+      </u-card-text>
+      <div class="dialog-actions">
+        <u-button @click="visible = false" color="primary">确定</u-button>
+      </div>
+    </u-card>
+  </u-dialog>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const visible = ref(false);
+</script>
+```
+
 ## 确认对话框
 
 带有按钮组的标准确认对话框模式。
@@ -217,19 +299,24 @@
 
 ## UDialog API
 
-| 属性          | 说明                     | 类型      | 默认值  |
-| ------------- | ------------------------ | --------- | ------- |
-| modelValue    | 是否显示对话框           | `boolean` | `false` |
-| width         | 对话框宽度               | `string`  | `90%`   |
-| fullscreen    | 是否使用全屏模式         | `boolean` | `false` |
-| closeOnClick  | 点击遮罩层是否关闭       | `boolean` | `true`  |
-| closeOnEsc    | 按 ESC 键是否关闭        | `boolean` | `true`  |
+| 属性          | 说明                     | 类型                            | 默认值          |
+| ------------- | ------------------------ | ------------------------------- | ---------------- |
+| modelValue    | 是否显示对话框           | `boolean`                       | `false`          |
+| width         | 对话框宽度               | `string`                        | `'520px'`        |
+| fullscreen    | 是否使用全屏模式         | `boolean`                       | `false`          |
+| closeOnClick  | 点击遮罩层是否关闭       | `boolean`                       | `true`           |
+| closeOnEsc    | 按 ESC 键是否关闭        | `boolean`                       | `true`           |
+| bgColor       | 对话框背景色             | `string`                        | `'var(--u-bg)'`  |
+| radius        | 对话框圆角               | `string`                        | `'4px'`          |
+| zIndex        | 对话框层级               | `number`                        | `1000`           |
+| location      | 动画原点位置             | `'bottom' \| 'top' \| 'center'` | `'bottom'`       |
 
 ## UDialog 插槽
 
-| 插槽    | 说明         |
-| ------- | ------------ |
-| default | 对话框内容   |
+| 插槽    | 说明           |
+| ------- | -------------- |
+| default | 对话框内容     |
+| trigger | 触发器元素     |
 
 ## UDialog 事件
 
@@ -245,6 +332,8 @@
   const visible3 = ref(false);
   const visible4 = ref(false);
   const visible5 = ref(false);
+  const visible6 = ref(false);
+  const visible7 = ref(false);
 </script>
 
 <style scoped>
