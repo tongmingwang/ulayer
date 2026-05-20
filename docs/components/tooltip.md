@@ -6,16 +6,14 @@ Tooltips are commonly used to display hint information when hovering over an ele
 
 In the simplest case, just set the text to display in the `content` attribute.
 
-<div class="demo-section">
   <u-tooltip content="This is a tooltip">
-    <u-button>Hover over me</u-button>
+    <u-button variant="contained"  width="100%">Hover over me</u-button>
   </u-tooltip>
-</div>
 
 ```vue
 <template>
   <u-tooltip content="This is a tooltip">
-    <u-button>Hover over me</u-button>
+    <u-button variant="contained" width="100%">Hover over me</u-button>
   </u-tooltip>
 </template>
 ```
@@ -27,20 +25,20 @@ Set the tooltip position via the `location` attribute, supporting `top`, `bottom
 <div class="demo-section">
   <div class="tooltip-row">
     <u-tooltip content="Top tooltip" location="top">
-      <u-button variant="text">Top</u-button>
+      <u-button variant="contained" color="primary">Top</u-button>
     </u-tooltip>
   </div>
   <div class="tooltip-row">
     <u-tooltip content="Bottom tooltip" location="bottom">
-      <u-button variant="text">Bottom</u-button>
+      <u-button variant="contained" color="primary">Bottom</u-button>
     </u-tooltip>
   </div>
   <div class="tooltip-row">
     <u-tooltip content="Left tooltip" location="left">
-      <u-button variant="text">Left</u-button>
+      <u-button variant="contained" color="primary">Left</u-button>
     </u-tooltip>
     <u-tooltip content="Right tooltip" location="right">
-      <u-button variant="text">Right</u-button>
+      <u-button variant="contained" color="primary">Right</u-button>
     </u-tooltip>
   </div>
 </div>
@@ -66,11 +64,9 @@ Set the tooltip position via the `location` attribute, supporting `top`, `bottom
 
 Set the trigger mode via the `trigger` attribute, supporting `hover` (default) and `click`.
 
-<div class="demo-section">
   <u-tooltip content="Click to show tooltip" trigger="click">
     <u-button color="primary">Click me</u-button>
   </u-tooltip>
-</div>
 
 ```vue
 <template>
@@ -84,7 +80,6 @@ Set the trigger mode via the `trigger` attribute, supporting `hover` (default) a
 
 You can customize the tooltip content through the default slot.
 
-<div class="demo-section">
   <u-tooltip location="top">
     <template #content>
       <div>This is custom content</div>
@@ -92,7 +87,6 @@ You can customize the tooltip content through the default slot.
     </template>
     <u-button color="success">Custom Content</u-button>
   </u-tooltip>
-</div>
 
 ```vue
 <template>
@@ -110,13 +104,11 @@ You can customize the tooltip content through the default slot.
 
 You can use `v-model` to control the visibility of the tooltip.
 
-<div class="demo-section">
   <u-tooltip v-model="visible" content="Controlled tooltip">
     <u-button color="warning" @click="visible = !visible">
       {{ visible ? 'Hide' : 'Show' }} Tooltip
     </u-button>
   </u-tooltip>
-</div>
 
 ```vue
 <template>
@@ -135,24 +127,24 @@ You can use `v-model` to control the visibility of the tooltip.
 
 ## UTooltip API
 
-| Attribute   | Description          | Type                                    | Default      |
-| ----------- | -------------------- | --------------------------------------- | ------------ |
-| modelValue  | Whether to show tooltip | `boolean`                            | `false`     |
-| content     | Tooltip text content | `string`                                | -            |
-| location    | Tooltip position     | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` |
-| trigger     | Trigger mode         | `'hover' \| 'click'`                     | `'hover'`    |
+| Attribute  | Description             | Type                                     | Default    |
+| ---------- | ----------------------- | ---------------------------------------- | ---------- |
+| modelValue | Whether to show tooltip | `boolean`                                | `false`    |
+| content    | Tooltip text content    | `string`                                 | -          |
+| location   | Tooltip position        | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` |
+| trigger    | Trigger mode            | `'hover' \| 'click'`                     | `'hover'`  |
 
 ## UTooltip Slots
 
-| Slot     | Description           |
-| -------- | -------------------- |
-| default  | Trigger element      |
-| content  | Custom tooltip content |
+| Slot    | Description            |
+| ------- | ---------------------- |
+| default | Trigger element        |
+| content | Custom tooltip content |
 
 ## UTooltip Events
 
-| Event             | Description                | Callback Params     |
-| ----------------- | -------------------------- | ------------------ |
+| Event             | Description                     | Callback Params    |
+| ----------------- | ------------------------------- | ------------------ |
 | update:modelValue | Emitted when visibility changes | `(value: boolean)` |
 
 <script setup>
