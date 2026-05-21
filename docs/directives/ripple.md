@@ -42,7 +42,7 @@ Click the buttons below to experience the ripple effect:
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5f5f5;
+    background-color: var(--u-bg);
     border: 1px solid #ddd;
     border-radius: 4px;
     cursor: pointer;
@@ -143,7 +143,7 @@ The ripple effect works by:
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5f5f5;
+    background-color: var(--u-bg);
     border: 1px solid #ddd;
     border-radius: 4px;
     cursor: pointer;
