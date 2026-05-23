@@ -56,7 +56,11 @@ Set the color of selected state via `color` prop on `u-option`.
 <template>
   <u-select v-model="value">
     <template #content>
-      <u-option v-for="item in options" :key="item" :value="item" color="success">
+      <u-option
+        v-for="item in options"
+        :key="item"
+        :value="item"
+        color="success">
         {{ item }}
       </u-option>
     </template>
@@ -67,6 +71,41 @@ Set the color of selected state via `color` prop on `u-option`.
   import { ref } from 'vue';
   const value = ref('Option 1');
   const options = ['Option 1', 'Option 2', 'Option 3'];
+</script>
+```
+
+## Align Dropdown
+
+Set dropdown alignment via `align` prop. Options include `left`, and `right`.
+
+<u-select v-model="value3" align="right" style="width: 200px;" placeholder="Select a city"> 
+  <template #content>
+  <u-option style="width: 280px;" :value="item" v-for="item in ['Beijing', 'Shanghai', 'Guangzhou']" :key="item">{{ item }}</u-option>
+  </template>
+</u-select>
+
+```vue
+<template>
+  <u-select
+    v-model="value"
+    align="right"
+    style="width: 200px;"
+    placeholder="Select a city">
+    <template #content>
+      <u-option
+        style="width: 280px;"
+        :value="item"
+        v-for="item in ['Beijing', 'Shanghai', 'Guangzhou']"
+        :key="item">
+        {{ item }}
+      </u-option>
+    </template>
+  </u-select>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const value = ref('');
 </script>
 ```
 
@@ -85,9 +124,7 @@ Customize trigger display content via default slot.
 
 ```vue
 <template>
-  <u-select
-    v-model="value"
-    :items="['Beijing', 'Shanghai', 'Guangzhou']">
+  <u-select v-model="value" :items="['Beijing', 'Shanghai', 'Guangzhou']">
     <span>Selected: {{ value || 'Please Select' }}</span>
   </u-select>
 </template>
@@ -175,7 +212,11 @@ Set `disabled` prop on `u-option` to disable a specific option.
   <u-select v-model="value">
     <span>Selected: {{ value || 'Please Select' }}</span>
     <template #content>
-      <u-option :value="item.value" v-for="item in options" :key="item.value" :disabled="item.disabled">
+      <u-option
+        :value="item.value"
+        v-for="item in options"
+        :key="item.value"
+        :disabled="item.disabled">
         {{ item.label }}
       </u-option>
     </template>
@@ -226,17 +267,17 @@ Customize option style via `height` and `radius` props on `u-option`.
 
 ## USelect API
 
-| Property    | Description                   | Type                                                       | Default |
-| ----------- | ----------------------------- | ---------------------------------------------------------- | ------- |
-| modelValue  | Current selected value        | `string \| number`                                         | -       |
-| disabled    | Whether to disable the select | `boolean`                                                  | `false` |
-| items       | Options list                  | `Array<string \| number>`                                  | -       |
-| placeholder | Placeholder text              | `string`                                                   | -       |
+| Property    | Description                   | Type                      | Default |
+| ----------- | ----------------------------- | ------------------------- | ------- |
+| modelValue  | Current selected value        | `string \| number`        | -       |
+| disabled    | Whether to disable the select | `boolean`                 | `false` |
+| items       | Options list                  | `Array<string \| number>` | -       |
+| placeholder | Placeholder text              | `string`                  | -       |
 
 ## USelect Events
 
-| Event | Description                | Type                       |
-| ----- | -------------------------- | -------------------------- |
+| Event  | Description                  | Type                                |
+| ------ | ---------------------------- | ----------------------------------- |
 | change | Triggered when value changes | `(value: string \| number) => void` |
 
 ## USelect Slots
@@ -248,19 +289,19 @@ Customize option style via `height` and `radius` props on `u-option`.
 
 ## UOption API
 
-| Property | Description          | Type                                                       | Default |
-| -------- | -------------------- | ---------------------------------------------------------- | ------- |
-| value    | Option value         | `string \| number`                                         | -       |
-| disabled | Whether to disable   | `boolean`                                                  | `false` |
+| Property | Description           | Type                                                       | Default |
+| -------- | --------------------- | ---------------------------------------------------------- | ------- |
+| value    | Option value          | `string \| number`                                         | -       |
+| disabled | Whether to disable    | `boolean`                                                  | `false` |
 | color    | Color of active state | `'primary' \| 'success' \| 'warning' \| 'error' \| 'info'` | -       |
-| radius   | Border radius        | `string`                                                   | -       |
-| height   | Option height        | `string`                                                   | -       |
+| radius   | Border radius         | `string`                                                   | -       |
+| height   | Option height         | `string`                                                   | -       |
 
 ## UOption Slots
 
-| Slot    | Description     |
-| ------- | --------------- |
-| default | Option content  |
+| Slot    | Description    |
+| ------- | -------------- |
+| default | Option content |
 
 <script setup>
   import { ref } from 'vue';

@@ -56,7 +56,11 @@
 <template>
   <u-select v-model="value">
     <template #content>
-      <u-option v-for="item in options" :key="item" :value="item" color="success">
+      <u-option
+        v-for="item in options"
+        :key="item"
+        :value="item"
+        color="success">
         {{ item }}
       </u-option>
     </template>
@@ -67,6 +71,41 @@
   import { ref } from 'vue';
   const value = ref('选项 1');
   const options = ['选项 1', '选项 2', '选项 3'];
+</script>
+```
+
+## 设置下拉对齐方式
+
+通过 `align` 属性设置下拉菜单的对齐方式。可选值包括 `left` 和 `right`。
+
+<u-select v-model="value3" align="right" style="width: 200px;" placeholder="Select a city"> 
+  <template #content>
+  <u-option style="width: 280px;" :value="item" v-for="item in ['Beijing', 'Shanghai', 'Guangzhou']" :key="item">{{ item }}</u-option>
+  </template>
+</u-select>
+
+```vue
+<template>
+  <u-select
+    v-model="value"
+    align="right"
+    style="width: 200px;"
+    placeholder="Select a city">
+    <template #content>
+      <u-option
+        style="width: 280px;"
+        :value="item"
+        v-for="item in ['Beijing', 'Shanghai', 'Guangzhou']"
+        :key="item">
+        {{ item }}
+      </u-option>
+    </template>
+  </u-select>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const value = ref('');
 </script>
 ```
 
@@ -85,9 +124,7 @@
 
 ```vue
 <template>
-  <u-select
-    v-model="value"
-    :items="['北京', '上海', '广州', '深圳']">
+  <u-select v-model="value" :items="['北京', '上海', '广州', '深圳']">
     <span>当前选择: {{ value || '请选择' }}</span>
   </u-select>
 </template>
@@ -172,7 +209,11 @@
   <u-select v-model="value">
     <span>当前选择: {{ value || '请选择' }}</span>
     <template #content>
-      <u-option :value="item.value" v-for="item in options" :key="item.value" :disabled="item.disabled">
+      <u-option
+        :value="item.value"
+        v-for="item in options"
+        :key="item.value"
+        :disabled="item.disabled">
         {{ item.label }}
       </u-option>
     </template>
@@ -208,9 +249,7 @@
   <u-select v-model="value">
     <span>当前选择: {{ value || '请选择' }}</span>
     <template #content>
-      <u-option height="48px" :value="i" v-for="i in 5">
-        选项 {{ i }}
-      </u-option>
+      <u-option height="48px" :value="i" v-for="i in 5">选项 {{ i }}</u-option>
     </template>
   </u-select>
 </template>
@@ -223,18 +262,18 @@
 
 ## USelect API
 
-| 属性        | 说明         | 类型                                                       | 默认值  |
-| ----------- | ------------ | ---------------------------------------------------------- | ------- |
-| modelValue  | 当前选中值   | `string \| number`                                         | -       |
-| disabled    | 是否禁用     | `boolean`                                                  | `false` |
-| items       | 选项列表     | `Array<string \| number>`                                  | -       |
-| placeholder | 占位文本     | `string`                                                   | -       |
+| 属性        | 说明       | 类型                      | 默认值  |
+| ----------- | ---------- | ------------------------- | ------- |
+| modelValue  | 当前选中值 | `string \| number`        | -       |
+| disabled    | 是否禁用   | `boolean`                 | `false` |
+| items       | 选项列表   | `Array<string \| number>` | -       |
+| placeholder | 占位文本   | `string`                  | -       |
 
 ## USelect 事件
 
-| 事件名 | 说明           | 类型                                |
-| ------ | -------------- | ----------------------------------- |
-| change | 值变化时触发   | `(value: string \| number) => void` |
+| 事件名 | 说明         | 类型                                |
+| ------ | ------------ | ----------------------------------- |
+| change | 值变化时触发 | `(value: string \| number) => void` |
 
 ## USelect 插槽
 
